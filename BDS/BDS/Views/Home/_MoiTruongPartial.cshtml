@@ -1,0 +1,258 @@
+﻿@using BDS.Data.Dto;
+@using BDS.Data.Enum;
+@using BDS.Helper;
+@model List<Criteria>
+
+
+<div class="panel-group" id="accordion2">
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#moitruong1">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Khu vực căn nhà
+                </h4>
+            </div>
+        </a>
+        <div id="moitruong1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                    @{
+                        var list = Model.Where(t => t.Type == 1).ToList();
+                        var index = 0;
+                    }
+                    @foreach (var item in list)
+                    {
+                        index = (int)item.ID - 1;
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                    }
+                                    else
+                                    {
+                                        <label>
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                    }
+                                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                </label>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#moitruong2">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Tiện ích xung quanh
+                </h4>
+            </div>
+        </a>
+        <div id="moitruong2" class="panel-collapse collapse">
+            <div class="panel-body">
+                    @{
+                        var list1 = Model.Where(t => t.Type == 2).ToList();
+                    }
+                    @foreach (var item in list1)
+            {
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                    }
+                                    else
+                                    {
+                                        <label>
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                    }
+                                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                </label>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#moitruong3">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Môi trường xung quanh
+                </h4>
+            </div>
+        </a>
+        <div id="moitruong3" class="panel-collapse collapse">
+            <div class="panel-body">
+                    @{
+                        var list2 = Model.Where(t => t.Type == 3).ToList();
+                    }
+                    @foreach (var item in list2)
+            {
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                    }
+                                    else
+                                    {
+                                        <label>
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                    }
+                                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                </label>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#moitruong4">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Hàng xom xung quanh
+                </h4>
+            </div>
+        </a>
+        <div id="moitruong4" class="panel-collapse collapse">
+            <div class="panel-body">
+                    @{
+                        var list3 = Model.Where(t => t.Type == 4).ToList();
+                    }
+                    @foreach (var item in list3)
+            {
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                    }
+                                    else
+                                    {
+                                        <label>
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                    }
+                                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                </label>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion2" href="#moitruong5">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Căn nhà nằm trong khu vực an ninh
+                </h4>
+            </div>
+        </a>
+        <div id="moitruong5" class="panel-collapse collapse">
+            <div class="panel-body">
+                    @{
+                        var list4 = Model.Where(t => t.Type == 5).ToList();
+                    }
+                    @foreach (var item in list4)
+            {
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="checkbox">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                    }
+                                    else
+                                    {
+                                        <label>
+                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                        </label>
+                                    }
+                                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                </label>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        index = index + 1;
+                    }
+            </div>
+        </div>
+    </div>
+
+</div>

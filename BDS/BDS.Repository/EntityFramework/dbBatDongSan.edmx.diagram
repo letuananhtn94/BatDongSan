@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf3bb16c55a5402091b5ffe460592b25" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="dbBatDongSanModel.Comment" Width="1.5" PointX="2.875" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Criteria" Width="1.5" PointX="8.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.DetailProject" Width="1.5" PointX="8.875" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.District" Width="1.5" PointX="0.625" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.GroupCriteria" Width="1.5" PointX="8.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Image" Width="1.5" PointX="2.875" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Like" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Parameter" Width="1.5" PointX="0.625" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Project" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Province" Width="1.5" PointX="0.625" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Role" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.Save" Width="1.5" PointX="6.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.TypeProject" Width="1.5" PointX="8.875" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.User" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Comment_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Comment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Image_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Criteria_GroupCriteria" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_DetailProject_Criteria" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_DetailProject_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_District_Province" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Image_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Like_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Like_User" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Project_TypeProject" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Save_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="dbBatDongSanModel.FK_Save_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbBatDongSanModel.sysdiagrams" Width="1.5" PointX="0.625" PointY="11" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

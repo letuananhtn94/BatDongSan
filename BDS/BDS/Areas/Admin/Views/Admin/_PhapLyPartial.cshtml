@@ -1,0 +1,48 @@
+﻿@using BDS.Data.Dto;
+
+@model List<Criteria>
+
+
+<div class="panel-group" id="accordion6">
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion6" href="#phaply1">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Pháp lý
+                </h4>
+            </div>
+        </a>
+        <div id="phaply1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="row">
+                    @{
+                        var list = Model.Where(t => t.Type == 1).ToList();
+                        var index = 0;
+                    }
+                    @foreach (var item in list)
+                    {
+                        index = (int)item.ID - 1;
+                        <div class="checkbox">
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                            <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                            </label>
+                            }
+                            else
+                            {
+                            <label>
+                                @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                            </label>
+                            }
+                            <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                        </div>
+                        index = index + 1;
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

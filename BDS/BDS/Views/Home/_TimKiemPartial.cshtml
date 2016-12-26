@@ -1,0 +1,186 @@
+﻿<link href="~/Assets/client/css/timkiem.css" rel="stylesheet" />
+@using BDS.Data.Dto;
+@model List<Criteria>
+
+<!-- Khung tìm kiếm -->
+<div class="_tim_kiem">
+    <div class="_tk_dia_diem">
+        <fieldset class="GroupBox">
+            <legend class="GroupBoxLegend">Địa điểm</legend>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="_tinh_thanh_pho">
+                        <option selected hidden>--Chọn Tỉnh/Thành phố--</option>
+                        <option>TP.Hồ Chí Minh</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="_quan_huyen">
+                        <option selected hidden>--Chọn Quận/Huyện--</option>
+                        <option>Quận Thủ Đức</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="do_uu_tien">
+                        <option selected hidden>--Độ ưu tiên--</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+    <div class="_tk_gia">
+        <fieldset class="GroupBox">
+            <legend class="GroupBoxLegend">Giá</legend>
+            <div class="form-group">
+                <select class="form-control" id="do_uu_tien">
+                    <option selected hidden>--Chọn giá--</option>
+                    <option>Dưới 300 triệu</option>
+                    <option>300 - 500 triệu</option>
+                    <option>500 - 1 tỷ</option>
+                    <option>Trên 1 tỷ</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" id="do_uu_tien">
+                    <option selected hidden>--Độ ưu tiên--</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </fieldset>
+    </div>
+    <div class="_tk_dien_tich">
+        <fieldset class="GroupBox">
+            <legend class="GroupBoxLegend">Diện tích</legend>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="do_uu_tien">
+                        <option selected hidden>--Diện tích thấp nhất--</option>
+                        <option>20 m2</option>
+                        <option>30 m2</option>
+                        <option>50 m2</option>
+                        <option>80 m2</option>
+                        <option>100 m2</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="do_uu_tien">
+                        <option selected hidden>--Diện tích cao nhất--</option>
+                        <option>20 m2</option>
+                        <option>30 m2</option>
+                        <option>50 m2</option>
+                        <option>80 m2</option>
+                        <option>100 m2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <select class="form-control" id="do_uu_tien">
+                        <option selected hidden>--Độ ưu tiên--</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+    <div class="_tk_button">
+        <div>
+            <button type="submit" id="btn_nang_cao" class="btn btn-default" data-toggle="modal" data-target="#modal_timkiem">Nâng Cao</button>
+        </div>
+        <button type="submit" id="btn_tim_kiem" class="btn btn-default">Tìm Kiếm</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="modal_timkiem" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <form action="/Home/List" method="post">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Tìm kiếm nâng cao</h4>
+                </div>
+                <div class="modal-body" style="padding:0px;">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#vatlykientruc">Vật lý kiến trúc</a></li>
+                        <li><a data-toggle="tab" href="#vitri">Vị trí</a></li>
+                        <li><a data-toggle="tab" href="#moitruong">Môi trường</a></li>
+                        <li><a data-toggle="tab" href="#taichinh">Tài chính</a></li>
+                        <li><a data-toggle="tab" href="#marketing">Marketing</a></li>
+                        <li><a data-toggle="tab" href="#phaply">Pháp lý</a></li>
+                    </ul>
+
+                    <div class="tab-content" style="padding:10px">
+                        <div id="vatlykientruc" class="tab-pane fade in active">
+                            @Html.Partial("_VatLyPartial", (List<Criteria>)Model.Where(v => v.GroupID == 1).ToList())
+                        </div>
+                        <div id="vitri" class="tab-pane fade">
+                            @Html.Partial("_ViTriPartial", (List<Criteria>)Model.Where(v => v.GroupID == 2).ToList())
+                        </div>
+                        <div id="moitruong" class="tab-pane fade">
+                            @Html.Partial("_MoiTruongPartial", (List<Criteria>)Model.Where(v => v.GroupID == 3).ToList())
+                        </div>
+                        <div id="taichinh" class="tab-pane fade">
+                            @Html.Partial("_TaiChinhPartial", (List<Criteria>)Model.Where(v => v.GroupID == 4).ToList())
+                        </div>
+                        <div id="marketing" class="tab-pane fade">
+                            @Html.Partial("_MarketingPartial", (List<Criteria>)Model.Where(v => v.GroupID == 5).ToList())
+                        </div>
+                        <div id="phaply" class="tab-pane fade">
+                            @Html.Partial("_PhapLyPartial", (List<Criteria>)Model.Where(v => v.GroupID == 6).ToList())
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" id="btn_tim_kiem1" class="btn btn-default">Tìm Kiếm</button>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<script>
+    $(document).ready(function () {
+        //// Show the Modal on load
+        //$("#modal_timkiem").modal("show");
+
+        // Hide the Modal
+        $("#btn_nang_cao").click(function () {
+            $("#modal_timkiem").modal("show");
+        });
+    });
+    // Get the modal
+    //var modal = document.getElementById('modal_timkiem');
+    //var button = document.getElementById('btn_nang_cao');
+
+    //button.onclick = function () {
+    //    modal.modal()
+    //}
+
+    //modal.onclick = function () {
+    //    modal.style.display = "none";
+    //}
+</script>*@

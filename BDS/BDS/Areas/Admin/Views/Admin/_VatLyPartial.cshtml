@@ -1,0 +1,232 @@
+﻿@using BDS.Data.Dto;
+
+@model List<Criteria>
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+      <a data-toggle="collapse" data-parent="#accordion" href="#vatly1">
+          <div class="panel-heading">
+              <h4 class="panel-title">
+                  Thiết kế tối ưu
+              </h4>
+          </div>
+      </a>
+    <div id="vatly1" class="panel-collapse collapse in">
+      <div class="panel-body">
+          <div class="row">
+              @{
+                  var list = Model.Where(t => t.Type == 1).ToList();
+                  var index = 0;
+              }
+              @foreach (var item in list)
+              {
+                <div class="checkbox">
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    else
+                    {
+                    <label>
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                </div>
+                  index = index + 1;
+              }             
+          </div>          
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+      <a data-toggle="collapse" data-parent="#accordion" href="#vatly2">
+          <div class="panel-heading">
+              <h4 class="panel-title">
+                  Khả năng tiếp cận
+              </h4>
+          </div>
+      </a>
+    <div id="vatly2" class="panel-collapse collapse">
+      <div class="panel-body">
+          <div class="row">
+              @{
+                  var list1 = Model.Where(t => t.Type == 2).ToList();                 
+              }
+              @foreach (var item in list1)
+              {
+                <div class="checkbox">
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    else
+                    {
+                    <label>
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                </div>
+                  index = index + 1;
+              }
+              
+          </div>          
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+      <a data-toggle="collapse" data-parent="#accordion" href="#vatly3">
+          <div class="panel-heading">
+              <h4 class="panel-title">
+                  Khả năng thích nghi
+              </h4>
+          </div>
+      </a>
+    <div id="vatly3" class="panel-collapse collapse">
+      <div class="panel-body">
+          <div class="row">
+              @{
+                  var list2 = Model.Where(t => t.Type == 3).ToList();
+              }
+              @foreach (var item in list2)
+              {
+                <div class="checkbox">
+                    @if (!string.IsNullOrEmpty(item.Description))
+                    {
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    else
+                    {
+                    <label>
+                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                    </label>
+                    }
+                    <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                </div>
+                  index = index + 1;
+              }
+          </div>         
+      </div>
+    </div>
+  </div>
+
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion" href="#vatly4">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Bố trí không gian
+                </h4>
+            </div>
+        </a>
+        <div id="vatly4" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    @{
+                        var list3 = Model.Where(t => t.Type == 4).ToList();
+                    }
+                    @foreach (var item in list3)
+                    {
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label>@item.Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                                <input class="form-control" type="text" name="search.Criterias[@index].Value" />
+                            </div>
+                        </div>
+                        
+                        index = index + 1;
+                    }                                            
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion" href="#vatly5">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Hiệu xuất của hệ thống M&E 
+                </h4>
+            </div>
+        </a>
+        <div id="vatly5" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    @{
+                        var list4 = Model.Where(t => t.Type == 5).ToList();
+                    }
+                    @foreach (var item in list4)
+                    {
+                        <div class="checkbox">
+                            @if (!string.IsNullOrEmpty(item.Description))
+                            {
+                            <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                                @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                            </label>
+                            }
+                            else
+                            {
+                            <label>
+                                @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                            </label>
+                            }
+                            <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                        </div>
+                        index = index + 1;
+                    }
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <a data-toggle="collapse" data-parent="#accordion" href="#vatly6">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Vật liệu xây dựng
+                </h4>
+            </div>
+        </a>
+        <div id="vatly6" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                   @{
+                       var list5 = Model.Where(t => t.Type == 6).ToList();
+                }
+                @foreach (var item in list5)
+                {
+                    <div class="checkbox">
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
+                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        </label>
+                        }
+                        else
+                        {
+                        <label>
+                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        </label>
+                        }
+                        <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
+                    </div>
+                    index = index + 1;
+                }
+                </div>               
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+

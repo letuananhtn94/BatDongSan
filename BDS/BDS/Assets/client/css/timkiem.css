@@ -1,0 +1,9 @@
+
+div.panel-heading{
+    background-color: #19146d;
+}
+
+a:hover, a:focus {
+    color: white;
+    text-decoration: none;
+}

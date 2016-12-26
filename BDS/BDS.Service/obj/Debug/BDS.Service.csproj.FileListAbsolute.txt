@@ -1,0 +1,34 @@
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Service.dll.config
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Service.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Service.pdb
+D:\My Source\BDS\BDS.Service\bin\Debug\Autofac.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Data.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Repository.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\EntityFramework.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Data.pdb
+D:\My Source\BDS\BDS.Service\bin\Debug\BDS.Repository.pdb
+D:\My Source\BDS\BDS.Service\bin\Debug\Autofac.xml
+D:\My Source\BDS\BDS.Service\bin\Debug\EntityFramework.xml
+D:\My Source\BDS\BDS.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\My Source\BDS\BDS.Service\obj\Debug\BDS.Service.csprojResolveAssemblyReference.cache
+D:\My Source\BDS\BDS.Service\obj\Debug\BDS.Service.dll
+D:\My Source\BDS\BDS.Service\obj\Debug\BDS.Service.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Service.dll.config
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Service.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Service.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\Autofac.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Data.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Repository.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\EntityFramework.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\EntityFramework.SqlServer.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Data.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\BDS.Repository.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\Autofac.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\EntityFramework.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\EntityFramework.SqlServer.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\obj\Debug\BDS.Service.csprojResolveAssemblyReference.cache
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\obj\Debug\BDS.Service.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\obj\Debug\BDS.Service.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\AutoMapper.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Service\bin\Debug\AutoMapper.xml

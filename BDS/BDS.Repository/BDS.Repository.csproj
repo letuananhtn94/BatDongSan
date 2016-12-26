@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A850DA3C-5B12-4EBB-8229-310E8FFE775C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BDS.Repository</RootNamespace>
+    <AssemblyName>BDS.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EntityFramework\Comment.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Criteria.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\dbBatDongSan.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbBatDongSan.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\dbBatDongSan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\dbBatDongSan.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbBatDongSan.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\DetailProject.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\District.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\GroupCriteria.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Helper\PagingHelper.cs" />
+    <Compile Include="EntityFramework\Image.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Like.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Models\DetailProject.cs" />
+    <Compile Include="EntityFramework\Models\GroupCriteria.cs" />
+    <Compile Include="EntityFramework\Models\Criteria.cs" />
+    <Compile Include="EntityFramework\Models\District.cs" />
+    <Compile Include="EntityFramework\Models\Province.cs" />
+    <Compile Include="EntityFramework\Models\Project.cs" />
+    <Compile Include="EntityFramework\Parameter.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Project.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Province.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Role.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Save.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\sysdiagrams.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\TypeProject.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\User.cs">
+      <DependentUpon>dbBatDongSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepository\IBaseRepository.cs" />
+    <Compile Include="IRepository\IDetailProjectRepositoty.cs" />
+    <Compile Include="IRepository\IGroupCriteriaRepository.cs" />
+    <Compile Include="IRepository\ICriteriaRepository.cs" />
+    <Compile Include="IRepository\IProvinceRepository.cs" />
+    <Compile Include="IRepository\IGenericRepository.cs" />
+    <Compile Include="IRepository\IDistrictRepository.cs" />
+    <Compile Include="IRepository\IProjectRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\DetailProjectRepositoty.cs" />
+    <Compile Include="Repository\GroupCriteriaRepository.cs" />
+    <Compile Include="Repository\CriteriaRepository.cs" />
+    <Compile Include="Repository\ProvinceRepository.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\DistrictRepository.cs" />
+    <Compile Include="Repository\ProjectRepository.cs" />
+    <Compile Include="Repository\RepositoryModule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="EntityFramework\dbBatDongSan.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbBatDongSan.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityFramework\dbBatDongSan.edmx.diagram">
+      <DependentUpon>dbBatDongSan.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityFramework\dbBatDongSan.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbBatDongSan.edmx</DependentUpon>
+      <LastGenOutput>dbBatDongSan.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityFramework\dbBatDongSan.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbBatDongSan.edmx</DependentUpon>
+      <LastGenOutput>dbBatDongSan.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BDS.Data\BDS.Data.csproj">
+      <Project>{81b21e09-4022-45bb-aee3-4a9337efc906}</Project>
+      <Name>BDS.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,102 @@
+﻿@using BDS.Data.Dto.Response;
+@using BDS.Data.Dto;
+
+@model SearchResult<Project>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Assets/client/css/detail.css" rel="stylesheet" />
+<link href="~/Assets/client/css/list.css" rel="stylesheet" />
+
+@Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+
+<div class="_list_main">
+    <div class="_list_tim_kiem">
+        
+        @if (Model.Data != null && Model.Data.Any())
+        {
+            var i = 1;
+            foreach (var item in Model.Data)
+            {
+
+                <div class="_item_list" id="div-@item.ID">
+                    <div class="_image_tilte">
+                        @if (item.Image != null && item.Image.Any())
+                        {
+                            <a href="@Url.Action("Detail", "Home", new { projectId = item.ID})">
+                                <img src="@item.Image.ElementAt(0).Url@item.Image.ElementAt(0).Name" alt="Fjords" class="img-responsive">
+                            </a>
+                        }
+
+                    </div>
+                    <div class="_thong_tin">
+                        <div class="_tieu_de col-sm-12"><a href="@Url.Action("Detail", "Home", new { projectId = item.ID})"><b>@i. @item.Name</b></a></div>
+                        <div class="_dia_chi col-sm-12">@item.Address</div>
+                        <div class="_gia col-sm-12">$: @item.Price @item.UnitPrice</div>
+                        <div class="_dien_tich col-sm-12">S: @item.Acreage</div>
+                    </div>
+                    <div class="_luu">
+                        <button type="submit" id="btn_tim_kiem" class="btn btn-default" style="float: right;">Lưu</button>
+                    </div>
+                </div>
+                i++;
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+    <div class="_list_ban_do">
+        <div id="googleMap" style="height:100%;width:100%;"></div>
+        <!-- Add Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq2vNKISjdL0GJcmj_0oVqKCBEmwoV_os">
+        </script>
+        @Scripts.Render("~/bundles/googlemap")
+        <script>
+            $(function () {
+                $("#googleMap").googleMap({
+                    zoom: 1, // Initial zoom level (optional)
+                    coords: [48.895651, 2.290569], // Map center (optional)
+                    type: "ROADMAP" // Map type (optional)
+                });
+
+                
+
+                //var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                //var image = "/Images/sothutu.png";                
+                var labels = '123456789';
+                var labelIndex = 0;
+                @foreach (var item in Model.Data)
+                {                   
+                    <text>
+                        var image = {
+                            url: '/Images/sothutu.png',
+                            // This marker is 20 pixels wide by 32 pixels high.
+                            size: new google.maps.Size(42, 50),
+                            // The origin for this image is (0, 0).
+                            origin: new google.maps.Point((labelIndex++)*42, 0),
+                            // The anchor for this image is the base of the flagpole at (0, 32).
+                            anchor: new google.maps.Point(21, 42)
+                        };
+
+                        $("#googleMap").addMarker({
+                            coords: [@item.Lat, @item.Long],
+                            url: '#div-@item.ID', // Link to redirect onclick (optional)
+                            id: '@item.ID', // Unique ID for your marker
+                            icon: image,
+                            title: "@item.Name",
+                            text: "Giá: @item.Price @item.UnitPrice | Diện tích: @item.Acreage m2"                            
+                        });               
+                    </text>                    
+                }
+
+            })
+        </script>
+
+    </div>
+</div>

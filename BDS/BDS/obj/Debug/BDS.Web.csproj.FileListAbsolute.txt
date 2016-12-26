@@ -1,0 +1,134 @@
+D:\My Source\BDS\BDS\obj\Debug\BDS.Web.csprojResolveAssemblyReference.cache
+D:\My Source\BDS\BDS\bin\ApplicationInsights.config
+D:\My Source\BDS\BDS\bin\roslyn\csc.exe
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\My Source\BDS\BDS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\My Source\BDS\BDS\bin\roslyn\System.Collections.Immutable.dll
+D:\My Source\BDS\BDS\bin\roslyn\System.Reflection.Metadata.dll
+D:\My Source\BDS\BDS\bin\roslyn\vbc.exe
+D:\My Source\BDS\BDS\bin\roslyn\VBCSCompiler.exe
+D:\My Source\BDS\BDS\bin\roslyn\VBCSCompiler.exe.config
+D:\My Source\BDS\BDS\bin\BDS.dll.config
+D:\My Source\BDS\BDS\bin\BDS.dll
+D:\My Source\BDS\BDS\bin\BDS.pdb
+D:\My Source\BDS\BDS\bin\Antlr3.Runtime.dll
+D:\My Source\BDS\BDS\bin\Autofac.dll
+D:\My Source\BDS\BDS\bin\Autofac.Integration.Mvc.dll
+D:\My Source\BDS\BDS\bin\BDS.Data.dll
+D:\My Source\BDS\BDS\bin\BDS.Repository.dll
+D:\My Source\BDS\BDS\bin\BDS.Service.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.Agent.Intercept.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.DependencyCollector.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.Web.dll
+D:\My Source\BDS\BDS\bin\Microsoft.AI.WindowsServer.dll
+D:\My Source\BDS\BDS\bin\Microsoft.ApplicationInsights.dll
+D:\My Source\BDS\BDS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\My Source\BDS\BDS\bin\Microsoft.Web.Infrastructure.dll
+D:\My Source\BDS\BDS\bin\Newtonsoft.Json.dll
+D:\My Source\BDS\BDS\bin\System.Web.Helpers.dll
+D:\My Source\BDS\BDS\bin\System.Web.Mvc.dll
+D:\My Source\BDS\BDS\bin\System.Web.Optimization.dll
+D:\My Source\BDS\BDS\bin\System.Web.Razor.dll
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.Deployment.dll
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.dll
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.Razor.dll
+D:\My Source\BDS\BDS\bin\WebGrease.dll
+D:\My Source\BDS\BDS\bin\EntityFramework.dll
+D:\My Source\BDS\BDS\bin\BDS.Data.pdb
+D:\My Source\BDS\BDS\bin\BDS.Repository.pdb
+D:\My Source\BDS\BDS\bin\BDS.Service.pdb
+D:\My Source\BDS\BDS\bin\Autofac.xml
+D:\My Source\BDS\BDS\bin\Autofac.Integration.Mvc.xml
+D:\My Source\BDS\BDS\bin\Microsoft.AI.DependencyCollector.xml
+D:\My Source\BDS\BDS\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\My Source\BDS\BDS\bin\Microsoft.AI.Web.xml
+D:\My Source\BDS\BDS\bin\Microsoft.AI.WindowsServer.xml
+D:\My Source\BDS\BDS\bin\Microsoft.ApplicationInsights.xml
+D:\My Source\BDS\BDS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\My Source\BDS\BDS\bin\System.Web.Helpers.xml
+D:\My Source\BDS\BDS\bin\System.Web.Mvc.xml
+D:\My Source\BDS\BDS\bin\System.Web.Optimization.xml
+D:\My Source\BDS\BDS\bin\System.Web.Razor.xml
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.xml
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.Deployment.xml
+D:\My Source\BDS\BDS\bin\System.Web.WebPages.Razor.xml
+D:\My Source\BDS\BDS\bin\Antlr3.Runtime.pdb
+D:\My Source\BDS\BDS\bin\Newtonsoft.Json.xml
+D:\My Source\BDS\BDS\bin\EntityFramework.xml
+D:\My Source\BDS\BDS\obj\Debug\BDS.dll
+D:\My Source\BDS\BDS\obj\Debug\BDS.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\ApplicationInsights.config
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\csc.exe
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\System.Collections.Immutable.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\System.Reflection.Metadata.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\vbc.exe
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\VBCSCompiler.exe
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\roslyn\VBCSCompiler.exe.config
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.dll.config
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Antlr3.Runtime.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Autofac.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Autofac.Integration.Mvc.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Data.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Repository.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Service.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.Agent.Intercept.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.DependencyCollector.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.Web.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.WindowsServer.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.ApplicationInsights.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.Web.Infrastructure.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Newtonsoft.Json.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Helpers.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Mvc.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Optimization.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Razor.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.Deployment.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.Razor.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\WebGrease.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Data.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Repository.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\BDS.Service.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Autofac.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Autofac.Integration.Mvc.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.DependencyCollector.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.Web.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.AI.WindowsServer.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.ApplicationInsights.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Helpers.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Mvc.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Optimization.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.Razor.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.Deployment.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\System.Web.WebPages.Razor.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Antlr3.Runtime.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\Newtonsoft.Json.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\obj\Debug\BDS.Web.csprojResolveAssemblyReference.cache
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\obj\Debug\BDS.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\obj\Debug\BDS.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\AutoMapper.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\AutoMapper.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\EntityFramework.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\EntityFramework.SqlServer.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\EntityFramework.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS\bin\EntityFramework.SqlServer.xml

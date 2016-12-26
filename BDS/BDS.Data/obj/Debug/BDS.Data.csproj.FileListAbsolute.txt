@@ -1,0 +1,10 @@
+D:\My Source\BDS\BDS.Data\bin\Debug\BDS.Data.dll
+D:\My Source\BDS\BDS.Data\bin\Debug\BDS.Data.pdb
+D:\My Source\BDS\BDS.Data\obj\Debug\BDS.Data.dll
+D:\My Source\BDS\BDS.Data\obj\Debug\BDS.Data.pdb
+D:\My Source\BDS\BDS.Data\obj\Debug\BDS.Data.csprojResolveAssemblyReference.cache
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Data\bin\Debug\BDS.Data.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Data\bin\Debug\BDS.Data.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Data\obj\Debug\BDS.Data.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Data\obj\Debug\BDS.Data.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Data\obj\Debug\BDS.Data.csprojResolveAssemblyReference.cache

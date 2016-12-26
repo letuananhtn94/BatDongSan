@@ -1,0 +1,211 @@
+﻿<link href="~/Assets/client/css/detail.css" rel="stylesheet" />
+@using BDS.Data.Dto;
+@model Project
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_TimKiemPartial")
+
+<!-- Phần chi tiết -->
+<div class="container _main">
+    <div class="_slide_image">
+        <div class="flexslider">
+            <ul class="slides">
+                @foreach (var img in Model.Image)
+                {
+                    <li>
+                        <img class="" src="@img.Url@img.Name"  height="200px"/>
+                    </li>
+                }
+                                                
+            </ul>
+        </div>
+
+    </div>
+    <div class="_content_title">
+        <div class="_image_tilte col-md-2">
+            @if (Model.Image != null && Model.Image.Any())
+            {               
+                <img src="@Model.Image.ElementAt(0).Url@Model.Image.ElementAt(0).Name" alt="Fjords" class="img-responsive">                               
+            }
+           
+        </div>
+        <div class="_thong_tin col-md-10" style="margin-left: -35px">
+            <div class="_tieu_de col-sm-12"><b>@Model.Name</b></div>
+            <div class="_dia_chi col-sm-12">@Model.Address</div>
+            <div class="_gia col-sm-12">$: @Model.Price @Model.UnitPrice</div>
+            <div class="_dien_tich col-sm-12">S: @Model.Acreage</div>
+        </div>
+    </div>
+    <div class="_tab_box">
+        <div class="_tab_menu col-md-9">
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="pill" href="#binhluan">Bình luận</a></li>
+                <li><a data-toggle="pill" href="#mota">Mô tả</a></li>
+                <li><a data-toggle="pill" href="#hinhanh">Hình ảnh</a></li>
+            </ul>
+        </div>
+        <div class="_like_save col-md-3">
+
+        </div>
+    </div>
+
+    <div class="_content_detail">
+        <div class="_detail_col_left">
+            <div class="tab-content">
+                <div id="binhluan" class="tab-pane fade in active">
+                    <h3>Danh sách bình luận</h3>
+                    <hr/>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <textarea class="form-control" rows="5" id="comment" placeholder="Nội dung bình luận"></textarea>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-default" style="margin-bottom: 10px">Hình ảnh</button>
+                                <button type="submit" class="btn btn-default">Gửi bình luận</button>
+                            </div>                          
+                        </div>                                            
+                    
+                </div>
+                <div id="mota" class="tab-pane fade">
+                    <h3>Thông tin mô tả</h3>
+                    @Html.Raw(Model.Description)                   
+                </div>
+                <div id="hinhanh" class="tab-pane fade">
+                    @foreach (var img in Model.Image)
+                    {                        
+                        <div class="_item_image">
+                            <img src="@img.Url@img.Name" class="myImg img-thumbnail" alt="Thanh Pho" width="300" height="200">
+                        </div>
+                    }                                       
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+                        <img class="modal-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
+
+                    <script>
+					// Get the modal
+					var modal = document.getElementById('myModal');
+
+					// Get the image and insert it inside the modal - use its "alt" text as a caption
+					var img = document.getElementsByClassName("myImg");
+					var modalImg = document.getElementById("img01");
+					var captionText = document.getElementById("caption");
+					$( ".myImg" ).on( "click", function() {
+						modal.style.display = "block";
+						modalImg.src = this.src;
+						captionText.innerHTML = this.alt;
+					});
+
+
+					modal.onclick = function() {
+						modal.style.display = "none";
+					}
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="_detail_col_right">
+            <div class="_ban_do">
+                <div id="googleMap" style="height:100%;width:100%;"></div>
+                <!-- Add Google Maps -->                               
+                <script>
+                  function initMap() {
+                      var uluru = { lat:@Model.Lat, lng:@Model.Long};
+                    var map = new google.maps.Map(document.getElementById('googleMap'), {
+                      zoom: 12,
+                      center: uluru,
+                      scrollwheel: true,
+                      draggable: true,
+                      mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+                    var marker = new google.maps.Marker({
+                      position: uluru,
+                      map: map
+                    });
+                  }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq2vNKISjdL0GJcmj_0oVqKCBEmwoV_os&callback=initMap">
+                </script>
+            </div>
+            <div class="_lien_he">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Liên Hệ</div>
+                    <div class="panel-body">
+                        @Html.Raw(Model.Contact)
+                    </div>
+                </div>
+
+            </div>
+            @*<div class="_du_an_tuong_tu">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Bất động sản tương tự</div>
+                    <div class="panel-body">
+                        @{
+                            var model = ViewData["lstTopHome"] as List<WebsiteBatDongSan.Models.DuAn>;
+                        }
+                        @if (model.Count > 0)
+                        {
+                            foreach (var item in model)
+                            {
+                                Html.RenderPartial("_DuAnTuongTuPartial", item, null);
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="container-fluid" style="background-color:white; padding-top:10px; padding-bottom:30px; margin-top:5px">
+    <div class="list_du_an container">
+        <div class="_title">
+            <h2>Bất động sản tương tự</h2>
+        </div>
+
+        @*<div class="row">
+            @{
+                var model = ViewData["lstTopHome"] as List<BDS.Models.DuAn>;
+            }
+            @if (model.Count > 0)
+            {
+                foreach (var item in model)
+                {
+                    Html.RenderPartial("_DuAnPartial", item, null);
+                }
+            }
+            else
+            {
+
+            }
+
+        </div>*@
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 300,
+        itemMargin: 5,
+
+      });
+    });
+</script>

@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbBDSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BinhLuan">
+    <Key>
+      <PropertyRef Name="BinhLuanID" />
+    </Key>
+    <Property Name="BinhLuanID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DuAn" Relationship="Self.FK_BinhLuan_DuAn" FromRole="BinhLuan" ToRole="DuAn" />
+    <NavigationProperty Name="User" Relationship="Self.FK_BinhLuan_User" FromRole="BinhLuan" ToRole="User" />
+    <NavigationProperty Name="FileDinhKem" Relationship="Self.FK_FileDinhKem_BinhLuan" FromRole="BinhLuan" ToRole="FileDinhKem" />
+  </EntityType>
+  <EntityType Name="ChiTietDuAn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TieuChiID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="DuAn" Relationship="Self.FK_ChiTietDuAn_DuAn" FromRole="ChiTietDuAn" ToRole="DuAn" />
+    <NavigationProperty Name="TieuChi" Relationship="Self.FK_ChiTietDuAn_TieuChi" FromRole="ChiTietDuAn" ToRole="TieuChi" />
+  </EntityType>
+  <EntityType Name="DuAn">
+    <Key>
+      <PropertyRef Name="DuAnID" />
+    </Key>
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenDuAn" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="LienHe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Gia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DienTich" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HienTrang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDungMoTa" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Long" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiTao" Type="Int32" />
+    <Property Name="NguoiCapNhat" Type="Int32" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_DuAn" FromRole="DuAn" ToRole="BinhLuan" />
+    <NavigationProperty Name="ChiTietDuAn" Relationship="Self.FK_ChiTietDuAn_DuAn" FromRole="DuAn" ToRole="ChiTietDuAn" />
+    <NavigationProperty Name="FileDinhKem" Relationship="Self.FK_FileDinhKem_DuAn" FromRole="DuAn" ToRole="FileDinhKem" />
+    <NavigationProperty Name="Luu" Relationship="Self.FK_Luu_DuAn" FromRole="DuAn" ToRole="Luu" />
+    <NavigationProperty Name="Thich" Relationship="Self.FK_Thich_DuAn" FromRole="DuAn" ToRole="Thich" />
+  </EntityType>
+  <EntityType Name="FileDinhKem">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FileExtension" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BinhLuanID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BinhLuan" Relationship="Self.FK_FileDinhKem_BinhLuan" FromRole="FileDinhKem" ToRole="BinhLuan" />
+    <NavigationProperty Name="DuAn" Relationship="Self.FK_FileDinhKem_DuAn" FromRole="FileDinhKem" ToRole="DuAn" />
+  </EntityType>
+  <EntityType Name="Luu">
+    <Key>
+      <PropertyRef Name="LuuID" />
+    </Key>
+    <Property Name="LuuID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DuAn" Relationship="Self.FK_Luu_DuAn" FromRole="Luu" ToRole="DuAn" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Luu_User" FromRole="Luu" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NguoiTao" Type="Int32" />
+    <Property Name="NguoiCapNhat" Type="Int32" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Roles" FromRole="Roles" ToRole="User" />
+  </EntityType>
+  <EntityType Name="TieuChi">
+    <Key>
+      <PropertyRef Name="TieuChiID" />
+    </Key>
+    <Property Name="TieuChiID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MaTieuChi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenTieuChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Diem" Type="Double" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="ChiTietDuAn" Relationship="Self.FK_ChiTietDuAn_TieuChi" FromRole="TieuChi" ToRole="ChiTietDuAn" />
+  </EntityType>
+  <EntityType Name="Thich">
+    <Key>
+      <PropertyRef Name="ThichID" />
+    </Key>
+    <Property Name="ThichID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="DuAnID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="DuAn" Relationship="Self.FK_Thich_DuAn" FromRole="Thich" ToRole="DuAn" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Thich_User" FromRole="Thich" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <Property Name="NgayCapNhat" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="BinhLuan" Relationship="Self.FK_BinhLuan_User" FromRole="User" ToRole="BinhLuan" />
+    <NavigationProperty Name="Luu" Relationship="Self.FK_Luu_User" FromRole="User" ToRole="Luu" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_User_Roles" FromRole="User" ToRole="Roles" />
+    <NavigationProperty Name="Thich" Relationship="Self.FK_Thich_User" FromRole="User" ToRole="Thich" />
+  </EntityType>
+  <Association Name="FK_BinhLuan_DuAn">
+    <End Role="DuAn" Type="Self.DuAn" Multiplicity="0..1" />
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="DuAnID" />
+      </Principal>
+      <Dependent Role="BinhLuan">
+        <PropertyRef Name="DuAnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BinhLuan_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BinhLuan">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileDinhKem_BinhLuan">
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="0..1" />
+    <End Role="FileDinhKem" Type="Self.FileDinhKem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BinhLuan">
+        <PropertyRef Name="BinhLuanID" />
+      </Principal>
+      <Dependent Role="FileDinhKem">
+        <PropertyRef Name="BinhLuanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietDuAn_DuAn">
+    <End Role="DuAn" Type="Self.DuAn" Multiplicity="0..1" />
+    <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="DuAnID" />
+      </Principal>
+      <Dependent Role="ChiTietDuAn">
+        <PropertyRef Name="DuAnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietDuAn_TieuChi">
+    <End Role="TieuChi" Type="Self.TieuChi" Multiplicity="0..1" />
+    <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TieuChi">
+        <PropertyRef Name="TieuChiID" />
+      </Principal>
+      <Dependent Role="ChiTietDuAn">
+        <PropertyRef Name="TieuChiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileDinhKem_DuAn">
+    <End Role="DuAn" Type="Self.DuAn" Multiplicity="0..1" />
+    <End Role="FileDinhKem" Type="Self.FileDinhKem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="DuAnID" />
+      </Principal>
+      <Dependent Role="FileDinhKem">
+        <PropertyRef Name="DuAnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Luu_DuAn">
+    <End Role="DuAn" Type="Self.DuAn" Multiplicity="0..1" />
+    <End Role="Luu" Type="Self.Luu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="DuAnID" />
+      </Principal>
+      <Dependent Role="Luu">
+        <PropertyRef Name="DuAnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thich_DuAn">
+    <End Role="DuAn" Type="Self.DuAn" Multiplicity="0..1" />
+    <End Role="Thich" Type="Self.Thich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="DuAnID" />
+      </Principal>
+      <Dependent Role="Thich">
+        <PropertyRef Name="DuAnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Luu_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Luu" Type="Self.Luu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Luu">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thich_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Thich" Type="Self.Thich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Thich">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbBDSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" />
+    <EntitySet Name="ChiTietDuAn" EntityType="Self.ChiTietDuAn" />
+    <EntitySet Name="DuAn" EntityType="Self.DuAn" />
+    <EntitySet Name="FileDinhKem" EntityType="Self.FileDinhKem" />
+    <EntitySet Name="Luu" EntityType="Self.Luu" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="TieuChi" EntityType="Self.TieuChi" />
+    <EntitySet Name="Thich" EntityType="Self.Thich" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_BinhLuan_DuAn" Association="Self.FK_BinhLuan_DuAn">
+      <End Role="DuAn" EntitySet="DuAn" />
+      <End Role="BinhLuan" EntitySet="BinhLuan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BinhLuan_User" Association="Self.FK_BinhLuan_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="BinhLuan" EntitySet="BinhLuan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileDinhKem_BinhLuan" Association="Self.FK_FileDinhKem_BinhLuan">
+      <End Role="BinhLuan" EntitySet="BinhLuan" />
+      <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietDuAn_DuAn" Association="Self.FK_ChiTietDuAn_DuAn">
+      <End Role="DuAn" EntitySet="DuAn" />
+      <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietDuAn_TieuChi" Association="Self.FK_ChiTietDuAn_TieuChi">
+      <End Role="TieuChi" EntitySet="TieuChi" />
+      <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileDinhKem_DuAn" Association="Self.FK_FileDinhKem_DuAn">
+      <End Role="DuAn" EntitySet="DuAn" />
+      <End Role="FileDinhKem" EntitySet="FileDinhKem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Luu_DuAn" Association="Self.FK_Luu_DuAn">
+      <End Role="DuAn" EntitySet="DuAn" />
+      <End Role="Luu" EntitySet="Luu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thich_DuAn" Association="Self.FK_Thich_DuAn">
+      <End Role="DuAn" EntitySet="DuAn" />
+      <End Role="Thich" EntitySet="Thich" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Luu_User" Association="Self.FK_Luu_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Luu" EntitySet="Luu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Roles" Association="Self.FK_User_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thich_User" Association="Self.FK_Thich_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Thich" EntitySet="Thich" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

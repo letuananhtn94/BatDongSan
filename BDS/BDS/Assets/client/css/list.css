@@ -1,0 +1,52 @@
+footer {
+    display: none;
+}
+
+._list_tim_kiem {
+    width: 50%;
+    float: left;
+    background-color: white;
+    height: 490px;
+    padding: 5px;
+    overflow: scroll;
+    position:relative;
+}
+
+    ._list_tim_kiem > .active {
+        background-color: #bce8f1;
+        -webkit-transition: background-color 1000ms linear;
+        -moz-transition: background-color 1000ms linear;
+        -o-transition: background-color 1000ms linear;
+        -ms-transition: background-color 1000ms linear;
+        transition: background-color 1000ms linear;
+    }
+
+._list_ban_do {
+    width: 50%;
+    height: 490px;
+    float: right;
+}
+
+._item_list {
+    padding: 5px;
+    height: 135px;
+    margin-top: 10px;
+    border: 1px solid #777;
+}
+
+    ._item_list:hover {
+        opacity: 0.7;
+        border: 3px solid black;
+    }
+
+div._tieu_de {
+    font-size: 15px;
+}
+
+div._thong_tin {
+    width: 70%;
+}
+
+._luu {
+    float: right;
+}

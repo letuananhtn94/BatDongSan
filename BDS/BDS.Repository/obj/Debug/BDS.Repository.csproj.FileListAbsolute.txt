@@ -1,0 +1,28 @@
+D:\My Source\BDS\BDS.Repository\obj\Debug\BDS.Repository.csprojResolveAssemblyReference.cache
+D:\My Source\BDS\BDS.Repository\bin\Debug\BDS.Repository.dll.config
+D:\My Source\BDS\BDS.Repository\bin\Debug\BDS.Repository.dll
+D:\My Source\BDS\BDS.Repository\bin\Debug\BDS.Repository.pdb
+D:\My Source\BDS\BDS.Repository\bin\Debug\Autofac.dll
+D:\My Source\BDS\BDS.Repository\bin\Debug\BDS.Data.dll
+D:\My Source\BDS\BDS.Repository\bin\Debug\EntityFramework.dll
+D:\My Source\BDS\BDS.Repository\bin\Debug\EntityFramework.SqlServer.dll
+D:\My Source\BDS\BDS.Repository\bin\Debug\BDS.Data.pdb
+D:\My Source\BDS\BDS.Repository\bin\Debug\Autofac.xml
+D:\My Source\BDS\BDS.Repository\bin\Debug\EntityFramework.xml
+D:\My Source\BDS\BDS.Repository\bin\Debug\EntityFramework.SqlServer.xml
+D:\My Source\BDS\BDS.Repository\obj\Debug\BDS.Repository.dll
+D:\My Source\BDS\BDS.Repository\obj\Debug\BDS.Repository.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\BDS.Repository.dll.config
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\BDS.Repository.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\BDS.Repository.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\Autofac.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\BDS.Data.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\EntityFramework.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\EntityFramework.SqlServer.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\BDS.Data.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\Autofac.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\EntityFramework.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\bin\Debug\EntityFramework.SqlServer.xml
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\obj\Debug\BDS.Repository.dll
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\obj\Debug\BDS.Repository.pdb
+E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\obj\Debug\BDS.Repository.csprojResolveAssemblyReference.cache

@@ -1,0 +1,19 @@
+﻿@using BDS.Data.Dto;
+@model Project
+
+
+<div class="">
+    <div class="img">
+        @if (Model.Image != null && Model.Image.Any())
+        {
+            <a href="@Url.Action("Detail", "Home", new { projectId = Model.ID})">
+                <img src="@Model.Image.ElementAt(0).Url@Model.Image.ElementAt(0).Name" alt="Fjords" class="img-responsive">
+            </a>           
+        }
+        
+        <div class="_tieu_de col-sm-12"><b>@Model.Name</b></div>
+        <div class="_dia_chi col-sm-12">@Model.Address</div>
+        <div class="_gia col-sm-6">$: @Model.Price @Model.UnitPrice</div>
+        <div class="_dien_tich col-sm-6">S: @Model.Acreage</div>
+    </div>
+</div>
