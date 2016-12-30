@@ -1,10 +1,10 @@
-﻿using BDS.Repository.EntityFramework;
-using BDS.Repository.IRepository;
+﻿using BDS.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using BDS.Repository.EntityFramework;
 
 namespace BDS.Repository.Repository
 {
@@ -23,7 +23,7 @@ namespace BDS.Repository.Repository
             this.context = context;
             this.dbSet = context.Set<TEntity>();
         }
-
+        
         public dbBatDongSanEntities Context
         {
             get

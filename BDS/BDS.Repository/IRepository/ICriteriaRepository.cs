@@ -12,5 +12,6 @@ namespace BDS.Repository.IRepository
     public interface ICriteriaRepository : IGenericRepository<Criteria>
     {
         List<Criteria> Get(long id, string code, string codeFull);
+        
     }
 }

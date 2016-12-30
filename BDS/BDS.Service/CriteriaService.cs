@@ -15,6 +15,7 @@ namespace BDS.Service
 
         List<Criteria> GetByID(long groupId, string code, string codeFull);
         List<Criteria> GetAll();
+        List<Criteria> FilterList(List<Criteria> criteria);
     }
 
     internal class CriteriaService : ICriteriaService
@@ -54,6 +55,22 @@ namespace BDS.Service
                 return new List<Criteria>();
             }
 
+        }
+
+        public List<Criteria> FilterList(List<Criteria> criteria)
+        {
+            Criteria cr = new Criteria();
+            List<Criteria> data = new List<Criteria>();
+
+            foreach (var item in criteria.ToList())
+            {
+                if(item.Selected == true || !string.IsNullOrEmpty(item.Value) || item.Importance != 0)
+                {
+                    data.Add(item);
+                }
+            }
+            
+            return data;
         }
     }
 }

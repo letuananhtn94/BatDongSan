@@ -20,47 +20,47 @@ namespace BDS.Service
         {
             var mapperConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<Entity.Project, Project>();
-                config.CreateMap<Project,Entity.Project >();
+                config.CreateMap<Entity.Project, Project>().MaxDepth(3);
+                config.CreateMap<Project,Entity.Project >().MaxDepth(3);
 
-                config.CreateMap<Entity.Image, Image>();
-                config.CreateMap<Image,Entity.Image >();
+                config.CreateMap<Entity.Image, Image>().MaxDepth(3);
+                config.CreateMap<Image,Entity.Image >().MaxDepth(3);
 
-                config.CreateMap<Entity.Province, Province>();
-                config.CreateMap<Province, Entity.Province>();
+                config.CreateMap<Entity.Province, Province>().MaxDepth(3);
+                config.CreateMap<Province, Entity.Province>().MaxDepth(3);
 
-                config.CreateMap<Entity.Criteria, Criteria>();
-                config.CreateMap<Criteria, Entity.Criteria>();
+                config.CreateMap<Entity.Criteria, Criteria>().MaxDepth(3);
+                config.CreateMap<Criteria, Entity.Criteria>().MaxDepth(3);
 
-                config.CreateMap<Entity.District, District>();
-                config.CreateMap<District, Entity.District>();
+                config.CreateMap<Entity.District, District>().MaxDepth(3);
+                config.CreateMap<District, Entity.District>().MaxDepth(3);
 
-                config.CreateMap<Entity.Comment, Comment>();
-                config.CreateMap<Comment, Entity.Comment>();
+                config.CreateMap<Entity.Comment, Comment>().MaxDepth(3);
+                config.CreateMap<Comment, Entity.Comment>().MaxDepth(3);
 
-                config.CreateMap<Entity.Like, Like>();
-                config.CreateMap<Like, Entity.Like>();
+                config.CreateMap<Entity.Like, Like>().MaxDepth(3);
+                config.CreateMap<Like, Entity.Like>().MaxDepth(3);
 
-                config.CreateMap<Entity.Save, Save>();
-                config.CreateMap<Save, Entity.Save>();
+                config.CreateMap<Entity.Save, Save>().MaxDepth(3);
+                config.CreateMap<Save, Entity.Save>().MaxDepth(3);
 
-                config.CreateMap<Entity.User, User>();
-                config.CreateMap<User, Entity.User>();
+                config.CreateMap<Entity.User, User>().MaxDepth(3);
+                config.CreateMap<User, Entity.User>().MaxDepth(3);
 
-                config.CreateMap<Entity.TypeProject, TypeProject>();
-                config.CreateMap<TypeProject, Entity.TypeProject>();
+                config.CreateMap<Entity.TypeProject, TypeProject>().MaxDepth(3);
+                config.CreateMap<TypeProject, Entity.TypeProject>().MaxDepth(3);
 
-                config.CreateMap<Entity.Role, Role>();
-                config.CreateMap<Role, Entity.Role>();
+                config.CreateMap<Entity.Role, Role>().MaxDepth(3);
+                config.CreateMap<Role, Entity.Role>().MaxDepth(3);
 
-                config.CreateMap<Entity.Parameter, Parameter>();
-                config.CreateMap<Parameter, Entity.Parameter>();
+                config.CreateMap<Entity.Parameter, Parameter>().MaxDepth(3);
+                config.CreateMap<Parameter, Entity.Parameter>().MaxDepth(3);
 
-                config.CreateMap<Entity.DetailProject, DetailProject>();
-                config.CreateMap<DetailProject, Entity.DetailProject>();
+                config.CreateMap<Entity.DetailProject, DetailProject>().MaxDepth(3);
+                config.CreateMap<DetailProject, Entity.DetailProject>().MaxDepth(3);
 
-                config.CreateMap<Entity.GroupCriteria, GroupCriteria>();
-                config.CreateMap<GroupCriteria, Entity.GroupCriteria>();
+                config.CreateMap<Entity.GroupCriteria, GroupCriteria>().MaxDepth(3);
+                config.CreateMap<GroupCriteria, Entity.GroupCriteria>().MaxDepth(3);
                 //.ConvertUsing<ProjectConverter>();
                 // .ForMember(p => p.Status, m => m.MapFrom(f => f.Name + " hai"))
                 // .ForMember(p => p.Name, m => m.MapFrom(f => f.Name + " hai"));

@@ -37,8 +37,8 @@ namespace BDS.Repository.EntityFramework
         public virtual DbSet<Province> Province { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Save> Save { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeProject> TypeProject { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

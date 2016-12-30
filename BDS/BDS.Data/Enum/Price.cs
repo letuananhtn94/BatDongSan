@@ -10,105 +10,77 @@ namespace BDS.Data.Enum
 {
     public enum Price
     {
-        [Description("Dưới 300 triệu")] Duoi300 = 0,
-        [Description("300500")] Tu300To500 = 1
+        [Description("--Chọn giá--")]
+        Start,
+        [Description("Dưới 300 triệu")]
+        Duoi300,
+        [Description("300 - 500 triệu")]
+        Tu300To500,
+        [Description("500 - 1 tỷ")]
+        Tu500To1,
+        [Description("Trên 1 tỷ")]
+        Tren1
+    }
+
+    public enum Acreage
+    {
+        [Description("--Chọn diện tích--")]
+        Start,
+        [Description("Dưới 50 m2")]
+        Duoi50,
+        [Description("50 - 80 m2")]
+        Tu50To80,
+        [Description("80 - 100 m2")]
+        Tu80To100,
+        [Description("Trên 100 m2")]
+        Tren100
     }
 
     public enum KichthuocPhongNgu
     {
         [Description("--Kích thước phòng ngủ--")]
-        Start =-1,
+        Start,
         [Description("Dưới 10 m2")]
-        Duoi10m2 = 1,
+        Duoi10m2,
         [Description("10 - 20 m2")]
-        Tu10den20 = 2,
+        Tu10den20,
         [Description("Trên 20 m2")]
-        Tren20 = 3,
+        Tren20
     }
 
     public enum KichthuocToilet
     {
         [Description("--Kích thước phòng toilet--")]
-        Start = -1,
+        Start,
         [Description("Dưới 3 m2")]
-        Duoi3m2 = 1,
+        Duoi3m2,
         [Description("3 - 5 m2")]
-        Tu3den5 = 2,
+        Tu3den5,
         [Description("Trên 5 m2")]
-        Tren5 = 3,
+        Tren5
     }
 
     public enum KichthuocPhongKhach
     {
         [Description("--Kích thước phòng khách--")]
-        Start = -1,
+        Start,
         [Description("Dưới 13 m2")]
-        Duoi13m2 = 1,
+        Duoi13m2,
         [Description("13 - 15 m2")]
-        Tu13den15 = 2,
+        Tu13den15,
         [Description("16 - 20 m2")]
-        Tu16den20 = 3,
+        Tu16den20,
         [Description("Trên 20 m2")]
-        Tren20 = 4,
+        Tren20
     }
 
     public enum SoLuongPhongNgu
     {
 
         [Description("--Số lượng phòng ngủ--")]
-        Start = -1,
+        Start,
         [Description("1")]
-        Mot = 1,
-        [Description("2")]
-        Hai = 2,
-        [Description("3")]
-        Ba = 3,
-        [Description("4")]
-        Bon = 4,
-        [Description("5")]
-        Nam = 5,
-    }
-
-    public enum SoLuongToiletChung
-    {
-
-        [Description("--Số lượng toilet chung--")]
-        Start = -1,
-        [Description("1")]
-        Mot = 1,
-        [Description("2")]
-        Hai = 2,
-        [Description("3")]
-        Ba = 3,
-        [Description("4")]
-        Bon = 4,
-        [Description("5")]
-        Nam = 5,
-    }
-
-    public enum SoluongToiletRieng
-    {
-
-        [Description("--Số lượng toilet riêng--")]
-        Start = -1,
-        [Description("1")]
-        Mot = 1,
-        [Description("2")]
-        Hai = 2,
-        [Description("3")]
-        Ba = 3,
-        [Description("4")]
-        Bon = 4,
-        [Description("5")]
-        Nam = 5,
-    }
-
-    public enum DoQuanTrong
-    {
-        [Description("-Độ quan trọng-")]
-        Start,        
-        [Description("1")]
-        Mot = 1,
+        Mot,
         [Description("2")]
         Hai,
         [Description("3")]
@@ -116,6 +88,56 @@ namespace BDS.Data.Enum
         [Description("4")]
         Bon,
         [Description("5")]
-        Nam,
+        Nam
+    }
+
+    public enum SoLuongToiletChung
+    {
+
+        [Description("--Số lượng toilet chung--")]
+        Start,
+        [Description("1")]
+        Mot,
+        [Description("2")]
+        Hai,
+        [Description("3")]
+        Ba,
+        [Description("4")]
+        Bon,
+        [Description("5")]
+        Nam
+    }
+
+    public enum SoluongToiletRieng
+    {
+
+        [Description("--Số lượng toilet riêng--")]
+        Start,
+        [Description("1")]
+        Mot,
+        [Description("2")]
+        Hai,
+        [Description("3")]
+        Ba,
+        [Description("4")]
+        Bon,
+        [Description("5")]
+        Nam
+    }
+
+    public enum Importance
+    {
+        [Description("-Độ quan trọng-")]
+        Start,        
+        [Description("1")]
+        Mot,
+        [Description("2")]
+        Hai,
+        [Description("3")]
+        Ba,
+        [Description("4")]
+        Bon,
+        [Description("5")]
+        Nam
     }
 }

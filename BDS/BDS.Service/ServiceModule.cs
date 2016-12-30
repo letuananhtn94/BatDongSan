@@ -20,6 +20,7 @@ namespace BDS.Service
             builder.RegisterType<DistrictService>().As<IDistrictService>().InstancePerRequest();
             builder.RegisterType<CriteriaService>().As<ICriteriaService>().InstancePerRequest();
             builder.RegisterType<GroupCriteriaService>().As<IGroupCriteriaService>().InstancePerRequest();
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
         }
 
     }

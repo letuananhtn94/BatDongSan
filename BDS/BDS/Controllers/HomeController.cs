@@ -24,23 +24,23 @@ namespace BDS.Controllers
             _districtService = district;
             _criteriaService = criteriaService;
         }
+
         public ActionResult Index(SearchProject search)
         {
-            search.Criterias = new List<Criteria>
-            {
-                new Criteria {
-                    selected = true,
-                },
-            };
-            var result = _projectService.Search(search);
-            data = _provinceService.GetAll();
-            
+            ViewBag.Criterias = _criteriaService.GetAll();
+            var project = _projectService.GetListTopHome();
+            data = _provinceService.GetAll();            
             ViewBag.CbProvince = data;
-            return View(result);
+            ViewBag.TopHome = project;
+            return View();
         }
 
-        public ActionResult Detail(long projectId)
+        public ActionResult Detail(long projectId, SearchProject search)
         {
+            ViewBag.Criterias = _criteriaService.GetAll();
+            data = _provinceService.GetAll();
+            ViewBag.CbProvince = data;
+            ViewBag.ListTuongTu = TempData["ListProject"];
             var result = _projectService.GetById(projectId);
             return View(result);
         }
@@ -48,7 +48,17 @@ namespace BDS.Controllers
         public ActionResult List(SearchProject search)
         {
             ViewBag.Criterias = _criteriaService.GetAll();
+            if (search.Criterias != null)
+            {
+                var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
+                search.Criterias = listCriteria;
+            }                        
             var result = _projectService.Search(search);
+
+            TempData["ListProject"] = result.Data.ToList();
+            data = _provinceService.GetAll();
+            ViewBag.CbProvince = data;
+
             return View(result);
         }
 
@@ -84,6 +94,23 @@ namespace BDS.Controllers
                 //Log errror
             }
             return Json(district, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAddress(string provinceid, string districtid)
+        {
+            string address = "";
+            try
+            {
+                District district = _districtService.GetById(districtid);
+                Province province = _provinceService.GetById(provinceid);
+
+                address = district.Name + "," + province.Name;
+            }
+            catch (Exception ex)
+            {
+                //Log errror
+            }
+            return Json(address, JsonRequestBehavior.AllowGet);
         }
     }
 }

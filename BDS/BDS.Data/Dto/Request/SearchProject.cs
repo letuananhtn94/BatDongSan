@@ -8,9 +8,11 @@ namespace BDS.Data.Dto.Request
 {
     public class BaseSearchProject
     {
-        public int PriceType { get; set; }
-        public int PriceTypet { get; set; }
+        public string Address { get; set; }
+        public int Price { get; set; }
+        public int Acreage { get; set; }
     }
+
     public class SearchProject : SearchCriteria
     {
         public List<Criteria> Criterias { get; set; }

@@ -10,8 +10,9 @@
 
 <link href="~/Assets/client/css/detail.css" rel="stylesheet" />
 <link href="~/Assets/client/css/list.css" rel="stylesheet" />
-
-@Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+<form action="/Home/List" method="post">
+    @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+</form>
 
 <div class="_list_main">
     <div class="_list_tim_kiem">
@@ -47,7 +48,7 @@
         }
         else
         {
-
+            <p>Không tìm thấy dữ liệu</p>
         }
 
     </div>

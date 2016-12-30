@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BDS\BDS.Repository\EntityFramework\dbBatDongSan.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\TAI LIEU\Hoc Tap\Khoa Luan Tot Nghiep\Project\BatDongSan\BDS\BDS.Repository\EntityFramework\dbBatDongSan.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

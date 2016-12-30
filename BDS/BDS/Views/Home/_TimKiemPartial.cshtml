@@ -1,6 +1,10 @@
-﻿<link href="~/Assets/client/css/timkiem.css" rel="stylesheet" />
-@using BDS.Data.Dto;
+﻿@using BDS.Data.Dto;
+@using BDS.Data.Enum;
+@using BDS.Helper;
 @model List<Criteria>
+
+
+<link href="~/Assets/client/css/timkiem.css" rel="stylesheet" />
 
 <!-- Khung tìm kiếm -->
 <div class="_tim_kiem">
@@ -9,28 +13,32 @@
             <legend class="GroupBoxLegend">Địa điểm</legend>
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="_tinh_thanh_pho">
+                    <input type="hidden" name="search.Criterias[94].ID" value="95" />
+                    <input type="hidden" name="search.Criterias[94].Selected" value="true" />
+                    <input id="txtAddress" type="hidden" name="search.Criterias[94].Value" value="" />
+                    <input type="hidden" name="search.Criterias[94].EnumType" value="Address" />
+                    <select class="chosen-select form-control" id="ddlProvince">
                         <option selected hidden>--Chọn Tỉnh/Thành phố--</option>
-                        <option>TP.Hồ Chí Minh</option>
+                        @foreach (var item in ViewBag.CbProvince as List<Province>)
+                        {
+                            <option value="@item.ID.ToString()">@item.Type @item.Name</option>
+                        }
                     </select>
                 </div>
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="_quan_huyen">
+                    <select class="form-control" id="ddlDistrict">
                         <option selected hidden>--Chọn Quận/Huyện--</option>
-                        <option>Quận Thủ Đức</option>
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="do_uu_tien">
-                        <option selected hidden>--Độ ưu tiên--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    @Html.DropDownList("search.Criterias[94].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                        @Html.CheckBox("search.Criterias[94].Prerequisite") Tiên quyết
+                    </label>
                 </div>
             </div>
 
@@ -40,24 +48,21 @@
         <fieldset class="GroupBox">
             <legend class="GroupBoxLegend">Giá</legend>
             <div class="form-group">
-                <select class="form-control" id="do_uu_tien">
-                    <option selected hidden>--Chọn giá--</option>
-                    <option>Dưới 300 triệu</option>
-                    <option>300 - 500 triệu</option>
-                    <option>500 - 1 tỷ</option>
-                    <option>Trên 1 tỷ</option>
-                </select>
+                <input type="hidden" name="search.Criterias[95].ID" value="96" />
+                <input type="hidden" name="search.Criterias[95].Selected" value="true" />
+                @Html.DropDownList("search.Criterias[95].Value", Price.Start.ToSelectList(), new { @class = "form-control" })
+                <input type="hidden" name="search.Criterias[95].EnumType" value="Price" />
             </div>
 
-            <div class="form-group">
-                <select class="form-control" id="do_uu_tien">
-                    <option selected hidden>--Độ ưu tiên--</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+            <div class="row">
+                <div class="form-group col-sm-7">
+                    @Html.DropDownList("search.Criterias[95].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-5">
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                        @Html.CheckBox("search.Criterias[95].Prerequisite") Tiên quyết
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
@@ -66,36 +71,20 @@
             <legend class="GroupBoxLegend">Diện tích</legend>
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="do_uu_tien">
-                        <option selected hidden>--Diện tích thấp nhất--</option>
-                        <option>20 m2</option>
-                        <option>30 m2</option>
-                        <option>50 m2</option>
-                        <option>80 m2</option>
-                        <option>100 m2</option>
-                    </select>
-                </div>
-                <div class="form-group col-sm-6">
-                    <select class="form-control" id="do_uu_tien">
-                        <option selected hidden>--Diện tích cao nhất--</option>
-                        <option>20 m2</option>
-                        <option>30 m2</option>
-                        <option>50 m2</option>
-                        <option>80 m2</option>
-                        <option>100 m2</option>
-                    </select>
-                </div>
+                    <input type="hidden" name="search.Criterias[96].ID" value="97" />
+                    <input type="hidden" name="search.Criterias[96].Selected" value="true" />
+                    @Html.DropDownList("search.Criterias[96].Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
+                    <input type="hidden" name="search.Criterias[96].EnumType" value="Acreage" />
+                </div>                
             </div>
             <div class="row">
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="do_uu_tien">
-                        <option selected hidden>--Độ ưu tiên--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    @Html.DropDownList("search.Criterias[96].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                        @Html.CheckBox("search.Criterias[96].Prerequisite") Tiên quyết
+                    </label>
                 </div>
             </div>
 
@@ -103,7 +92,7 @@
     </div>
     <div class="_tk_button">
         <div>
-            <button type="submit" id="btn_nang_cao" class="btn btn-default" data-toggle="modal" data-target="#modal_timkiem">Nâng Cao</button>
+            <button type="button" id="btn_nang_cao" class="btn btn-default" data-toggle="modal" data-target="#modal_timkiem">Nâng Cao</button>
         </div>
         <button type="submit" id="btn_tim_kiem" class="btn btn-default">Tìm Kiếm</button>
     </div>
@@ -184,3 +173,92 @@
     //    modal.style.display = "none";
     //}
 </script>*@
+
+<script>
+
+    function setValueInput()
+    {
+        $("#ddlDistrict").on("change", function () {
+            var province = $("#ddlProvince").val();
+            var district = $(this).val();
+            $("#txtAddress").val(district + province);            
+        });
+    }
+
+    function setEventToControl() {
+        $("#ddlProvince").on("change", function () {
+            setValueInput();
+            $("#Lat").val("");
+            $("#Long").val("");
+            var stateId = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("GetDistrictByID", "Home")',
+                type: "GET",
+                dataType: "JSON",
+                data: { id: stateId },
+                success: function (cities) {
+                    console.log(cities);
+                    //$("#_district").html();
+                    $("#ddlDistrict").find('option').remove();
+                    $("#ddlDistrict").append($("<option selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                    $.each(cities, function (i, city) {
+                        //$("#ddlDistrict").append(
+                        //    $('<option></option>').val(city.ID).html(city.Name));
+
+                        $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
+                    });
+                },
+                error: function (a) {
+                    console.log(a.responseText);
+                    alert("lỗi");
+                }
+            });
+        });
+    }
+
+    $(document).ready(function () {
+        setValueInput();
+        setEventToControl();// Gán event
+    });
+
+    // Lấy danh sách phường theo quận gán vào select
+    function GetListPhuongToSelectBox(data, element) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDistrictByID", "Home")' + "?id=" + data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            //data:JSON.stringify($("#ddlDistrict").val()),
+            //async: false,
+            success: function (data) {
+                alert("thanh công" + data);
+                $('#' + element).find('option').remove();
+                $('#' + element).append($("<option></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                $.each(data, function () {
+                    $('#' + element).append($("<option></option>").attr("value", this.ID).text(this.Name));
+                });
+            },
+            error: function (a) {
+                console.log(a.responseText);
+                alert("lỗi");
+            }
+        });
+    }
+</script>
+
+@section chosen{
+
+    <script type="text/javascript">
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+        '.chosen-select-width': { width: "95%" }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+    </script>
+}

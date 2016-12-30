@@ -28,14 +28,14 @@
                                     @if (!string.IsNullOrEmpty(item.Description))
                                     {
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                         <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
                                     }
                                     else
                                     {
                                         <label>
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                     }
                                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -43,11 +43,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                    @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                                 </label>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })                               
+                                @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })                               
                             </div>                                                     
                         </div>
                         index = index + 1;
@@ -77,14 +77,14 @@
                                     @if (!string.IsNullOrEmpty(item.Description))
                                     {
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                         <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
                                     }
                                     else
                                     {
                                         <label>
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                     }
                                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -92,11 +92,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                    @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                                 </label>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                                @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                             </div>
                         </div>
                         index = index + 1;
@@ -126,14 +126,14 @@
                                     @if (!string.IsNullOrEmpty(item.Description))
                                     {
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                         <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
                                     }
                                     else
                                     {
                                         <label>
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                     }
                                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -141,11 +141,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                    @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                                 </label>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                                @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                             </div>
                         </div>
                         index = index + 1;
@@ -167,49 +167,51 @@
                 <div class="row">
                     <div class="form-group col-sm-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="17" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", KichthuocPhongNgu.Start.ToSelectList(), new { @class = "form-control" })
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="KichthuocPhongNgu" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="18" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", KichthuocToilet.Start.ToSelectList(), new { @class = "form-control" })
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="KichthuocToilet" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="19" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", KichthuocPhongKhach.Start.ToSelectList(), new { @class = "form-control" })
-
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="KichthuocPhongKhach" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>
@@ -217,48 +219,51 @@
                 <div class="row">
                     <div class="form-group col-md-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="20" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", SoLuongPhongNgu.Start.ToSelectList(), new { @class = "form-control" })
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="SoLuongPhongNgu" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="21" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", SoLuongToiletChung.Start.ToSelectList(), new { @class = "form-control" })
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="SoLuongToiletChung" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-7">
                         <input type="hidden" name="search.Criterias[@index].ID" value="22" />
-                        <input type="hidden" name="search.Criterias[@index].selected" value="true" />
+                        <input type="hidden" name="search.Criterias[@index].Selected" value="true" />
                         @Html.DropDownList("search.Criterias[" + index + "].Value", SoluongToiletRieng.Start.ToSelectList(), new { @class = "form-control" })
+                        <input type="hidden" name="search.Criterias[@index].EnumType" value="SoluongToiletRieng" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                            @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                            @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                         </label>
                     </div>
                     <div class="form-group col-md-3">
-                        @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                         @{ index = index + 1;}
                     </div>
                 </div>                                                               
@@ -287,14 +292,14 @@
                                     @if (!string.IsNullOrEmpty(item.Description))
                                     {
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                         <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
                                     }
                                     else
                                     {
                                         <label>
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                     }
                                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -302,11 +307,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                    @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                                 </label>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                                @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                             </div>
                         </div>
                         index = index + 1;
@@ -336,14 +341,14 @@
                                     @if (!string.IsNullOrEmpty(item.Description))
                                     {
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                         <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
                                     }
                                     else
                                     {
                                         <label>
-                                            @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                                            @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                                         </label>
                                     }
                                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -351,11 +356,11 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                    @Html.CheckBox("search.Criterias[" + index + "].tienquyet") Tiên quyết
+                                    @Html.CheckBox("search.Criterias[" + index + "].Prerequisite") Tiên quyết
                                 </label>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.DropDownList("search.Criterias[" + index + "].doquantrong", DoQuanTrong.Start.ToSelectList(), new { @class = "form-control" })
+                                @Html.DropDownList("search.Criterias[" + index + "].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                             </div>
                         </div>
                         index = index + 1;

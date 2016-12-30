@@ -81,6 +81,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-2">
+                    <input type="hidden" name="search.Criterias[95].ID" value="96" />
+                    <input type="hidden" name="search.Criterias[95].Selected" value="true" />
                     @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                 </div>
@@ -93,6 +95,8 @@
                 </div>
                 @Html.LabelFor(model => model.Acreage, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
+                    <input type="hidden" name="search.Criterias[96].ID" value="97" />
+                    <input type="hidden" name="search.Criterias[96].Selected" value="true" />
                     @Html.TextBoxFor(model => model.Acreage, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Acreage, "", new { @class = "text-danger" })
                 </div>
@@ -104,6 +108,30 @@
                 <div class="col-md-10">
                     @Html.TextBoxFor(model => model.Status, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="sel1">Tỉnh/ thành phố</label>
+                <div class="col-md-4">
+                    <input type="hidden" name="search.Criterias[94].ID" value="95" />
+                    <input type="hidden" name="search.Criterias[94].Selected" value="true" />
+                    <input id="txtAddress" type="hidden" name="search.Criterias[94].Value" value="" />
+                    <input type="hidden" name="search.Criterias[94].EnumType" value="Address" />
+                    <select class="chosen-select form-control" id="ddlProvince">
+                        <option Selected hidden>--Chọn Tỉnh/Thành phố--</option>
+                        @foreach (var item in ViewBag.CbProvince as List<Province>)
+                        {
+                            <option value="@item.ID.ToString()">@item.Type @item.Name</option>
+                        }
+                    </select>
+
+                </div>
+                <label class="control-label col-md-2" for="sel1">Quận/ huyện</label>
+                <div class="col-md-4">
+                    <select class="form-control" id="ddlDistrict">
+                        <option Selected hidden>--Chọn Quận/Huyện--</option>
+                    </select>
                 </div>
             </div>
 
@@ -321,7 +349,7 @@
             <hr />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Thêm dự án" class="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -370,6 +398,95 @@
 
 <script src="~/Assets/chosen/chosen.jquery.js"></script>
 <script type="text/javascript">
+    function setValueInput() {
+        $("#ddlDistrict").on("change", function () {
+            var province = $("#ddlProvince").val();
+            var district = $(this).val();
+
+            $("#txtAddress").val(district + province);
+
+            $.ajax({
+                url: '@Url.Action("GetAddress", "Admin")',
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    provinceid: province,
+                    districtid: district
+                },
+                success: function (cities) {
+                    console.log(cities);                    
+                    $("#Address").val(cities);
+                },
+                error: function (a) {
+                    console.log(a.responseText);
+                    alert("lỗi");
+                }
+            });
+        });
+    }
+
+    function setEventToControl() {
+        $("#ddlProvince").on("change", function () {
+            setValueInput();
+            $("#Lat").val("");
+            $("#Long").val("");
+            var stateId = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("GetDistrictByID", "Admin")',
+                type: "GET",
+                dataType: "JSON",
+                data: { id: stateId },
+                success: function (cities) {
+                    console.log(cities);
+                    //$("#_district").html();
+                    $("#ddlDistrict").find('option').remove();
+                    $("#ddlDistrict").append($("<option Selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                    $.each(cities, function (i, city) {
+                        //$("#ddlDistrict").append(
+                        //    $('<option></option>').val(city.ID).html(city.Name));
+
+                        $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
+                    });
+                },
+                error: function (a) {
+                    console.log(a.responseText);
+                    alert("lỗi");
+                }
+            });
+        });
+    }
+
+    $(document).ready(function () {
+        setValueInput();
+        setEventToControl();// Gán event
+    });
+
+    // Lấy danh sách phường theo quận gán vào select
+    function GetListPhuongToSelectBox(data, element) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDistrictByID", "Home")' + "?id=" + data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            //data:JSON.stringify($("#ddlDistrict").val()),
+            //async: false,
+            success: function (data) {
+                alert("thanh công" + data);
+                $('#' + element).find('option').remove();
+                $('#' + element).append($("<option></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                $.each(data, function () {
+                    $('#' + element).append($("<option></option>").attr("value", this.ID).text(this.Name));
+                });
+            },
+            error: function (a) {
+                console.log(a.responseText);
+                alert("lỗi");
+            }
+        });
+    }
+
+
     var config = {
         '.chosen-select': {},
         '.chosen-select-deselect': { allow_single_deselect: true },

@@ -12,7 +12,8 @@ namespace BDS.Service
 {
     public interface IDistrictService
     {       
-        List<District> GetAllById(string provinceId);       
+        List<District> GetAllById(string provinceId);
+        District GetById(string id);
     }
 
     internal class DistrictService : IDistrictService
@@ -28,7 +29,7 @@ namespace BDS.Service
         {
             try
             {
-                var result = _districtRepository.Get(provinceId);
+                var result = _districtRepository.GetListById(provinceId);
 
                 return result.Select(v => MappingConfig.Mapper.Map<Entity.District, District>(v)).ToList();
             }
@@ -38,6 +39,19 @@ namespace BDS.Service
             }
 
         }
-       
+
+        public District GetById(string id)
+        {        
+            try
+            {
+                var result = _districtRepository.Get(id);
+
+                return result != null ? MappingConfig.Mapper.Map<Entity.District, District>(result) : new District();
+            }
+            catch (Exception ex)
+            {
+                return new District();
+            }
+        }
     }
 }

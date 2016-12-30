@@ -25,13 +25,13 @@ namespace BDS.Repository.EntityFramework
         public string Name { get; set; }
         public Nullable<double> Score { get; set; }
         public Nullable<int> GroupID { get; set; }
+        public Nullable<int> Type { get; set; }
+        public string Description { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<bool> Active { get; set; }
-        public Nullable<int> Type { get; set; }
-        public string Description { get; set; }
     
         public virtual GroupCriteria GroupCriteria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

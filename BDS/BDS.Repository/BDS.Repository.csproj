@@ -11,6 +11,21 @@
     <AssemblyName>BDS.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,11 +57,15 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LinqKit">
+      <HintPath>..\..\..\LinqKit\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +115,7 @@
     <Compile Include="EntityFramework\Models\GroupCriteria.cs" />
     <Compile Include="EntityFramework\Models\Criteria.cs" />
     <Compile Include="EntityFramework\Models\District.cs" />
+    <Compile Include="EntityFramework\Models\User.cs" />
     <Compile Include="EntityFramework\Models\Province.cs" />
     <Compile Include="EntityFramework\Models\Project.cs" />
     <Compile Include="EntityFramework\Parameter.cs">
@@ -126,6 +146,7 @@
     <Compile Include="IRepository\IDetailProjectRepositoty.cs" />
     <Compile Include="IRepository\IGroupCriteriaRepository.cs" />
     <Compile Include="IRepository\ICriteriaRepository.cs" />
+    <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="IRepository\IProvinceRepository.cs" />
     <Compile Include="IRepository\IGenericRepository.cs" />
     <Compile Include="IRepository\IDistrictRepository.cs" />
@@ -135,6 +156,7 @@
     <Compile Include="Repository\DetailProjectRepositoty.cs" />
     <Compile Include="Repository\GroupCriteriaRepository.cs" />
     <Compile Include="Repository\CriteriaRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ProvinceRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\DistrictRepository.cs" />
@@ -153,6 +175,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BDS.Data\BDS.Data.csproj">
+      <Project>{81b21e09-4022-45bb-aee3-4a9337efc906}</Project>
+      <Name>BDS.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\dbBatDongSan.mdf" />
+    <Content Include="Data\dbBatDongSan_log.ldf">
+      <DependentUpon>dbBatDongSan.mdf</DependentUpon>
+    </Content>
     <Content Include="EntityFramework\dbBatDongSan.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbBatDongSan.edmx</DependentUpon>
@@ -165,13 +200,16 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BDS.Data\BDS.Data.csproj">
-      <Project>{81b21e09-4022-45bb-aee3-4a9337efc906}</Project>
-      <Name>BDS.Data</Name>
-    </ProjectReference>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

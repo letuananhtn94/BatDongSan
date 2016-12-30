@@ -11,6 +11,6 @@ namespace BDS.Repository.IRepository
 {
     public interface IProvinceRepository : IGenericRepository<Province>
     {
-       
+        Province Get(string id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BDS.Data.Dto;
+using BDS.Data.Dto.Request;
 using BDS.Data.Dto.Response;
 using BDS.Service;
 using System;
@@ -6,17 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BDS.Helper;
 
 namespace BDS.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
         private readonly IProjectService _projectService;
+        private readonly IProvinceService _provinceService;
+        private readonly IDistrictService _districtService;
         private readonly ICriteriaService _criteriaService;
-
-        public AdminController(IProjectService projectService, ICriteriaService criteriaService)
+        List<Province> data = new List<Province>();
+        List<District> district = new List<District>();
+        public AdminController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService)
         {
             _projectService = projectService;
+            _provinceService = provinceService;
+            _districtService = district;
             _criteriaService = criteriaService;
         }
         // GET: Admin/Admin
@@ -24,40 +31,51 @@ namespace BDS.Areas.Admin.Controllers
         public ActionResult Index()
         {
             ViewBag.Criterias = _criteriaService.GetAll();
+            data = _provinceService.GetAll();
+            ViewBag.CbProvince = data;
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Index(Project project, HttpPostedFileBase[] files)
+        public ActionResult Index(Project project, SearchProject search, HttpPostedFileBase[] files)
         {
             try
-            {
-                string urlImage = "/Images/Project/";                
+            {                         
                 project.Image = new List<Image>();
+                project.DetailProject = new List<DetailProject>();
+                var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
 
-                /*Lopp for multiple files*/
-                foreach (HttpPostedFileBase file in files)
+                foreach (var item in listCriteria.ToList())
                 {
-                    Image img = new Image();
-                    /*Geting the file name*/
-                    string filename = System.IO.Path.GetFileName(file.FileName);
-                    /*Saving the file in server folder*/
-                    file.SaveAs(Server.MapPath(urlImage + filename));
-                    string pathImage = urlImage + filename;
-                    /*HERE WILL BE YOUR CODE TO SAVE THE FILE DETAIL IN DATA BASE*/
+                    DetailProject dp = new DetailProject();
+                    dp.CriteriaID = (int)item.ID;
+                    dp.Value = !string.IsNullOrEmpty(item.Value) ? int.Parse(item.Value) : 0;
 
-                    img.Name = filename;
-                    img.Url = urlImage;
-                    project.Image.Add(img);
+                    project.DetailProject.Add(dp);
                 }
+
+                if (files != null)
+                {
+                    /*Lopp for multiple files*/
+                    foreach (HttpPostedFileBase file in files)
+                    {
+                        Image img = new Image();
+                        img = ImageUpload.UploadFile(file, img);
+                        project.Image.Add(img);
+                    }
+                }
+
+                project.CreatedDate = DateTime.Now;
+                project.Active = true;                        
+                
             
                 ServiceResult<Project> result = _projectService.Add(project);
 
-                ViewBag.Message = "File Uploaded successfully.";
+                
             }
             catch(Exception ex)
             {
-                ViewBag.Message = "Error while uploading the files.";
+                
             }
             return Index();
         }
@@ -65,6 +83,36 @@ namespace BDS.Areas.Admin.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult GetDistrictByID(string id)
+        {
+            try
+            {
+                district = _districtService.GetAllById(id);
+            }
+            catch (Exception ex)
+            {
+                //Log errror
+            }
+            return Json(district, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAddress(string provinceid, string districtid)
+        {
+            string address = "";
+            try
+            {
+                District district = _districtService.GetById(districtid);
+                Province province = _provinceService.GetById(provinceid);
+
+                address = district.Name + "," + province.Name;
+            }
+            catch (Exception ex)
+            {
+                //Log errror
+            }
+            return Json(address, JsonRequestBehavior.AllowGet);
         }
     }
 }

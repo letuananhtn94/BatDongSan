@@ -17,7 +17,7 @@ namespace BDS.Repository.EntityFramework
         public long ID { get; set; }
         public Nullable<long> ProjectID { get; set; }
         public Nullable<int> CriteriaID { get; set; }
-        public string Value { get; set; }
+        public Nullable<int> Value { get; set; }
     
         public virtual Criteria Criteria { get; set; }
         public virtual Project Project { get; set; }

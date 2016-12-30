@@ -11,7 +11,7 @@ namespace BDS.Data.Dto
     {
         public long? ProjectID { get; set; }
         public int? CriteriaID { get; set; }
-        public string Value { get; set; }
+        public int? Value { get; set; }
 
         public virtual Criteria Criteria { get; set; }
         public virtual Project Project { get; set; }

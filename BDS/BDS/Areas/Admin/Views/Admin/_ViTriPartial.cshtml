@@ -26,13 +26,13 @@
                     @if (!string.IsNullOrEmpty(item.Description))
                     {
                     <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     else
                     {
                     <label>
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -63,13 +63,13 @@
                     @if (!string.IsNullOrEmpty(item.Description))
                     {
                     <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     else
                     {
                     <label>
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />
@@ -101,13 +101,13 @@
                     @if (!string.IsNullOrEmpty(item.Description))
                     {
                     <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="@item.Description">
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     else
                     {
                     <label>
-                        @Html.CheckBox("search.Criterias[" + index + "].selected")@item.Name
+                        @Html.CheckBox("search.Criterias[" + index + "].Selected")@item.Name
                     </label>
                     }
                     <input type="hidden" name="search.Criterias[@index].ID" value="@item.ID" />

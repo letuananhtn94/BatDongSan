@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbBatDongSanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbBatDongSan.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
@@ -43,7 +43,7 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProjectID" Type="bigint" />
           <Property Name="CriteriaID" Type="int" />
-          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+          <Property Name="Value" Type="int" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -346,7 +346,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbBatDongSanModelStoreContainer">
+        <EntityContainer Name="dbBatDongSanStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Criteria" EntityType="Self.Criteria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetailProject" EntityType="Self.DetailProject" Schema="dbo" store:Type="Tables" />
@@ -419,10 +419,11 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbBatDongSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbBatDongSan" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="ID" />
@@ -449,6 +450,8 @@
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Score" Type="Double" />
           <Property Name="GroupID" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
@@ -456,8 +459,6 @@
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="GroupCriteria" Relationship="Self.FK_Criteria_GroupCriteria" FromRole="Criteria" ToRole="GroupCriteria" />
           <NavigationProperty Name="DetailProject" Relationship="Self.FK_DetailProject_Criteria" FromRole="Criteria" ToRole="DetailProject" />
-          <Property Name="Type" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DetailProject">
           <Key>
@@ -466,7 +467,7 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectID" Type="Int64" />
           <Property Name="CriteriaID" Type="Int32" />
-          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int32" />
           <NavigationProperty Name="Criteria" Relationship="Self.FK_DetailProject_Criteria" FromRole="DetailProject" ToRole="Criteria" />
           <NavigationProperty Name="Project" Relationship="Self.FK_DetailProject_Project" FromRole="DetailProject" ToRole="Project" />
         </EntityType>
@@ -582,6 +583,16 @@
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Project" Relationship="Self.FK_Save_Project" FromRole="Save" ToRole="Project" />
           <NavigationProperty Name="User" Relationship="Self.FK_Save_User" FromRole="Save" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TypeProject">
           <Key>
@@ -795,6 +806,7 @@
           <EntitySet Name="Province" EntityType="Self.Province" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Save" EntityType="Self.Save" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TypeProject" EntityType="Self.TypeProject" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_Comment_Project" Association="Self.FK_Comment_Project">
@@ -853,26 +865,15 @@
             <End Role="User" EntitySet="User" />
             <End Role="Save" EntitySet="Save" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="dbBatDongSanModel.sysdiagrams" />
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbBatDongSanModelStoreContainer" CdmEntityContainer="dbBatDongSanEntities">
+        <EntityContainerMapping StorageEntityContainer="dbBatDongSanStoreContainer" CdmEntityContainer="dbBatDongSanEntities">
           <EntitySetMapping Name="Comment">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Comment">
+            <EntityTypeMapping TypeName="dbBatDongSan.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -887,15 +888,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Criteria">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Criteria">
+            <EntityTypeMapping TypeName="dbBatDongSan.Criteria">
               <MappingFragment StoreEntitySet="Criteria">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -905,7 +906,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DetailProject">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.DetailProject">
+            <EntityTypeMapping TypeName="dbBatDongSan.DetailProject">
               <MappingFragment StoreEntitySet="DetailProject">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -915,7 +916,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="District">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.District">
+            <EntityTypeMapping TypeName="dbBatDongSan.District">
               <MappingFragment StoreEntitySet="District">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -926,7 +927,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GroupCriteria">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.GroupCriteria">
+            <EntityTypeMapping TypeName="dbBatDongSan.GroupCriteria">
               <MappingFragment StoreEntitySet="GroupCriteria">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -935,7 +936,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Image">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Image">
+            <EntityTypeMapping TypeName="dbBatDongSan.Image">
               <MappingFragment StoreEntitySet="Image">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -946,7 +947,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Like">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Like">
+            <EntityTypeMapping TypeName="dbBatDongSan.Like">
               <MappingFragment StoreEntitySet="Like">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -955,7 +956,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Parameter">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Parameter">
+            <EntityTypeMapping TypeName="dbBatDongSan.Parameter">
               <MappingFragment StoreEntitySet="Parameter">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ParaKey" ColumnName="ParaKey" />
@@ -965,7 +966,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Project">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Project">
+            <EntityTypeMapping TypeName="dbBatDongSan.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -989,7 +990,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Province">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Province">
+            <EntityTypeMapping TypeName="dbBatDongSan.Province">
               <MappingFragment StoreEntitySet="Province">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -998,7 +999,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Role">
+            <EntityTypeMapping TypeName="dbBatDongSan.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1007,7 +1008,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Save">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.Save">
+            <EntityTypeMapping TypeName="dbBatDongSan.Save">
               <MappingFragment StoreEntitySet="Save">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
@@ -1020,8 +1021,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbBatDongSan.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TypeProject">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.TypeProject">
+            <EntityTypeMapping TypeName="dbBatDongSan.TypeProject">
               <MappingFragment StoreEntitySet="TypeProject">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -1030,7 +1042,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.User">
+            <EntityTypeMapping TypeName="dbBatDongSan.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -1045,17 +1057,6 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="dbBatDongSanModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

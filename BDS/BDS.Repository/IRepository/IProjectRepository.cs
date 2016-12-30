@@ -11,6 +11,6 @@ namespace BDS.Repository.IRepository
 {
     public interface IProjectRepository: IGenericRepository<Project>
     {
-       
+        List<Project> GetListTopHome();
     }
 }

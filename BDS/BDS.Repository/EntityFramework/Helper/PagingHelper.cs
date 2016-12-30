@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BDS.Data.Extensions;
+using System.Web.UI.WebControls;
 
 namespace BDS.Repository.EntityFramework
 {
@@ -20,7 +22,7 @@ namespace BDS.Repository.EntityFramework
                 RowCount = data.Count()
             };
             result.PageCount = result.RowCount / result.PageSize + (result.RowCount % result.PageSize > 0 ? 1 : 0);
-            result.Data = data.Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize);
+            result.Data = LinqExtension.OrderBy(data,"ID").Skip((result.CurrentPage - 1) * result.PageSize).Take(result.PageSize);
             result.ResultCode = ResultCode.Ok;
 
             return result;
@@ -40,5 +42,7 @@ namespace BDS.Repository.EntityFramework
 
             return result;
         }
+
+
     }
 }

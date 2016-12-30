@@ -16,7 +16,7 @@
 
     <link href="~/Assets/chosen/bootstrap-chosen.css" rel="stylesheet" />
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar-fixed-top" >
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -31,27 +31,30 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
                     <li>@Html.ActionLink("Tìm kiếm", "List", "Home")</li>
                     <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
                     <li>@Html.ActionLink("Hướng dẫn", "Contact", "Home")</li>
                 </ul>
-               @* @Html.Partial("_LoginPartial")*@
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container-fluid" style="padding:0px">
         @RenderBody()
     </div>
-    <footer class="container-fluid text-center" style="margin-top: 10px">
+
+
+
+    <footer class="container-fluid text-center" >
         <div class="container text-center">
             <img src="/Images/banner01.jpg" class="img-circle" alt="Cinque Terre" width="60" height="60">
             <div class="_list_menu">
                 <ul class="">
-                    <li class="active"><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Tìm kiếm</a></li>
-                    <li><a href="#">Giới thiệu</a></li>
-                    <li><a href="#">Hướng dẫn</a></li>
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Tìm kiếm", "List", "Home")</li>
+                    <li>@Html.ActionLink("Giới thiệu", "About", "Home")</li>
+                    <li>@Html.ActionLink("Hướng dẫn", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
@@ -62,5 +65,11 @@
 
     @RenderSection("scripts", required: false)
     @RenderSection("chosen", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+        });
+    </script>
 </body>
 </html>

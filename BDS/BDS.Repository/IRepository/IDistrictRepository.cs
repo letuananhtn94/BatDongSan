@@ -11,6 +11,7 @@ namespace BDS.Repository.IRepository
 {
     public interface IDistrictRepository : IGenericRepository<District>
     {
-        List<District> Get(string id);
+        List<District> GetListById(string id);
+        District Get(string id);
     }
 }

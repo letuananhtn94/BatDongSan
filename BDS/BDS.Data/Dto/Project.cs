@@ -9,6 +9,7 @@ namespace BDS.Data.Dto
 {
     public class Project : BaseData
     {
+       
         [Display(Name="Tiêu đề")]
         public string Name { get; set; }
         [Display(Name = "Địa chỉ")]
@@ -36,7 +37,8 @@ namespace BDS.Data.Dto
         public bool? Active { get; set; }
 
         public float Score { get; set; }
-
+        public List<Criteria> search { get; set; }
         public virtual IList<Image> Image { get; set; }
+        public virtual IList<DetailProject> DetailProject { get; set; }
     }
 }

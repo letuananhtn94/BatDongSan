@@ -12,7 +12,7 @@ namespace BDS.Service
 {
     public interface IProvinceService
     {
-        
+        Province GetById(string id);
         List<Province> GetAll();
     }
 
@@ -35,6 +35,20 @@ namespace BDS.Service
             catch (Exception ex)
             {
                 return new List<Province>();
+            }
+        }
+
+        public Province GetById(string id)
+        {
+            try
+            {
+                var result = _repository.Get(id);
+
+                return result != null ? MappingConfig.Mapper.Map<Entity.Province, Province>(result) : new Province();
+            }
+            catch (Exception ex)
+            {
+                return new Province();
             }
         }
     }

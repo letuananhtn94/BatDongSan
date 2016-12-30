@@ -7,8 +7,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_TimKiemPartial")
-
+<form action="/Home/List" method="post">
+    @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+</form>
 <!-- Phần chi tiết -->
 <div class="container _main">
     <div class="_slide_image">
@@ -142,27 +143,7 @@
                 </div>
 
             </div>
-            @*<div class="_du_an_tuong_tu">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Bất động sản tương tự</div>
-                    <div class="panel-body">
-                        @{
-                            var model = ViewData["lstTopHome"] as List<WebsiteBatDongSan.Models.DuAn>;
-                        }
-                        @if (model.Count > 0)
-                        {
-                            foreach (var item in model)
-                            {
-                                Html.RenderPartial("_DuAnTuongTuPartial", item, null);
-                            }
-                        }
-                        else
-                        {
-
-                        }
-                    </div>
-                </div>
-            </div>*@
+            
         </div>
     </div>
 
@@ -176,23 +157,23 @@
             <h2>Bất động sản tương tự</h2>
         </div>
 
-        @*<div class="row">
+        <div class="row">
             @{
-                var model = ViewData["lstTopHome"] as List<BDS.Models.DuAn>;
+                var data = (List<Project>)ViewBag.ListTuongTu;
             }
-            @if (model.Count > 0)
+            @if (data != null && data.Any())
             {
-                foreach (var item in model)
+                foreach (var item in data)
                 {
                     Html.RenderPartial("_DuAnPartial", item, null);
                 }
             }
             else
             {
-
+                <h2 style="text-align: center"><i>Hiện tại chưa có bất động sản tương tự.</i></h2>
             }
 
-        </div>*@
+        </div>
     </div>
 </div>
 

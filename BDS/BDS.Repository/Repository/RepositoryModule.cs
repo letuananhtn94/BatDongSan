@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using BDS.Repository.Repository;
 using BDS.Repository.IRepository;
 
 namespace BDS.Repository.Repository
@@ -20,6 +21,7 @@ namespace BDS.Repository.Repository
             builder.RegisterType<DistrictRepository>().As<IDistrictRepository>().InstancePerRequest();
             builder.RegisterType<CriteriaRepository>().As<ICriteriaRepository>().InstancePerRequest();
             builder.RegisterType<DetailProjectRepositoty>().As<IDetailProjectRepositoty>().InstancePerRequest();
+            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
         }
 
     }
