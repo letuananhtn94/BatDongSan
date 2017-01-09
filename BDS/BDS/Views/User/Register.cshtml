@@ -1,0 +1,130 @@
+﻿@using BDS.Data.Dto.Response;
+@using BDS.Data.Dto.Request;
+@using BDS.Data.Dto;
+@using BDS.Data.Enum;
+@using BDS.Helper;
+@using BotDetect.Web.Mvc;
+
+@model BDS.Data.Dto.RegisterModel
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+@{ MvcCaptcha registerCapcha = new MvcCaptcha("registerCapcha"); }
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<link href="~/Assets/client/login/css/style.css" rel="stylesheet" />
+<style>
+    .main-wthree {
+        background: #3b8fc5;
+        min-height: 400px;
+    }
+
+        .main-wthree h2 {
+            font-size: 30px;
+            color: #FFF;
+            margin-bottom: 1em;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+    .sin-w3-agile {
+        padding: 2em 0 0;
+        margin: 0 auto;
+        width: 30%;
+    }
+
+    input, select {
+        max-width: 100%;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main-wthree">
+        <div class="container">
+            <div class="sin-w3-agile">
+                <h2>Đăng ký</h2>
+                <div class="form-group">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success">@ViewBag.Success</div>
+                    }
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="email" type="text" class="form-control" name="UserName" placeholder="Tên đăng nhập">
+                    
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" type="password" class="form-control" name="Password" placeholder="Mật khẩu">
+                    
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" type="password" class="form-control" name="ConfirmPassword" placeholder="Xác nhận mật khẩu">
+                    
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="email" type="text" class="form-control" name="Name" placeholder="Họ và tên">
+                   
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input id="password" type="text" class="form-control" name="Email" placeholder="Email">
+                   
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                    <input id="password" type="text" class="form-control" name="Address" placeholder="Địa chỉ">
+                    
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10" style="margin-bottom: 15px;">
+                        @Html.Captcha(registerCapcha)
+                        @Html.TextBox("CaptchaCode")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="center" style="text-align: center; margin: 15px 0px">
+                        <button type="submit" class="btn btn-success" style="text-align: center; height:50px; width:150px">Tạo tài khoản</button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+}
+
+<div class="list_du_an container">
+    <div class="_title">
+        <h2>Bất động sản mới nhất</h2>
+    </div>
+
+    <div class="row">
+        @{
+            var data = (List<Project>)ViewBag.TopHome;
+        }
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                Html.RenderPartial("/Views/Home/_DuAnPartial.cshtml", item, null);
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+</div><br>

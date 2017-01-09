@@ -27,16 +27,7 @@ namespace BDS.Repository.Repository
             foreach (var item in search.Criterias)
             {                
                 if (item.Selected)
-                {
-                    //if (item.Prerequisite)
-                    //{
-                    //    inner = inner.Or(t => t.CriteriaID == item.ID);
-                    //}
-                    //else
-                    //{
-                    //    inner = inner.Or(t => t.CriteriaID == item.ID);
-                    //}
-
+                {                    
                     if (!string.IsNullOrEmpty(item.EnumType))
                     {
                         if (!string.IsNullOrEmpty(item.Value) && !item.Value.Equals("0"))

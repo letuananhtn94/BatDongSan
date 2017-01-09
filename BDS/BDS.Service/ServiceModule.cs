@@ -21,6 +21,8 @@ namespace BDS.Service
             builder.RegisterType<CriteriaService>().As<ICriteriaService>().InstancePerRequest();
             builder.RegisterType<GroupCriteriaService>().As<IGroupCriteriaService>().InstancePerRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
+            builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
+            builder.RegisterType<SaveService>().As<ISaveService>().InstancePerRequest();
         }
 
     }

@@ -111,10 +111,12 @@
     <Compile Include="EntityFramework\Like.cs">
       <DependentUpon>dbBatDongSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Models\Save.cs" />
     <Compile Include="EntityFramework\Models\DetailProject.cs" />
     <Compile Include="EntityFramework\Models\GroupCriteria.cs" />
     <Compile Include="EntityFramework\Models\Criteria.cs" />
     <Compile Include="EntityFramework\Models\District.cs" />
+    <Compile Include="EntityFramework\Models\Comment.cs" />
     <Compile Include="EntityFramework\Models\User.cs" />
     <Compile Include="EntityFramework\Models\Province.cs" />
     <Compile Include="EntityFramework\Models\Project.cs" />
@@ -143,9 +145,11 @@
       <DependentUpon>dbBatDongSan.tt</DependentUpon>
     </Compile>
     <Compile Include="IRepository\IBaseRepository.cs" />
+    <Compile Include="IRepository\ISaveRepository .cs" />
     <Compile Include="IRepository\IDetailProjectRepositoty.cs" />
     <Compile Include="IRepository\IGroupCriteriaRepository.cs" />
     <Compile Include="IRepository\ICriteriaRepository.cs" />
+    <Compile Include="IRepository\ICommentRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="IRepository\IProvinceRepository.cs" />
     <Compile Include="IRepository\IGenericRepository.cs" />
@@ -153,9 +157,11 @@
     <Compile Include="IRepository\IProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\SaveRepository.cs" />
     <Compile Include="Repository\DetailProjectRepositoty.cs" />
     <Compile Include="Repository\GroupCriteriaRepository.cs" />
     <Compile Include="Repository\CriteriaRepository.cs" />
+    <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ProvinceRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />

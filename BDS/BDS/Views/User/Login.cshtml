@@ -1,0 +1,107 @@
+﻿@using BDS.Data.Dto.Response;
+@using BDS.Data.Dto.Request;
+@using BDS.Data.Dto;
+@using BDS.Data.Enum;
+@using BDS.Helper;
+
+@model BDS.Data.Dto.LoginModel
+
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<link href="~/Assets/client/login/css/style.css" rel="stylesheet" />
+<style>
+    .main-wthree {
+    background: #3b8fc5;
+    min-height: 400px;
+}
+    .main-wthree h2 {
+    font-size: 30px;
+    color: #FFF;
+    margin-bottom: 1em;
+    letter-spacing: 3px;
+    text-align: center;
+}
+    .sin-w3-agile {
+    padding: 2em 0 0;
+    margin: 0 auto;
+    width: 30%;
+}
+    input, select {
+     max-width: 100%; 
+}
+</style>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="main-wthree">
+        <div class="container">
+            <div class="sin-w3-agile">
+                <h2>Đăng nhập</h2>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="email" type="text" class="form-control" name="UserName" placeholder="Tên đăng nhập">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" type="password" class="form-control" name="Password" placeholder="Mật khẩu">
+                </div>
+                <div class="form-group">
+                    <div class="center" style="text-align: center; margin: 15px 0px">
+                        <button type="submit" class="btn btn-success" style="text-align: center; height:50px; width:150px">Đăng nhập</button>
+                    </div>
+                </div>
+
+                <div class="logmod__alter">
+                    <div class="logmod__alter-container">
+                        <a href="/User/LoginFacebook" class="connect facebook">
+                            <div class="connect__icon">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+                            <div class="connect__context">
+                                <span>Đăng nhập với <strong>Facebook</strong></span>
+                            </div>
+                        </a>
+                        @*<a href="#" class="connect googleplus">
+                            <div class="connect__icon">
+                                <i class="fa fa-google-plus"></i>
+                            </div>
+                            <div class="connect__context">
+                                <span>Sign in with <strong>Google+</strong></span>
+                            </div>
+                        </a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="list_du_an container">
+    <div class="_title">
+        <h2>Bất động sản mới nhất</h2>
+    </div>
+
+    <div class="row">
+        @{
+            var data = (List<Project>)ViewBag.TopHome;
+        }
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                Html.RenderPartial("/Views/Home/_DuAnPartial.cshtml", item, null);
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+</div><br>

@@ -9,12 +9,17 @@ namespace BDS.Data.Dto
 {
     public class User : BaseData
     {
+        [Display(Name = "Tài khoản")]
         public string UserName { get; set; }
         public string Password { get; set; }
+        [Display(Name = "Quyền")]
         public int? RoleID { get; set; }
+        [Display(Name = "Tên")]
         public string Name { get; set; }
-        public string Address { get; set; }
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }        
         public string Email { get; set; }
+        [Display(Name = "SĐT")]
         public string Phone { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }

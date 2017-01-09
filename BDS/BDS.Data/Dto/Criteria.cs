@@ -10,11 +10,15 @@ namespace BDS.Data.Dto
 {
     public class Criteria : BaseData
     {
+        [Display(Name = "Mã")]
         public string Code { get; set; }
+        [Display(Name = "Tiêu chí")]
         public string Name { get; set; }
+        [Display(Name = "Điểm")]
         public double? Score { get; set; }
         public int? GroupID { get; set; }
         public int? Type { get; set; }
+        [Display(Name = "Mô tả")]
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }

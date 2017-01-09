@@ -1,0 +1,19 @@
+﻿
+@{
+    var session = (UserLogin)Session[BDS.Common.CommonConstants.USER_SESSION];
+}
+
+@if (session == null)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Đăng ký", "Register", "User", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Đăng nhập", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>       
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink(@session.UserName, "Index", "Profile", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Thoát", "Logout", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -7,6 +7,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    var session = (UserLogin)Session[BDS.Common.CommonConstants.USER_SESSION];
+}
+@if (session != null)
+{
+    <input type="hidden" id="UserID" value="@session.UserID" />
+}
+
+
+<style>
+    hr{    
+    border-top: 1px solid black;
+}
+    div.container-fluid{
+        background-color:#3b8fc5;
+    }
+</style>
+
 <form action="/Home/List" method="post">
     @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
 </form>
@@ -58,18 +76,57 @@
         <div class="_detail_col_left">
             <div class="tab-content">
                 <div id="binhluan" class="tab-pane fade in active">
-                    <h3>Danh sách bình luận</h3>
-                    <hr/>
-                        <div class="form-group">
-                            <div class="col-md-10">
-                                <textarea class="form-control" rows="5" id="comment" placeholder="Nội dung bình luận"></textarea>
+                    <div class="list-comment">
+                        <h3>Danh sách bình luận</h3>
+                        <hr />
+                        @{
+                            var comment = (List<Comment>)ViewBag.ListComment;
+                        }
+                        @if (comment != null && comment.Any())
+                        {
+                            foreach (var item in comment)
+                            {
+                                
+                                <div class="col-md-12 noidungcomment">
+                                    <p> @item.Content</p>
+                                </div>
+                                <div class="col-md-12 hinhanhcomment">
+                                    @foreach (var img in item.Image)
+                                    {
+                                        <div class="_item_image">
+                                            <img src="@img.Url@img.Name" class="myImg img-thumbnail" alt="Thanh Pho" width="300" height="200">
+                                        </div>
+                                    }          
+                                </div>
+                                <div class="col-md-12 thontincomment">
+                                    <i>Được tạo bởi </i> <b> @item.User.Name</b> | <i>Ngày tạo: </i> <b>@String.Format("{0:g}", item.CreatedDate)</b>
+                                </div>
+                                <div class="col-md-12">
+                                    <hr />
+                                </div>
+                                
+                            }
+
+                        }
+                        else
+                        {
+
+                        }
+                        
+                    </div>                                      
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="5" id="txtComment" placeholder="Nội dung bình luận"></textarea>
+                        </div>
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="col-md-4">
+                                <button type="button" id="btnBinhLuan" class="btn btn-default" style="float:right">Gửi bình luận</button>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-default" style="margin-bottom: 10px">Hình ảnh</button>
-                                <button type="submit" class="btn btn-default">Gửi bình luận</button>
-                            </div>                          
-                        </div>                                            
-                    
+                            <div class="col-md-8">
+                                <input class="btn-primary btn" id="fileComment" type="file" name="files" value="" multiple="multiple" />    
+                            </div>                            
+                        </div>                          
+                    </div>                                                                
                 </div>
                 <div id="mota" class="tab-pane fade">
                     <h3>Thông tin mô tả</h3>
@@ -81,32 +138,7 @@
                         <div class="_item_image">
                             <img src="@img.Url@img.Name" class="myImg img-thumbnail" alt="Thanh Pho" width="300" height="200">
                         </div>
-                    }                                       
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                        <img class="modal-content" id="img01">
-                        <div id="caption"></div>
-                    </div>
-
-                    <script>
-					// Get the modal
-					var modal = document.getElementById('myModal');
-
-					// Get the image and insert it inside the modal - use its "alt" text as a caption
-					var img = document.getElementsByClassName("myImg");
-					var modalImg = document.getElementById("img01");
-					var captionText = document.getElementById("caption");
-					$( ".myImg" ).on( "click", function() {
-						modal.style.display = "block";
-						modalImg.src = this.src;
-						captionText.innerHTML = this.alt;
-					});
-
-
-					modal.onclick = function() {
-						modal.style.display = "none";
-					}
-                    </script>
+                    }                                                                               
                 </div>
             </div>
         </div>
@@ -151,6 +183,12 @@
 
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+</div>
+
 <div class="container-fluid" style="background-color:white; padding-top:10px; padding-bottom:30px; margin-top:5px">
     <div class="list_du_an container">
         <div class="_title">
@@ -188,5 +226,71 @@
         itemMargin: 5,
 
       });
+
+
+        // Get the modal
+      var modal = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+      var img = document.getElementsByClassName("myImg");
+      var modalImg = document.getElementById("img01");
+      var captionText = document.getElementById("caption");
+      $(".myImg" ).on( "click", function() {
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+      });
+
+
+      modal.onclick = function() {
+          modal.style.display = "none";
+      }
+
     });
+
+    $("#btnBinhLuan").on("click", function () {
+        var txtComment = $("#txtComment").val();
+        var projectid = @Model.ID;     
+        var userid = $("#UserID").val();  
+        //var file = $('input[type=file]');
+        var files = document.getElementById("fileComment").files;        
+        var formData = new FormData();
+
+        if(files != null)
+        {
+            for (i = 0; i < files.length; i++) {            
+                formData.append(files[i].name, files[i]);
+                console.log(files[i]);          
+            }
+        }
+                
+        formData.append('ProjectID', projectid);
+        formData.append('Content', txtComment);
+        formData.append('UserID', userid);
+
+        InsertComment(formData, null);
+
+    });
+
+    function InsertComment(formData, control) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "Comment")',
+            data: formData,
+            dataType: "JSON",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                $(".list-comment").append($(data).find('div.list-comment').html());
+                // load facebooklike
+                FB.XFBML.parse();
+            },
+           
+            error: function (request, status, error) {                
+                console.log(request.responseText);
+            }
+        });
+    }
+
 </script>

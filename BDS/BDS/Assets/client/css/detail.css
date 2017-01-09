@@ -18,7 +18,7 @@ body{
 	padding: 5px 20px 5px 20px;
 	background-color: rgb(255, 133, 0);	
 	display: flex;
-	margin-bottom: 5px;
+	/*margin-bottom: 5px;*/
 }
 
 .form-control {
@@ -88,7 +88,7 @@ div._tieu_de{
 }
 
 ._detail_col_left{
-	border: 2px solid black;
+	/*border: 2px solid black;*/
 	background-color: #fcf8e3;
 	float: left;
 	width: 74%;
@@ -102,7 +102,7 @@ div._tieu_de{
 }
 
 ._ban_do{
-	border: 2px solid black;
+	/*border: 2px solid black;*/
 	height: 250px;
     border-radius: 4px;
 }
@@ -118,7 +118,7 @@ div._tieu_de{
 }
 
 #binhluan{
-	height: 500px;
+	min-height: 500px;
 }
 ._item_image{
     height: 200px;
@@ -265,4 +265,7 @@ div.img {
     padding-left: 35px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.noidungcomment{
+    font-size: 20px;
 }

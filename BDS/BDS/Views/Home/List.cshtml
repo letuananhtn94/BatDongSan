@@ -15,7 +15,7 @@
 </form>
 
 <div class="_list_main">
-    <div class="_list_tim_kiem">
+    <div class="_list_tim_kiem scrollbar" id="style-5">
         
         @if (Model.Data != null && Model.Data.Any())
         {
@@ -50,7 +50,7 @@
         {
             <p>Không tìm thấy dữ liệu</p>
         }
-
+        <div class="force-overflow"></div>
     </div>
     <div class="_list_ban_do">
         <div id="googleMap" style="height:100%;width:100%;"></div>

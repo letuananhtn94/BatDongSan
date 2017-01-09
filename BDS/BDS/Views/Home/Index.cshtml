@@ -36,17 +36,17 @@
             </div>
 
             <div id="form_tim_kiem">
-                <form action="/Home/List" method="post">
+                <form action="/Home/Index" method="post">
                     <div class="panel panel-default">
                         <div class="panel-heading"><b>Công cụ tìm kiếm</b></div>
                         <div class="panel-body">
                             <fieldset class="GroupBox">
                                 <legend class="GroupBoxLegend">Địa điểm</legend>
                                 <div class="form-group">
-                                    <input type="hidden" name="search.Criterias[94].ID" value="95" />
-                                    <input type="hidden" name="search.Criterias[94].Selected" value="true" />
-                                    <input id="txtAddress" type="hidden" name="search.Criterias[94].Value" value="" />
-                                    <input type="hidden" name="search.Criterias[94].EnumType" value="Address" />
+                                    <input type="hidden" name="Address.ID" value="95" />
+                                    <input type="hidden" name="Address.Selected" value="true" />
+                                    <input id="txtAddress" type="hidden" name="Address.Value" value="" />
+                                    <input type="hidden" name="Address.EnumType" value="Address" />
                                     <select class="chosen-select form-control" id="ddlProvince">
                                         <option Selected hidden>--Chọn Tỉnh/Thành phố--</option>
                                         @foreach (var item in ViewBag.CbProvince as List<Province>)
@@ -62,11 +62,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        @Html.DropDownList("search.Criterias[94].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                                        @Html.DropDownList("Address.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                                     </div>
                                     <div class="col-md-4">
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("search.Criterias[94].Prerequisite") Tiên quyết
+                                            @Html.CheckBox("Address.Prerequisite") Tiên quyết
                                         </label>
                                     </div>
                                 </div>
@@ -76,18 +76,18 @@
                             <fieldset class="GroupBox">
                                 <legend class="GroupBoxLegend">Giá</legend>
                                 <div class="form-group">
-                                    <input type="hidden" name="search.Criterias[95].ID" value="96" />
-                                    <input type="hidden" name="search.Criterias[95].Selected" value="true" />
-                                    @Html.DropDownList("search.Criterias[95].Value", Price.Start.ToSelectList(), new { @class = "form-control" })
-                                    <input type="hidden" name="search.Criterias[95].EnumType" value="Price" />
+                                    <input type="hidden" name="Price.ID" value="96" />
+                                    <input type="hidden" name="Price.Selected" value="true" />
+                                    @Html.DropDownList("Price.Value", Price.Start.ToSelectList(), new { @class = "form-control" })
+                                    <input type="hidden" name="Price.EnumType" value="Price" />
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        @Html.DropDownList("search.Criterias[95].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                                        @Html.DropDownList("Price.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                                     </div>
                                     <div class="col-md-4">
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("search.Criterias[95].Prerequisite") Tiên quyết
+                                            @Html.CheckBox("Price.Prerequisite") Tiên quyết
                                         </label>
                                     </div>
                                 </div>
@@ -96,18 +96,18 @@
                             <fieldset class="GroupBox">
                                 <legend class="GroupBoxLegend">Diện tích</legend>
                                 <div class="form-group">
-                                    <input type="hidden" name="search.Criterias[96].ID" value="97" />
-                                    <input type="hidden" name="search.Criterias[96].Selected" value="true" />
-                                    @Html.DropDownList("search.Criterias[96].Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
-                                    <input type="hidden" name="search.Criterias[96].EnumType" value="Acreage" />
+                                    <input type="hidden" name="Acreage.ID" value="97" />
+                                    <input type="hidden" name="Acreage.Selected" value="true" />
+                                    @Html.DropDownList("Acreage.Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
+                                    <input type="hidden" name="Acreage.EnumType" value="Acreage" />
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        @Html.DropDownList("search.Criterias[96].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                                        @Html.DropDownList("Acreage.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
                                     </div>
                                     <div class="col-md-4">
                                         <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("search.Criterias[96].Prerequisite") Tiên quyết
+                                            @Html.CheckBox("Acreage.Prerequisite") Tiên quyết
                                         </label>
                                     </div>
                                 </div>

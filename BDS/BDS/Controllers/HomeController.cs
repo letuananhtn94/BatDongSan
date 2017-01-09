@@ -15,39 +15,99 @@ namespace BDS.Controllers
         private readonly IProvinceService _provinceService;
         private readonly IDistrictService _districtService;
         private readonly ICriteriaService _criteriaService;
+        private readonly ICommentService _commentService;
         List<Province> data = new List<Province>();
         List<District> district = new List<District>();
-        public HomeController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService)
+        List<Comment> comments = new List<Comment>();
+        List<Criteria> criterias = new List<Criteria>();
+
+        public HomeController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService, ICommentService commentService)
         {
             _projectService = projectService;
             _provinceService = provinceService;
             _districtService = district;
             _criteriaService = criteriaService;
+            _commentService = commentService;
         }
 
-        public ActionResult Index(SearchProject search)
+        [HttpGet]
+        public ActionResult Index()
         {
-            ViewBag.Criterias = _criteriaService.GetAll();
             var project = _projectService.GetListTopHome();
-            data = _provinceService.GetAll();            
+            data = _provinceService.GetAll();
             ViewBag.CbProvince = data;
             ViewBag.TopHome = project;
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(SearchProject search, FormCollection collection)
+        {                        
+            search.Criterias = new List<Criteria>();
+            criterias = _criteriaService.GetAll();
+
+            Criteria cr = new Criteria();
+            cr.ID = long.Parse(Request.Form["Address.ID"].ToString());
+            cr.Selected = bool.Parse(Request.Form["Address.Selected"].ToString());
+            cr.Value = Request.Form["Address.Value"].ToString();
+            cr.EnumType = Request.Form["Address.EnumType"].ToString();
+            cr.Importance = int.Parse(Request.Form["Address.Importance"].ToString());
+            cr.Prerequisite = Convert.ToBoolean(Request.Form.GetValues("Address.Prerequisite")[0].ToString());
+            criterias[94] = cr;
+            cr = new Criteria();
+            cr.ID = long.Parse(Request.Form["Price.ID"].ToString());
+            cr.Selected = bool.Parse(Request.Form["Price.Selected"].ToString());
+            cr.Value = Request.Form["Price.Value"].ToString();
+            cr.EnumType = Request.Form["Price.EnumType"].ToString();
+            cr.Importance = int.Parse(Request.Form["Price.Importance"].ToString());
+            cr.Prerequisite = Convert.ToBoolean(Request.Form.GetValues("Price.Prerequisite")[0].ToString());
+            criterias[95] = cr;
+            cr = new Criteria();
+            cr.ID = long.Parse(Request.Form["Acreage.ID"].ToString());
+            cr.Selected = bool.Parse(Request.Form["Acreage.Selected"].ToString());
+            cr.Value = Request.Form["Acreage.Value"].ToString();
+            cr.EnumType = Request.Form["Acreage.EnumType"].ToString();
+            cr.Importance = int.Parse(Request.Form["Acreage.Importance"].ToString());
+            cr.Prerequisite = Convert.ToBoolean(Request.Form.GetValues("Acreage.Prerequisite")[0].ToString());
+            criterias[96] = cr;
+            cr = new Criteria();
+
+            foreach (var item in criterias)
+            {
+                search.Criterias.Add(item);
+            }
+
+            TempData["search"] = search;
+
+            return RedirectToAction("List");
+        }
+
         public ActionResult Detail(long projectId, SearchProject search)
         {
+            //Lay danh sach tieu chi tim kiem
             ViewBag.Criterias = _criteriaService.GetAll();
+            //Lay danh sach comment
+            comments = _commentService.GetListById(projectId);
+            ViewBag.ListComment = comments;
+            // Lay danh sach tinh/ thanh pho
             data = _provinceService.GetAll();
             ViewBag.CbProvince = data;
+
             ViewBag.ListTuongTu = TempData["ListProject"];
+
             var result = _projectService.GetById(projectId);
             return View(result);
         }
 
         public ActionResult List(SearchProject search)
         {
+            if (TempData["search"] != null)
+            {
+                search = (SearchProject)TempData["search"];
+            }
+           
             ViewBag.Criterias = _criteriaService.GetAll();
+
             if (search.Criterias != null)
             {
                 var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
@@ -61,6 +121,7 @@ namespace BDS.Controllers
 
             return View(result);
         }
+
 
         public ActionResult About()
         {

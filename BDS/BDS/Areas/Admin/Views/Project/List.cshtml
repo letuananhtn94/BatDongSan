@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BDS.Data.Dto.Project>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="agile-grids">
+    <div class="agile-tables">
+        <h3>Danh sách dự án</h3>
+
+        <table id="table-no-resize">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.Acreage)
+                    </th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price) @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Acreage) m2
+                        </td>
+                        
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) 
+                            @*|
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
+
+        $('#table-no-resize').basictable({
+            noResize: true
+        });
+    });
+</script>

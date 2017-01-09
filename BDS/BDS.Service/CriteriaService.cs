@@ -12,10 +12,10 @@ namespace BDS.Service
 {
     public interface ICriteriaService
     {
-
         List<Criteria> GetByID(long groupId, string code, string codeFull);
         List<Criteria> GetAll();
         List<Criteria> FilterList(List<Criteria> criteria);
+        bool CheckPrerequisite(List<Criteria> criteria);
     }
 
     internal class CriteriaService : ICriteriaService
@@ -58,19 +58,61 @@ namespace BDS.Service
         }
 
         public List<Criteria> FilterList(List<Criteria> criteria)
-        {
-            Criteria cr = new Criteria();
+        {            
             List<Criteria> data = new List<Criteria>();
+            List<Criteria> listPre = new List<Criteria>();
 
             foreach (var item in criteria.ToList())
             {
-                if(item.Selected == true || !string.IsNullOrEmpty(item.Value) || item.Importance != 0)
+                if (item.Selected == true)
+                {    
+                    if(item.Prerequisite == true)
+                    {
+                        listPre.Add(item);
+                    }
+                    else
+                    {
+                        if(!string.IsNullOrEmpty(item.EnumType))
+                        {
+                            if(!string.IsNullOrEmpty(item.Value) && !item.Value.Equals("0"))
+                            {
+                                data.Add(item);
+                            }                                                        
+                        }
+                        else
+                        {
+                            data.Add(item);
+                        }
+                        
+                    }
+                }                
+            }
+
+            if (listPre.Count != 0)
+            {
+                return listPre;
+            }
+            else
+            {
+                return data;
+            }
+        }
+
+        public bool CheckPrerequisite(List<Criteria> criteria)
+        {
+            List<Criteria> data = new List<Criteria>();
+
+            foreach (var item in criteria)
+            {
+                if (item.Selected == true && item.Prerequisite == true)
                 {
                     data.Add(item);
                 }
             }
-            
-            return data;
+
+            if (data.Count != 0)
+                return true;
+            return false;          
         }
     }
 }

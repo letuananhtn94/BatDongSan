@@ -7,6 +7,7 @@ using System.Linq;
 using Entity = BDS.Repository.EntityFramework;
 using System;
 using System.Collections.Generic;
+using BDS.Service;
 
 namespace BDS.Service
 {
@@ -16,11 +17,16 @@ namespace BDS.Service
 
         List<Project> GetListTopHome();
 
+        List<Project> GetAll();
+
         Project GetById(long projectId);
 
         ServiceResult<Project> Add(Project project);
 
         bool Update(Project project);
+
+        bool Check(Project project, List<Criteria> listPre);
+        
     }
 
     internal class ProjectService : IProjectService
@@ -28,10 +34,13 @@ namespace BDS.Service
         private readonly IProjectRepository _projectRepository;
         private readonly IDetailProjectRepositoty _detailProjectRepositoty;
 
-        public ProjectService(IProjectRepository projectRepository, IDetailProjectRepositoty detailProjectRepositoty)
+        private readonly ICriteriaService _criteriaService;
+
+        public ProjectService(IProjectRepository projectRepository, IDetailProjectRepositoty detailProjectRepositoty, ICriteriaService criteriaService)
         {
             _projectRepository = projectRepository;
             _detailProjectRepositoty = detailProjectRepositoty;
+            _criteriaService = criteriaService;
         }
 
 
@@ -42,79 +51,33 @@ namespace BDS.Service
                 Project pro = new Project();
                 var projectList = new List<Project>();
                 var detailList = new List<DetailProject>();
-                
+                               
                 var result = _detailProjectRepositoty.Search(search);
                 var detailProject = result.Data.Select(v => MappingConfig.Mapper.Map<Entity.DetailProject, DetailProject>(v)).ToList().OrderBy(t=>t.ProjectID);
                 var detailProjects = detailProject.ToList();
-                //int count;
-                //var dp1 = detailProjects[0];
-                //var dp2 = detailProjects[0];
-
-                //for ( int i = 0; i < detailProjects.Count; i++ )
-                //{
-                //    foreach (var item in search.Criterias.ToList())
-                //    {
-                //        if (item.Selected && item.Prerequisite)
-                //        {                            
-                //            if (dp1.CriteriaID == item.ID)
-                //            {
-                //                if (dp1.ProjectID == dp2.ProjectID)
-                //                {
-                //                    detailList.Add(dp1);
-                //                    detailProjects.Remove(dp1);
-                //                    dp1 = detailProjects[0];
-
-                //                    //if (detailList.Count <= 0)
-                //                    //{
-                //                    //    detailList.Add(dp1);
-                //                    //    detailProjects.Remove(dp1);
-                //                    //    dp1 = detailProjects[0];
-                //                    //}
-                //                    //else
-                //                    //{
-                //                    //    count = detailList.Count - 1;
-                //                    //    if (detailList[count].ProjectID != dp1.ProjectID)
-                //                    //    {
-                //                    //        detailList.Add(dp1);
-                //                    //        detailProjects.Remove(dp1);
-                //                    //    }
-                //                    //    detailProjects.Remove(dp1);
-                //                    //    dp2 = detailProjects[0];
-                //                    //}
-                //                }
-
-                //            }
-                //            else
-                //            {
-                                
-
-                //                if (dp1.ProjectID != dp2.ProjectID)
-                //                {
-                //                    dp1 = detailProjects[0];
-                //                    detailList.Remove(dp2);
-                //                    break;
-                //                }
-                //                else
-                //                {
-                //                    dp2 = detailProjects[0];
-                //                    detailProjects.Remove(dp1);
-                //                    dp1 = detailProjects[0];
-                                    
-                                    
-                //                }
-                //            }
-
-                //        }
-                //    }
-
-                //    dp2 = detailProjects[0];
-                //}
-
+                
                 var projectsId = detailProjects.Select(v => v.Project.ID).Distinct().ToList();
                 foreach (var item in projectsId)
                 {
                     pro = GetById(item);
                     projectList.Add(pro);
+                }
+
+                var checkPre = _criteriaService.CheckPrerequisite(search.Criterias);
+
+                if (checkPre)
+                {
+                    var count = projectList.Count;
+                    var list = projectList;
+                    for (var item = 1; item <= count; item++)
+                    {
+                        if (!Check(projectList[item - 1], search.Criterias))
+                        {
+                            projectList.Remove(projectList[item - 1]);
+                            item--;
+                            count--;                         
+                        }
+                    }
                 }
                             
                 foreach (var project in projectList)
@@ -124,6 +87,7 @@ namespace BDS.Service
                                 FirstOrDefault(s => s.ID == v.CriteriaID).Importance));
 
                 }
+
                 if (result.Data != null && result.Data.Any())
                 {
                     return new SearchResult<Project>
@@ -221,6 +185,39 @@ namespace BDS.Service
 
                 return new List<Project>();
             }
+        }
+
+        public List<Project> GetAll()
+        {
+            try
+            {
+                var result = _projectRepository.GetAll();
+                return result.Select(v => MappingConfig.Mapper.Map<Entity.Project, Project>(v)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                return new List<Project>();
+            }
+        }
+
+        public bool Check(Project project, List<Criteria> listPre)
+        {
+            var dem = 0;
+            foreach (var item in listPre)
+            {
+                foreach (var dp in project.DetailProject.ToList())
+                {
+                    if (dp.CriteriaID == item.ID)
+                    {
+                        dem++;
+                    }
+                }
+            }
+
+            if (dem == listPre.Count)
+                return true;
+            return false;
         }
     }
 }

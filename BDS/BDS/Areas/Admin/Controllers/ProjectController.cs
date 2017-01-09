@@ -11,7 +11,7 @@ using BDS.Helper;
 
 namespace BDS.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class ProjectController : BaseController
     {
         private readonly IProjectService _projectService;
         private readonly IProvinceService _provinceService;
@@ -19,7 +19,7 @@ namespace BDS.Areas.Admin.Controllers
         private readonly ICriteriaService _criteriaService;
         List<Province> data = new List<Province>();
         List<District> district = new List<District>();
-        public AdminController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService)
+        public ProjectController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService)
         {
             _projectService = projectService;
             _provinceService = provinceService;
@@ -27,7 +27,7 @@ namespace BDS.Areas.Admin.Controllers
             _criteriaService = criteriaService;
         }
         // GET: Admin/Admin
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Index()
         {
             ViewBag.Criterias = _criteriaService.GetAll();
@@ -83,6 +83,12 @@ namespace BDS.Areas.Admin.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult List()
+        {
+            var result = _projectService.GetAll();
+            return View(result);
         }
 
         public ActionResult GetDistrictByID(string id)

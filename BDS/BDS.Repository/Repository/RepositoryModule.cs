@@ -22,6 +22,8 @@ namespace BDS.Repository.Repository
             builder.RegisterType<CriteriaRepository>().As<ICriteriaRepository>().InstancePerRequest();
             builder.RegisterType<DetailProjectRepositoty>().As<IDetailProjectRepositoty>().InstancePerRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
+            builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerRequest();
+            builder.RegisterType<SaveRepository>().As<ISaveRepository>().InstancePerRequest();
         }
 
     }
