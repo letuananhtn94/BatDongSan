@@ -20,32 +20,26 @@ namespace BDS.Repository.Repository
 
         public bool CheckEmail(string email)
         {
-            var user = Query().Include(v => v.Role);
+            var user = Query();
             return user.Count(x => x.Email == email) > 0;
         }
 
         public bool CheckUserName(string userName)
         {
-            var user = Query().Include(v => v.Role);
+            var user = Query();
             return user.Count(x => x.UserName == userName) > 0;
         }
 
         public User GetById(string userName)
         {
-            var user = Query().Include(v => v.Role);
+            var user = Query();
             var result = user.SingleOrDefault(x => x.UserName == userName);
             return result;
         }
-
-        public long Insert(User entity)
-        {
-            this.Create(entity);
-            return entity.ID;
-        }
-
+        
         public long InsertForFacebook(User entity)
         {
-            var user = Query().Include(v => v.Role);
+            var user = Query();
             var user1 = user.SingleOrDefault(x => x.UserName == entity.UserName);
             if (user1 == null)
             {
@@ -60,7 +54,7 @@ namespace BDS.Repository.Repository
 
         public int Login(string userName, string passWord, bool isLoginAdmin = false)
         {
-            var user = Query().Include(v => v.Role);
+            var user = Query();
             var result = user.SingleOrDefault(x => x.UserName == userName);
             if (result == null)
             {
@@ -70,7 +64,7 @@ namespace BDS.Repository.Repository
             {
                 if (isLoginAdmin == true)
                 {
-                    if (result.RoleID == 1)
+                    if (result.RoleID.Contains("1"))
                     {
                         if (result.Active == false)
                         {

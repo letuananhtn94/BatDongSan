@@ -4,43 +4,55 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using BDS.Data.Common;
+using A = BDS.Data.Common;
 
-namespace BDS
+namespace BDS.Common
 {
-    public class HasCredentialAttribute : AuthorizeAttribute
+    public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        public string RoleID { set; get; }
+        public string[] RoleID { set; get; }
+
+        public CustomAuthorizeAttribute(params string[] roles)
+        {
+            this.RoleID = roles;
+        }
+
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var session = (UserLogin)HttpContext.Current.Session[Common.CommonConstants.USER_SESSION];
+            string controller = httpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
+            string action = httpContext.Request.RequestContext.RouteData.Values["action"].ToString();
+
+            var session = (UserLogin)HttpContext.Current.Session[CommonConstants.USER_SESSION];
             if (session == null)
             {
+                if (controller == "User" && action == "Login")
+                    return true;
+
                 return false;
-            }
-
-            List<string> privilegeLevels = this.GetCredentialByLoggedInUser(session.UserName); // Call another method to get rights of the user from DB
-
-            if (privilegeLevels.Contains(this.RoleID) || session.GroupID == CommonConstants.ADMIN_GROUP)
-            {
-                return true;
             }
             else
             {
-                return false;
+                string[] userRoles = session.UserRole;
+
+                bool authorize = userRoles.Where(t => RoleID.Contains(t)).Count() != 0;
+                return authorize;
             }
+            
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new ViewResult
+            var session = (UserLogin)HttpContext.Current.Session[CommonConstants.USER_SESSION];
+            if (session == null)
             {
-                ViewName = "~/Areas/Admin/Views/Shared/401.cshtml"
-            };
+                string returnUrl = filterContext.RequestContext.HttpContext.Request.RawUrl;
+                filterContext.Result = new RedirectToRouteResult("User_Login", new RouteValueDictionary(new { returnUrl = returnUrl }));
+            }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Home", action = "Index"}));
+            }
+           
         }
-        private List<string> GetCredentialByLoggedInUser(string userName)
-        {
-            var credentials = (List<string>)HttpContext.Current.Session[Common.CommonConstants.SESSION_CREDENTIALS];
-            return credentials;
-        }
+
     }
 }

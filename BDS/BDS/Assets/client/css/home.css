@@ -75,12 +75,56 @@ div._tieu_de{
 	width: 300px;
 	position: absolute;
 	top: 70px;
-	left: 100px;	
-	opacity: 0.7;
+	left: -300px;	
+    opacity: 0;   
 }
 
-#form_tim_kiem:hover{		
-	opacity: 1;
+.show-form{		
+	position: relative;
+    -webkit-animation: show 2s; /* Safari 4.0 - 8.0 */
+    animation: show 2s;
+    opacity: 1 !important;
+    left: 100px !important;
+}
+
+.hiden-form{		
+	position: relative;
+    -webkit-animation: hiden 2s; /* Safari 4.0 - 8.0 */
+    animation: hiden 2s;
+    opacity: 1 !important;    
+}
+
+@-webkit-keyframes show {
+    from {left: -300px;}
+    to {left: 100px;}
+}
+
+/* Standard syntax */
+@keyframes show {
+    from {left: -300px;}
+    to {left: 100px;}
+}
+
+@-webkit-keyframes hiden {
+    from {left: 100px;}
+    to {left: -300px;}
+}
+
+/* Standard syntax */
+@keyframes hiden {
+    from {left: 100px;}
+    to {left: -300px;}
+}
+
+#btn-show{
+    height: 50px;
+    font-size: 20px;
+    opacity: 0.6;    
+}
+#btn-show:hover{    
+    opacity: 1; 
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/   
+    box-shadow: 0px 0px 25px black;
 }
 
 ._caption{
@@ -96,7 +140,7 @@ div._tieu_de{
 ._slogon{
 	width: 500px;
 	top: 250px;
-	right: 200px;
+	right: 30%;
 	opacity: 1;
 }
 

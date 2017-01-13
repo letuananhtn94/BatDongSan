@@ -5,254 +5,244 @@
 @using BDS.Helper;
 
 @model SearchProject
-    
+
 @{
     ViewBag.Title = "Trang chủ";
 }
 
 
-        <div class="_main_content">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                </ol>
+<div class="_main_content">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="/Images/banner01.jpg" alt="Image" width="100%">
-                        <div class="carousel-caption">
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <img src="/Images/banner02.jpg" alt="Image" width="100%">
-                        <div class="carousel-caption">
-                        </div>
-                    </div>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="/Images/banner01.jpg" alt="Image" width="100%">
+                <div class="carousel-caption">
                 </div>
             </div>
 
-            <div id="form_tim_kiem">
-                <form action="/Home/Index" method="post">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><b>Công cụ tìm kiếm</b></div>
-                        <div class="panel-body">
-                            <fieldset class="GroupBox">
-                                <legend class="GroupBoxLegend">Địa điểm</legend>
-                                <div class="form-group">
-                                    <input type="hidden" name="Address.ID" value="95" />
-                                    <input type="hidden" name="Address.Selected" value="true" />
-                                    <input id="txtAddress" type="hidden" name="Address.Value" value="" />
-                                    <input type="hidden" name="Address.EnumType" value="Address" />
-                                    <select class="chosen-select form-control" id="ddlProvince">
-                                        <option Selected hidden>--Chọn Tỉnh/Thành phố--</option>
-                                        @foreach (var item in ViewBag.CbProvince as List<Province>)
-                                        {
-                                            <option value="@item.ID.ToString()">@item.Type @item.Name</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="form-group" id="_district">
-                                    <select class="form-control" id="ddlDistrict">
-                                        <option Selected hidden>--Chọn Quận/Huyện--</option>
-                                    </select>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        @Html.DropDownList("Address.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("Address.Prerequisite") Tiên quyết
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </fieldset>
-
-                            <fieldset class="GroupBox">
-                                <legend class="GroupBoxLegend">Giá</legend>
-                                <div class="form-group">
-                                    <input type="hidden" name="Price.ID" value="96" />
-                                    <input type="hidden" name="Price.Selected" value="true" />
-                                    @Html.DropDownList("Price.Value", Price.Start.ToSelectList(), new { @class = "form-control" })
-                                    <input type="hidden" name="Price.EnumType" value="Price" />
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        @Html.DropDownList("Price.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("Price.Prerequisite") Tiên quyết
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset class="GroupBox">
-                                <legend class="GroupBoxLegend">Diện tích</legend>
-                                <div class="form-group">
-                                    <input type="hidden" name="Acreage.ID" value="97" />
-                                    <input type="hidden" name="Acreage.Selected" value="true" />
-                                    @Html.DropDownList("Acreage.Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
-                                    <input type="hidden" name="Acreage.EnumType" value="Acreage" />
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        @Html.DropDownList("Acreage.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
-                                            @Html.CheckBox("Acreage.Prerequisite") Tiên quyết
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <button type="submit" id="btn_tim_kiem" class="btn btn-default">Tìm Kiếm</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="_caption">
-                <h3> Bất động sản dành cho người thu nhập trung bình thấp</h3>
-            </div>
-            <div class="_caption _slogon">
-                <h1><b> HÃY CHỌN NGAY NGÔI NHÀ PHÙ HỢP CHO MÌNH! </b></h1>
+            <div class="item">
+                <img src="/Images/banner02.jpg" alt="Image" width="100%">
+                <div class="carousel-caption">
+                </div>
             </div>
         </div>
+    </div>
 
+    <div id="form_tim_kiem">
+        <form action="/Home/Index" method="post">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Công cụ tìm kiếm</b></div>
+                <div class="panel-body">
+                    <fieldset class="GroupBox">
+                        <legend class="GroupBoxLegend">Địa điểm</legend>
+                        <div class="form-group">
+                            <input type="hidden" name="Address.ID" value="95" />
+                            <input type="hidden" name="Address.Selected" value="true" />
+                            <input id="txtAddress" type="hidden" name="Address.Value" value="" />
+                            <input type="hidden" name="Address.EnumType" value="Address" />
+                            <select class="chosen-select form-control" id="ddlProvince" name="ddlProvince">
+                                <option Selected hidden>--Chọn Tỉnh/Thành phố--</option>
+                                @foreach (var item in ViewBag.CbProvince as List<Province>)
+                                {
+                                    <option value="@item.ID.ToString()">@item.Type @item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group" id="_district">
+                            <select class="form-control" id="ddlDistrict" name="ddlDistrict">
+                                <option Selected hidden>--Chọn Quận/Huyện--</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.DropDownList("Address.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("Address.Prerequisite") Tiên quyết
+                                </label>
+                            </div>
+                        </div>
 
-        <div class="list_du_an container">
-            <div class="_title">
-                <h2>Bất động sản mới nhất</h2>
+                    </fieldset>
+
+                    <fieldset class="GroupBox">
+                        <legend class="GroupBoxLegend">Giá</legend>
+                        <div class="form-group">
+                            <input type="hidden" name="Price.ID" value="96" />
+                            <input type="hidden" name="Price.Selected" value="true" />
+                            @Html.DropDownList("Price.Value", Price.Start.ToSelectList(), new { @class = "form-control" })
+                            <input type="hidden" name="Price.EnumType" value="Price" />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.DropDownList("Price.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("Price.Prerequisite") Tiên quyết
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="GroupBox">
+                        <legend class="GroupBoxLegend">Diện tích</legend>
+                        <div class="form-group">
+                            <input type="hidden" name="Acreage.ID" value="97" />
+                            <input type="hidden" name="Acreage.Selected" value="true" />
+                            @Html.DropDownList("Acreage.Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
+                            <input type="hidden" name="Acreage.EnumType" value="Acreage" />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.DropDownList("Acreage.Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
+                                    @Html.CheckBox("Acreage.Prerequisite") Tiên quyết
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" id="btn_tim_kiem" class="btn btn-success">Tìm Kiếm</button>
+                </div>
             </div>
+        </form>
+    </div>
 
-            <div class="row">
-                @{ 
-                    var data = (List<Project>)ViewBag.TopHome;
-                }
-                @if (data != null && data.Any())
-                {
-                    foreach (var item in data)
-                    {
-                        Html.RenderPartial("_DuAnPartial", item, null);
-                    }
-                }
-                else
-                {
+    @*<div class="_caption">
+        <h3> Bất động sản dành cho người thu nhập trung bình thấp</h3>
+    </div>*@
+    <div class="_caption _slogon">
+        <h1><b> HÃY CHỌN NGAY NGÔI NHÀ PHÙ HỢP CHO MÌNH! </b></h1>
+        <button type="button" id="btn-show" class="btn btn-primary">Tìm Kiếm Ngay</button>
+    </div>
+</div>
 
-                }
 
-            </div>
-        </div><br>
-        @*<script src="~/Assets/client/js/dropdownlist.js"></script>*@
+<div class="list_du_an container">
+    <div class="_title">
+        <h2>Bất động sản mới nhất</h2>
+    </div>
 
-        <script>
-            function setValueInput() {
-                $("#ddlDistrict").on("change", function () {
-                    var province = $("#ddlProvince").val();
-                    var district = district = $(this).val();
-
-                    $.ajax({
-                        url: '@Url.Action("GetAddress", "Home")',
-                        type: "GET",
-                        dataType: "JSON",
-                        data: {
-                            provinceid: province,
-                            districtid: district
-                        },
-                        success: function (cities) {
-                            console.log(cities);
-                            $("#txtAddress").val(cities);
-                        },
-                        error: function (a) {
-                            console.log(a.responseText);
-                            alert("lỗi");
-                        }
-                    });
-                });
-            }
-
-            function setEventToControl() {
-                $("#ddlProvince").on("change", function () {
-                    setValueInput();
-                    $("#Lat").val("");
-                    $("#Long").val("");
-                    var stateId = $(this).val();
-
-                    $.ajax({
-                        url: '@Url.Action("GetDistrictByID", "Home")',
-                        type: "GET",
-                        dataType: "JSON",
-                        data: { id: stateId },
-                        success: function (cities) {
-                            console.log(cities);
-                            //$("#_district").html();
-                            $("#ddlDistrict").find('option').remove();
-                            $("#ddlDistrict").append($("<option Selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
-                            $.each(cities, function (i, city) {
-                                //$("#ddlDistrict").append(
-                                //    $('<option></option>').val(city.ID).html(city.Name));
-
-                                $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
-                            });
-                        },
-                        error: function (a) {
-                            console.log(a.responseText);
-                            alert("lỗi");
-                        }
-                    });
-                });
-            }
-
-            $(document).ready(function () {
-                setValueInput();
-                setEventToControl();// Gán event
-            });
-
-            // Lấy danh sách phường theo quận gán vào select
-            function GetListPhuongToSelectBox(data, element) {
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("GetDistrictByID", "Home")' + "?id=" + data,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    //data:JSON.stringify($("#ddlDistrict").val()),
-                    //async: false,
-                    success: function (data) {
-                        alert("thanh công" + data);
-                        $('#' + element).find('option').remove();
-                        $('#' + element).append($("<option></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
-                        $.each(data, function () {
-                            $('#' + element).append($("<option></option>").attr("value", this.ID).text(this.Name));
-                        });
-                    },
-                    error: function (a) {
-                        console.log(a.responseText);
-                        alert("lỗi");
-                    }
-                });
-            }
-        </script>
-
-        @section chosen{
-
-            <script type="text/javascript">
-                var config = {
-                    '.chosen-select': {},
-                    '.chosen-select-deselect': { allow_single_deselect: true },
-                    '.chosen-select-no-single': { disable_search_threshold: 10 },
-                    '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
-                    '.chosen-select-width': { width: "95%" }
-                }
-                for (var selector in config) {
-                    $(selector).chosen(config[selector]);
-                }
-            </script>
+    <div class="row">
+        @{
+            var data = (List<Project>)ViewBag.TopHome;
         }
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                Html.RenderPartial("_DuAnPartial", item, null);
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+</div><br>
+@*<script src="~/Assets/client/js/dropdownlist.js"></script>*@
+
+<script>
+    function setValueInput() {
+        $("#ddlDistrict").on("change", function () {
+            var province = $("#ddlProvince").val();
+            var district = district = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("GetAddress", "Home")',
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    provinceid: province,
+                    districtid: district
+                },
+                success: function (cities) {
+                    console.log(cities);
+                    $("#txtAddress").val(cities);
+                },
+                error: function (a) {
+                    console.log(a.responseText);
+                    alert("lỗi");
+                }
+            });
+        });
+    }
+
+    function setEventToControl() {
+        $("#ddlProvince").on("change", function () {
+            setValueInput();
+            $("#Lat").val("");
+            $("#Long").val("");
+            var stateId = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("GetDistrictByID", "Home")',
+                type: "GET",
+                dataType: "JSON",
+                data: { id: stateId },
+                success: function (cities) {
+                    console.log(cities);
+                    //$("#_district").html();
+                    $("#ddlDistrict").find('option').remove();
+                    $("#ddlDistrict").append($("<option Selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                    $.each(cities, function (i, city) {
+                        //$("#ddlDistrict").append(
+                        //    $('<option></option>').val(city.ID).html(city.Name));
+
+                        $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
+                    });
+                },
+                error: function (a) {
+                    console.log(a.responseText);
+                    alert("lỗi");
+                }
+            });
+        });
+    }
+
+    function SelectElement(valueToSelect) {
+        var element = document.getElementById('ddlProvince');
+        element.value = valueToSelect;
+    }
+
+    $(document).ready(function () {
+        setValueInput();
+        setEventToControl();// Gán event
+
+        $("#btn-show").click(function () {
+           
+            if ($("#form_tim_kiem").hasClass("show-form")) {
+                $("#form_tim_kiem").removeClass("show-form");
+                $("#form_tim_kiem").addClass("hiden-form");
+            }
+            else {
+                $("#form_tim_kiem").addClass("show-form");
+                $("#form_tim_kiem").removeClass("hiden-form");
+            }
+
+            
+        });
+    });
+
+</script>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}

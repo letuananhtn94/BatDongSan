@@ -1,6 +1,6 @@
-﻿
+﻿@using BDS.Common;
 @{
-    var session = (UserLogin)Session[BDS.Common.CommonConstants.USER_SESSION];
+    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
 }
 
 @if (session == null)

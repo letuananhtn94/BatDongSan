@@ -1,7 +1,66 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@using BDS.Data.Dto;
 
-<p>Use this area to provide additional information.</p>
+
+@{
+    ViewBag.Title = "Giới thiệu";
+}
+
+<style>
+    .main-wthree {
+        background: #3b8fc5;
+        min-height: 400px;
+    }
+
+        .main-wthree h2 {
+            font-size: 30px;
+            color: #FFF;
+            margin-bottom: 1em;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+    .sin-w3-agile {
+        padding: 2em 0 0;
+        margin: 0 auto;
+        width: 30%;
+    }
+
+    input, select {
+        max-width: 100%;
+    }
+</style>
+
+
+
+<div class="main-wthree">
+    <div class="container">
+        <div class="sin-w3-agile">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="list_du_an container">
+    <div class="_title">
+        <h2>Bất động sản mới nhất</h2>
+    </div>
+
+    <div class="row">
+        @{
+            var data = (List<Project>)ViewBag.TopHome;
+        }
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                Html.RenderPartial("/Views/Home/_DuAnPartial.cshtml", item, null);
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+</div><br>

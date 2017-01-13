@@ -63,6 +63,7 @@
     <Compile Include="CriteriaService.cs" />
     <Compile Include="GroupCriteriaService.cs" />
     <Compile Include="CommentService.cs" />
+    <Compile Include="RoleService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="ProvinceService.cs" />
     <Compile Include="DistrictService.cs" />

@@ -24,6 +24,7 @@ namespace BDS.Repository.Repository
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerRequest();
             builder.RegisterType<SaveRepository>().As<ISaveRepository>().InstancePerRequest();
+            builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
         }
 
     }

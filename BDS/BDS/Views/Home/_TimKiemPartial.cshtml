@@ -1,6 +1,8 @@
-﻿@using BDS.Data.Dto;
+﻿@using BDS.Data.Dto.Request;
+@using BDS.Data.Dto;
 @using BDS.Data.Enum;
 @using BDS.Helper;
+
 @model List<Criteria>
 
 
@@ -17,7 +19,7 @@
                     <input type="hidden" name="search.Criterias[94].Selected" value="true" />
                     <input id="txtAddress" type="hidden" name="search.Criterias[94].Value" value="" />
                     <input type="hidden" name="search.Criterias[94].EnumType" value="Address" />
-                    <select class="chosen-select form-control" id="ddlProvince">
+                    <select class="chosen-select form-control" id="ddlProvince" name="ddlProvince">
                         <option selected hidden>--Chọn Tỉnh/Thành phố--</option>
                         @foreach (var item in ViewBag.CbProvince as List<Province>)
                         {
@@ -26,7 +28,7 @@
                     </select>
                 </div>
                 <div class="form-group col-sm-6">
-                    <select class="form-control" id="ddlDistrict">
+                    <select class="form-control" id="ddlDistrict" name="ddlDistrict">
                         <option selected hidden>--Chọn Quận/Huyện--</option>
                     </select>
                 </div>
@@ -56,7 +58,7 @@
 
             <div class="row">
                 <div class="form-group col-sm-7">
-                    @Html.DropDownList("search.Criterias[95].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
+                    @Html.DropDownList("search.Criterias[95].Importance", Importance.Start.ToSelectList(), new { @class = "form-control"})
                 </div>
                 <div class="form-group col-sm-5">
                     <label class="_tooltip" data-toggle="tooltip" data-placement="top" title="">
@@ -69,14 +71,14 @@
     <div class="_tk_dien_tich">
         <fieldset class="GroupBox">
             <legend class="GroupBoxLegend">Diện tích</legend>
-            <div class="row">
-                <div class="form-group col-sm-6">
+            
+                <div class="form-group">
                     <input type="hidden" name="search.Criterias[96].ID" value="97" />
                     <input type="hidden" name="search.Criterias[96].Selected" value="true" />
                     @Html.DropDownList("search.Criterias[96].Value", Acreage.Start.ToSelectList(), new { @class = "form-control" })
                     <input type="hidden" name="search.Criterias[96].EnumType" value="Acreage" />
                 </div>                
-            </div>
+           
             <div class="row">
                 <div class="form-group col-sm-6">
                     @Html.DropDownList("search.Criterias[96].Importance", Importance.Start.ToSelectList(), new { @class = "form-control" })
@@ -92,9 +94,9 @@
     </div>
     <div class="_tk_button">
         <div>
-            <button type="button" id="btn_nang_cao" class="btn btn-default" data-toggle="modal" data-target="#modal_timkiem">Nâng Cao</button>
+            <button type="button" id="btn_nang_cao" class="btn btn-primary" data-toggle="modal" data-target="#modal_timkiem">Nâng Cao</button>
         </div>
-        <button type="submit" id="btn_tim_kiem" class="btn btn-default">Tìm Kiếm</button>
+        <button type="submit" id="btn_tim_kiem" class="btn btn-success">Tìm Kiếm</button>
     </div>
 </div>
 
@@ -142,37 +144,15 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="submit" id="btn_tim_kiem1" class="btn btn-default">Tìm Kiếm</button>
+                    <button type="submit" id="btn_tim_kiem1" class="btn btn-success">Tìm Kiếm</button>
 
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-@*<script>
-    $(document).ready(function () {
-        //// Show the Modal on load
-        //$("#modal_timkiem").modal("show");
-
-        // Hide the Modal
-        $("#btn_nang_cao").click(function () {
-            $("#modal_timkiem").modal("show");
-        });
-    });
-    // Get the modal
-    //var modal = document.getElementById('modal_timkiem');
-    //var button = document.getElementById('btn_nang_cao');
-
-    //button.onclick = function () {
-    //    modal.modal()
-    //}
-
-    //modal.onclick = function () {
-    //    modal.style.display = "none";
-    //}
-</script>*@
 
 <script>
 
@@ -186,6 +166,31 @@
     }
 
     function setEventToControl() {
+        var province = $("#ddlProvince").val();
+
+        $.ajax({
+            url: '@Url.Action("GetDistrictByID", "Home")',
+            type: "GET",
+            dataType: "JSON",
+            data: { id: province },
+            success: function (cities) {
+                console.log(cities);
+                //$("#_district").html();
+                $("#ddlDistrict").find('option').remove();
+                $("#ddlDistrict").append($("<option selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
+                $.each(cities, function (i, city) {
+                    //$("#ddlDistrict").append(
+                    //    $('<option></option>').val(city.ID).html(city.Name));
+
+                    $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
+                });
+            },
+            error: function (a) {
+                console.log(a.responseText);
+                alert("lỗi");
+            }
+        });
+
         $("#ddlProvince").on("change", function () {
             setValueInput();
             $("#Lat").val("");
@@ -217,48 +222,65 @@
         });
     }
 
+    //function CheckInputControl(){
+    //    var length = 97
+    //    for (var i = 0; i < length; i++) {            
+    //        var select = $("#search_Criterias_" + i + "__Value");
+    //        var checkbox = $("#search_Criterias_" + i + "__Selected");
+    //        var importance = $("#search_Criterias_" + i + "__Importance");
+    //        var prerequisite = $("#search_Criterias_" + i + "__Prerequisite");
+
+    //        $(select).on("change", function () {
+
+    //            $(importance).removeAttr('disabled');
+    //            $(prerequisite).removeAttr('disabled');
+    //        });
+
+    //        $(checkbox).change(function(){
+    //            if ($(checkbox).is(":checked")) {
+    //                $(importance).removeAttr('disabled');
+    //                $(prerequisite).removeAttr('disabled');
+    //            }
+    //            else {
+    //                $("#pizza_kind").prop('disabled', 'disabled');
+    //            }
+    //        });
+    //    }
+    //}
+
     $(document).ready(function () {
         setValueInput();
-        setEventToControl();// Gán event
+        //CheckInputControl();
+        setEventToControl()
+        var data = @Html.Raw(Json.Encode(ViewBag.Searchs));
+        if(data != null)
+        {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].ID == 95)
+                {
+                    $("#ddlProvince").val(data[i].ddlProvince)
+                    setEventToControl()
+                    $("#ddlDistrict").val(data[i].ddlDistrict)
+                    $("#search_Criterias_94__Importance").val(data[i].Importance)
+                    $("#search_Criterias_94__Prerequisite").prop("checked", data[i].Prerequisite)
+                }
+                else if (data[i].ID == 96)    
+                {
+                    $("#search_Criterias_95__Value").val(data[i].Value)
+                    $("#search_Criterias_95__Importance").val(data[i].Importance)
+                    $("#search_Criterias_95__Prerequisite").prop("checked", data[i].Prerequisite)
+                }
+                else if (data[i].ID == 97){
+                    $("#search_Criterias_96__Value").val(data[i].Value)
+                    $("#search_Criterias_96__Importance").val(data[i].Importance)
+                    $("#search_Criterias_96__Prerequisite").prop("checked", data[i].Prerequisite)
+                }                
+            }
+        }
+        
+        // Gán event
     });
 
-    // Lấy danh sách phường theo quận gán vào select
-    function GetListPhuongToSelectBox(data, element) {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GetDistrictByID", "Home")' + "?id=" + data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            //data:JSON.stringify($("#ddlDistrict").val()),
-            //async: false,
-            success: function (data) {
-                alert("thanh công" + data);
-                $('#' + element).find('option').remove();
-                $('#' + element).append($("<option></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
-                $.each(data, function () {
-                    $('#' + element).append($("<option></option>").attr("value", this.ID).text(this.Name));
-                });
-            },
-            error: function (a) {
-                console.log(a.responseText);
-                alert("lỗi");
-            }
-        });
-    }
+    
 </script>
 
-@section chosen{
-
-    <script type="text/javascript">
-    var config = {
-        '.chosen-select': {},
-        '.chosen-select-deselect': { allow_single_deselect: true },
-        '.chosen-select-no-single': { disable_search_threshold: 10 },
-        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
-        '.chosen-select-width': { width: "95%" }
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
-    </script>
-}

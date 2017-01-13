@@ -6,15 +6,14 @@
     <title>@ViewBag.Title - Bất Động Sản</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Assets/client/flexslider/flexslider.css")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("css", required: false)
+   
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js">\x3C/script>')</script>
-    @Scripts.Render("~/Assets/client/flexslider/jquery.flexslider.js")
+   
 
-    <link href="~/Assets/chosen/bootstrap-chosen.css" rel="stylesheet" />
 </head>
 <body data-spy="scroll" data-target=".navbar-fixed-top" >
 
@@ -47,6 +46,9 @@
 
 
     <footer class="container-fluid text-center" >
+        <div>
+            <a href="#" class="scrollup" data-toggle="tooltip" data-placement="bottom" title="Lên đầu trang!">Scroll</a>
+        </div>
         <div class="container text-center">
             <img src="/Images/banner01.jpg" class="img-circle" alt="Cinque Terre" width="60" height="60">
             <div class="_list_menu">
@@ -58,17 +60,40 @@
                 </ul>
             </div>
         </div>
-        @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        <p>&copy; @DateTime.Now.Year - Bất động sản dành cho người có thu nhập trung bình thấp</p>
     </footer>
 
-    <script src="~/Assets/chosen/chosen.jquery.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/client")
 
     @RenderSection("scripts", required: false)
-    @RenderSection("chosen", required: false)
 
     <script>
         $(document).ready(function () {
             $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+
+            $('select').select2({
+                theme: "bootstrap"
+            });
+
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 500) {
+                    $('.scrollup').fadeIn();
+                } else {
+                    $('.scrollup').fadeOut();
+                }
+            });
+
+            $('.scrollup').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
         });
     </script>
 </body>

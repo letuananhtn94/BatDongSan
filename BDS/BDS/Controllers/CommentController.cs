@@ -1,4 +1,5 @@
-﻿using BDS.Data.Dto;
+﻿using BDS.Common;
+using BDS.Data.Dto;
 using BDS.Helper;
 using BDS.Service;
 using System;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace BDS.Controllers
 {
+    
     public class CommentController : Controller
     {
         private readonly IProjectService _projectService;
@@ -34,6 +36,13 @@ namespace BDS.Controllers
             return View();
         }
 
+        [HttpGet]
+        public PartialViewResult CommentList(long id)
+        {
+            var comments = _commentService.GetListById(id);
+            return PartialView(comments);
+        }
+
         // GET: Comment/Details/5
         public ActionResult Details(int id)
         {
@@ -48,7 +57,7 @@ namespace BDS.Controllers
 
         // POST: Comment/Create
         [HttpPost]
-        public JsonResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection collection)
         {
             Comment cm = new Comment();
             cm.Image = new List<Image>();
@@ -77,8 +86,8 @@ namespace BDS.Controllers
 
             _commentService.Add(cm);
             comments = _commentService.GetListById(projecid);
-            
-            return Json(comments, JsonRequestBehavior.AllowGet);
+
+            return RedirectToAction("CommentList", new {id = projecid } );
         }
 
         // GET: Comment/Edit/5

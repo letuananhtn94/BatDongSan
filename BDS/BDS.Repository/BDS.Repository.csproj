@@ -117,6 +117,7 @@
     <Compile Include="EntityFramework\Models\Criteria.cs" />
     <Compile Include="EntityFramework\Models\District.cs" />
     <Compile Include="EntityFramework\Models\Comment.cs" />
+    <Compile Include="EntityFramework\Models\Role.cs" />
     <Compile Include="EntityFramework\Models\User.cs" />
     <Compile Include="EntityFramework\Models\Province.cs" />
     <Compile Include="EntityFramework\Models\Project.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="IRepository\IGroupCriteriaRepository.cs" />
     <Compile Include="IRepository\ICriteriaRepository.cs" />
     <Compile Include="IRepository\ICommentRepository.cs" />
+    <Compile Include="IRepository\IRoleRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="IRepository\IProvinceRepository.cs" />
     <Compile Include="IRepository\IGenericRepository.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Repository\GroupCriteriaRepository.cs" />
     <Compile Include="Repository\CriteriaRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\ProvinceRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -190,10 +193,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\dbBatDongSan.mdf" />
-    <Content Include="Data\dbBatDongSan_log.ldf">
-      <DependentUpon>dbBatDongSan.mdf</DependentUpon>
-    </Content>
     <Content Include="EntityFramework\dbBatDongSan.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbBatDongSan.edmx</DependentUpon>
@@ -216,6 +215,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

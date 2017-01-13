@@ -20,17 +20,21 @@ namespace BDS
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/client").Include(
                       "~/Assets/client/bootstrap/js/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Assets/select2/select2.js",
+                      "~/Assets/select2/vi.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/googlemap").Include(
                       "~/Scripts/jquery.googlemap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Assets/client/bootstrap/css/bootstrap.css",
+                      "~/Assets/font-awesome/css/font-awesome.min.css",
+                      "~/Assets/select2/select2.css",
                       "~/Assets/client/css/home.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

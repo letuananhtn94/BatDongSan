@@ -23,6 +23,7 @@ namespace BDS.Service
             builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
             builder.RegisterType<SaveService>().As<ISaveService>().InstancePerRequest();
+            builder.RegisterType<RoleService>().As<IRoleService>().InstancePerRequest();
         }
 
     }

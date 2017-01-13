@@ -34,5 +34,7 @@ namespace BDS.Data.Dto
         public bool Prerequisite { get; set; }
         public string Value { get; set; }
         public string EnumType { get; set; }
+        public string ddlProvince { get; set; }
+        public string ddlDistrict { get; set; }
     }
 }

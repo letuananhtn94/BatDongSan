@@ -1,5 +1,6 @@
 ﻿<link href="~/Assets/client/css/detail.css" rel="stylesheet" />
 @using BDS.Data.Dto;
+@using BDS.Common;
 @model Project
 
 @{
@@ -7,8 +8,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section css{
+           @Styles.Render("~/Assets/client/flexslider/flexslider.css")
+}
+
 @{
-    var session = (UserLogin)Session[BDS.Common.CommonConstants.USER_SESSION];
+    var session = (UserLogin)Session[CommonConstants.USER_SESSION];
 }
 @if (session != null)
 {
@@ -26,7 +31,7 @@
 </style>
 
 <form action="/Home/List" method="post">
-    @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+    @*@Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);*@
 </form>
 <!-- Phần chi tiết -->
 <div class="container _main">
@@ -56,7 +61,7 @@
             <div class="_tieu_de col-sm-12"><b>@Model.Name</b></div>
             <div class="_dia_chi col-sm-12">@Model.Address</div>
             <div class="_gia col-sm-12">$: @Model.Price @Model.UnitPrice</div>
-            <div class="_dien_tich col-sm-12">S: @Model.Acreage</div>
+            <div class="_dien_tich col-sm-12">S: @Model.Acreage m2</div>
         </div>
     </div>
     <div class="_tab_box">
@@ -77,42 +82,7 @@
             <div class="tab-content">
                 <div id="binhluan" class="tab-pane fade in active">
                     <div class="list-comment">
-                        <h3>Danh sách bình luận</h3>
-                        <hr />
-                        @{
-                            var comment = (List<Comment>)ViewBag.ListComment;
-                        }
-                        @if (comment != null && comment.Any())
-                        {
-                            foreach (var item in comment)
-                            {
-                                
-                                <div class="col-md-12 noidungcomment">
-                                    <p> @item.Content</p>
-                                </div>
-                                <div class="col-md-12 hinhanhcomment">
-                                    @foreach (var img in item.Image)
-                                    {
-                                        <div class="_item_image">
-                                            <img src="@img.Url@img.Name" class="myImg img-thumbnail" alt="Thanh Pho" width="300" height="200">
-                                        </div>
-                                    }          
-                                </div>
-                                <div class="col-md-12 thontincomment">
-                                    <i>Được tạo bởi </i> <b> @item.User.Name</b> | <i>Ngày tạo: </i> <b>@String.Format("{0:g}", item.CreatedDate)</b>
-                                </div>
-                                <div class="col-md-12">
-                                    <hr />
-                                </div>
-                                
-                            }
-
-                        }
-                        else
-                        {
-
-                        }
-                        
+                        @{Html.RenderAction("CommentList", "Comment", new { id = Model.ID });}
                     </div>                                      
                     <div class="form-group">
                         <div class="col-md-12">
@@ -215,10 +185,13 @@
     </div>
 </div>
 
+@section scripts{
 
+
+@Scripts.Render("~/Assets/client/flexslider/jquery.flexslider.js")
 <script type="text/javascript">
 
-    $(window).load(function(){
+    $(document).ready(function(){
       $('.flexslider').flexslider({
         animation: "slide",
         animationLoop: false,
@@ -250,20 +223,20 @@
 
     $("#btnBinhLuan").on("click", function () {
         var txtComment = $("#txtComment").val();
-        var projectid = @Model.ID;     
-        var userid = $("#UserID").val();  
+        var projectid = @Model.ID;
+        var userid = $("#UserID").val();
         //var file = $('input[type=file]');
-        var files = document.getElementById("fileComment").files;        
+        var files = document.getElementById("fileComment").files;
         var formData = new FormData();
 
         if(files != null)
         {
-            for (i = 0; i < files.length; i++) {            
+            for (i = 0; i < files.length; i++) {
                 formData.append(files[i].name, files[i]);
-                console.log(files[i]);          
+                console.log(files[i]);
             }
         }
-                
+
         formData.append('ProjectID', projectid);
         formData.append('Content', txtComment);
         formData.append('UserID', userid);
@@ -277,20 +250,20 @@
             type: "POST",
             url: '@Url.Action("Create", "Comment")',
             data: formData,
-            dataType: "JSON",
             processData: false,
             contentType: false,
             success: function (data) {
                 console.log(data);
-                $(".list-comment").append($(data).find('div.list-comment').html());
-                // load facebooklike
-                FB.XFBML.parse();
+                $(".list-comment").html(data);        
+                location.reload();
             },
-           
-            error: function (request, status, error) {                
+
+            error: function (request, status, error) {
                 console.log(request.responseText);
             }
         });
     }
 
 </script>
+}
+

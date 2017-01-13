@@ -15,7 +15,10 @@ namespace BDS.Service
         List<User> GetAll();
         long InsertForFacebook(User entity);
         int Login(string userName, string passWord, bool isLoginAdmin = false);
-        long Insert(User entity);
+        string Insert(User entity);
+        string Update(User entity);
+        string Delete(User entity);
+        User Get(long id);
         User GetById(string userName);
         bool CheckEmail(string email);
         bool CheckUserName(string userName);
@@ -40,11 +43,38 @@ namespace BDS.Service
             return _repository.CheckUserName(userName);
         }
 
+        public string Delete(User entity)
+        {
+            try
+            {
+                var model = MappingConfig.Mapper.Map<User, Entity.User>(entity);
+                _repository.Delete(model);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public User Get(long id)
+        {
+            try
+            {
+                var result = _repository.Get(id);
+                return result != null ? MappingConfig.Mapper.Map<Entity.User, User>(result) : new User();
+            }
+            catch (Exception ex)
+            {
+                return new User();
+            }
+        }
+
         public List<User> GetAll()
         {
             try
             {
-                var result = _repository.GetAll(t => t.Role).OrderByDescending(a => a.CreatedDate);
+                var result = _repository.GetAll().OrderByDescending(a => a.CreatedDate);
                 return result.Select(v => MappingConfig.Mapper.Map<Entity.User, User>(v)).ToList();
             }
             catch (Exception ex)
@@ -66,16 +96,17 @@ namespace BDS.Service
             }
         }
 
-        public long Insert(User entity)
+        public string Insert(User entity)
         {
             try
             {
                 var model = MappingConfig.Mapper.Map<User, Entity.User>(entity);
-                return _repository.Insert(model);
+                var result = _repository.Create(model);
+                return null;
             }
             catch (Exception ex)
             {
-                return entity.ID;
+                return ex.Message;
             }
         }
 
@@ -102,6 +133,20 @@ namespace BDS.Service
             catch (Exception ex)
             {
                 return 0;
+            }
+        }
+
+        public string Update(User entity)
+        {
+            try
+            {
+                var model = MappingConfig.Mapper.Map<User, Entity.User>(entity);
+                _repository.Update(model);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
     }

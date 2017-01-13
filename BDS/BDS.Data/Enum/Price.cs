@@ -125,9 +125,32 @@ namespace BDS.Data.Enum
         Nam
     }
 
+    public enum Huong
+    {
+
+        [Description("--Chọn hướng--")]
+        Start,
+        [Description("Bắc")]
+        Bac,
+        [Description("Nam")]
+        Nam,
+        [Description("Tây")]
+        Tay,
+        [Description("Đông")]
+        Dong,
+        [Description("Tây Bắc")]
+        TayBac,
+        [Description("Đông Bắc")]
+        DongBac,
+        [Description("Tây Nam")]
+        TayNam,
+        [Description("Đông Nam")]
+        DongNam
+    }
+
     public enum Importance
     {
-        [Description("-Độ quan trọng-")]
+        [Description("--Độ quan trọng--")]
         Start,        
         [Description("1")]
         Mot,

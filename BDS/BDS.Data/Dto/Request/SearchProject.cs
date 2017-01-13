@@ -8,8 +8,8 @@ namespace BDS.Data.Dto.Request
 {
     public class BaseSearchProject
     {
-        public string Address { get; set; }
-        public int Price { get; set; }
+        public string ddlProvince { get; set; }
+        public string ddlDistrict { get; set; }
         public int Acreage { get; set; }
     }
 
@@ -17,5 +17,7 @@ namespace BDS.Data.Dto.Request
     {
         public List<Criteria> Criterias { get; set; }
         public BaseSearchProject BaseSearchProject { get; set; }
+        public string ddlProvince { get; set; }
+        public string ddlDistrict { get; set; }
     }
 }

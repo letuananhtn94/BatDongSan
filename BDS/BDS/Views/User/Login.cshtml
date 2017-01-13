@@ -11,7 +11,6 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 <link href="~/Assets/client/login/css/style.css" rel="stylesheet" />
 <style>
     .main-wthree {
@@ -35,7 +34,7 @@
 }
 </style>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Login", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, null)) 
 {
     @Html.AntiForgeryToken()
 

@@ -12,17 +12,20 @@ using System.Web.Mvc;
 
 namespace BDS.Controllers
 {
+    
     public class UserController : Controller
     {
         private readonly IProjectService _projectService;
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
         List<Province> data = new List<Province>();
         List<District> district = new List<District>();
-        public UserController(IProjectService projectService, IUserService userService)
+        public UserController(IProjectService projectService, IUserService userService, IRoleService roleService)
         {
             _projectService = projectService;
             _userService = userService;
+            _roleService = roleService;
         }
 
         private Uri RedirectUri
@@ -46,8 +49,9 @@ namespace BDS.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl = null)
         {
+            ViewBag.ReturnUrl = returnUrl;
             var project = _projectService.GetListTopHome();           
             ViewBag.TopHome = project;
             return View();
@@ -98,13 +102,15 @@ namespace BDS.Controllers
                 user.Name = firstname + " " + middlename + " " + lastname;
                 user.CreatedDate = DateTime.Now;
                 user.Active = true;
-                user.RoleID = 2;
+                user.RoleID = "2";
                 var resultInsert = _userService.InsertForFacebook(user);
                 if (resultInsert > 0)
                 {
+                    int[] userRoles = user.RoleID.Split(',').Select(o => int.Parse(o)).ToArray();
                     var userSession = new UserLogin();
                     userSession.UserName = user.Name;
                     userSession.UserID = user.ID;
+                    userSession.UserRole = _roleService.GetAll().Where(t => userRoles.Contains((int)t.ID)).Select(o => o.Name).ToArray();
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                 }
             }
@@ -116,7 +122,7 @@ namespace BDS.Controllers
             return Redirect("/");
         }
         [HttpPost]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {               
@@ -124,11 +130,17 @@ namespace BDS.Controllers
                 if (result == 1)
                 {
                     var user = _userService.GetById(model.UserName);
+                    int[] userRoles = user.RoleID.Split(',').Select(o => int.Parse(o)).ToArray();
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
+                    userSession.UserRole = _roleService.GetAll().Where(t => userRoles.Contains((int)t.ID)).Select(o => o.Name).ToArray();
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return Redirect("/");
+
+                    if (string.IsNullOrEmpty(ReturnUrl))
+                        return Redirect("/");
+                    else
+                        return Redirect(ReturnUrl);
                 }
                 else if (result == 0)
                 {
@@ -174,11 +186,11 @@ namespace BDS.Controllers
                     user.Email = model.Email;
                     user.Address = model.Address;
                     user.CreatedDate = DateTime.Now;
-                    user.RoleID = 2;
+                    user.RoleID = "2";
                     user.Active = true;
 
                     var result = _userService.Insert(user);
-                    if (result > 0)
+                    if (result == null)
                     {
                         ViewBag.Success = "Đăng ký thành công";
                         model = new RegisterModel();

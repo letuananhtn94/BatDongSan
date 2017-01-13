@@ -11,7 +11,6 @@ namespace BDS.Repository.IRepository
 {
     public interface IUserRepository: IGenericRepository<User>
     {
-        long Insert(User entity);
         long InsertForFacebook(User entity);
         int Login(string userName, string passWord, bool isLoginAdmin = false);
         User GetById(string userName);

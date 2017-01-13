@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BDS.Common;
 
 namespace BDS.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly IProjectService _projectService;
@@ -31,13 +33,15 @@ namespace BDS.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(SearchProject search)
         {
+            search.ddlProvince = "01";
+            search.ddlDistrict = "001";
             var project = _projectService.GetListTopHome();
             data = _provinceService.GetAll();
             ViewBag.CbProvince = data;
             ViewBag.TopHome = project;
-            return View();
+            return View(search);
         }
 
         [HttpPost]
@@ -53,6 +57,8 @@ namespace BDS.Controllers
             cr.EnumType = Request.Form["Address.EnumType"].ToString();
             cr.Importance = int.Parse(Request.Form["Address.Importance"].ToString());
             cr.Prerequisite = Convert.ToBoolean(Request.Form.GetValues("Address.Prerequisite")[0].ToString());
+            cr.ddlProvince = search.ddlProvince;
+            cr.ddlDistrict = search.ddlDistrict;
             criterias[94] = cr;
             cr = new Criteria();
             cr.ID = long.Parse(Request.Form["Price.ID"].ToString());
@@ -86,6 +92,13 @@ namespace BDS.Controllers
         {
             //Lay danh sach tieu chi tim kiem
             ViewBag.Criterias = _criteriaService.GetAll();
+
+            if (TempData["search"] != null)
+            {
+                search = (SearchProject)TempData["search"];
+                ViewBag.Criterias = search.Criterias;
+            }
+
             //Lay danh sach comment
             comments = _commentService.GetListById(projectId);
             ViewBag.ListComment = comments;
@@ -99,18 +112,23 @@ namespace BDS.Controllers
             return View(result);
         }
 
+
         public ActionResult List(SearchProject search)
         {
+            var searchModel = new SearchProject();
             if (TempData["search"] != null)
             {
                 search = (SearchProject)TempData["search"];
             }
            
             ViewBag.Criterias = _criteriaService.GetAll();
+            //ViewBag.Criterias = searchModel.Criterias;
 
+            //TempData["search"] = search;
+            var listCriteria = new List<Criteria>();
             if (search.Criterias != null)
             {
-                var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
+                listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
                 search.Criterias = listCriteria;
             }                        
             var result = _projectService.Search(search);
@@ -119,20 +137,24 @@ namespace BDS.Controllers
             data = _provinceService.GetAll();
             ViewBag.CbProvince = data;
 
+            ViewBag.Searchs = listCriteria;
+
             return View(result);
         }
 
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var project = _projectService.GetListTopHome();
+            ViewBag.TopHome = project;
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            var project = _projectService.GetListTopHome();
+            ViewBag.TopHome = project;
 
             return View();
         }

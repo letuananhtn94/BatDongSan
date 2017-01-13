@@ -1,17 +1,63 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@using BDS.Data.Dto;
+
+
+@{
+    ViewBag.Title = "Hướng dẫn";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<style>
+    .main-wthree {
+        background: #3b8fc5;
+        min-height: 400px;
+    }
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        .main-wthree h2 {
+            font-size: 30px;
+            color: #FFF;
+            margin-bottom: 1em;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+    .sin-w3-agile {
+        padding: 2em 0 0;
+        margin: 0 auto;
+        width: 30%;
+    }
+
+    input, select {
+        max-width: 100%;
+    }
+</style>
+
+<div class="main-wthree">
+    <div class="container">
+        <div class="sin-w3-agile">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="list_du_an container">
+    <div class="_title">
+        <h2>Bất động sản mới nhất</h2>
+    </div>
+
+    <div class="row">
+        @{
+            var data = (List<Project>)ViewBag.TopHome;
+        }
+        @if (data != null && data.Any())
+        {
+            foreach (var item in data)
+            {
+                Html.RenderPartial("/Views/Home/_DuAnPartial.cshtml", item, null);
+            }
+        }
+        else
+        {
+
+        }
+
+    </div>
+</div><br>

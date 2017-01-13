@@ -1,4 +1,6 @@
 ﻿@using BDS.Data.Dto;
+@using BDS.Data.Enum;
+@using BDS.Helper;
 
 @model List<Criteria>
 
@@ -92,6 +94,19 @@
     <div id="vitri3" class="panel-collapse collapse">
       <div class="panel-body">
           <div class="row">
+              <div class="form-group">
+                  <div class="col-md-2">
+                      <label>Hướng nhà</label>
+                  </div>
+                  <div class="col-md-6">
+                      <input type="hidden" name="search.Criterias[97].ID" value="98" />
+                      <input type="hidden" name="search.Criterias[97].Selected" value="true" />
+                      @Html.DropDownList("search.Criterias[97].Value", Huong.Start.ToSelectList(), new { @class = "form-control" })
+                      <input type="hidden" name="search.Criterias[97].EnumType" value="Huong" />
+                  </div>
+              </div>                    
+          </div>
+          <div class="row">              
               @{
                   var list2 = Model.Where(t => t.Type == 3).ToList();
             }

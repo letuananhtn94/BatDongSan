@@ -145,6 +145,9 @@ namespace BDS.Repository.Repository
                                 case "SoluongToiletRieng":
                                     inner = inner.Or(t => t.CriteriaID == item.ID && t.Value == value);
                                     break;
+                                case "Huong":
+                                    inner = inner.Or(t => t.CriteriaID == item.ID && t.Value == value);
+                                    break;
                             }
                         }
                     }

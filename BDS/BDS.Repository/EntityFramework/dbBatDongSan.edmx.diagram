@@ -32,7 +32,6 @@
         <AssociationConnector Association="dbBatDongSan.FK_Like_User" ManuallyRouted="false" />
         <AssociationConnector Association="dbBatDongSan.FK_Project_TypeProject" ManuallyRouted="false" />
         <AssociationConnector Association="dbBatDongSan.FK_Save_Project" ManuallyRouted="false" />
-        <AssociationConnector Association="dbBatDongSan.FK_User_Role" ManuallyRouted="false" />
         <AssociationConnector Association="dbBatDongSan.FK_Save_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

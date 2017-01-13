@@ -25,7 +25,7 @@ namespace BDS.Repository.EntityFramework
         public long ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Nullable<int> RoleID { get; set; }
+        public string RoleID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
@@ -40,7 +40,6 @@ namespace BDS.Repository.EntityFramework
         public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Like> Like { get; set; }
-        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Save> Save { get; set; }
     }

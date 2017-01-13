@@ -1,4 +1,5 @@
-﻿@using BDS.Data.Dto.Response;
+﻿@using BDS.Data.Dto.Request;
+@using BDS.Data.Dto.Response;
 @using BDS.Data.Dto;
 
 @model SearchResult<Project>
@@ -11,7 +12,7 @@
 <link href="~/Assets/client/css/detail.css" rel="stylesheet" />
 <link href="~/Assets/client/css/list.css" rel="stylesheet" />
 <form action="/Home/List" method="post">
-    @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);
+    @Html.Partial("_TimKiemPartial", (List<Criteria>)ViewBag.Criterias);   
 </form>
 
 <div class="_list_main">
@@ -37,7 +38,7 @@
                         <div class="_tieu_de col-sm-12"><a href="@Url.Action("Detail", "Home", new { projectId = item.ID})"><b>@i. @item.Name</b></a></div>
                         <div class="_dia_chi col-sm-12">@item.Address</div>
                         <div class="_gia col-sm-12">$: @item.Price @item.UnitPrice</div>
-                        <div class="_dien_tich col-sm-12">S: @item.Acreage</div>
+                        <div class="_dien_tich col-sm-12">S: @item.Acreage m2</div>
                     </div>
                     <div class="_luu">
                         <button type="submit" id="btn_tim_kiem" class="btn btn-default" style="float: right;">Lưu</button>
@@ -65,12 +66,7 @@
                     coords: [48.895651, 2.290569], // Map center (optional)
                     type: "ROADMAP" // Map type (optional)
                 });
-
-                
-
-                //var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                //var image = "/Images/sothutu.png";                
-                var labels = '123456789';
+                               
                 var labelIndex = 0;
                 @foreach (var item in Model.Data)
                 {                   
@@ -101,3 +97,15 @@
 
     </div>
 </div>
+
+@section scripts{
+<script>
+        $(document).ready(function () {           
+            $('select').select2({
+                theme: "bootstrap"
+            });
+                
+            
+        });
+</script>
+    }

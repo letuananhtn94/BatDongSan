@@ -34,7 +34,7 @@
 }
 </style>
 
-@section jsFooter{
+@section scripts{
     <script>
        
         var editor = CKEDITOR.replace('txtDescription', {
@@ -46,7 +46,7 @@
     </script>
 }
 
-@using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Index", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="grid-form1">
@@ -356,46 +356,6 @@
     </div>
 }
 
-@*<div class="grid-form1">
-    <h2 id="forms-example" class="">Thông tin cơ bản</h2>
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="Address" placeholder="Email address">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Check me out
-            </label>
-        </div>
-        <em>Into This</em>
-        <select data-placeholder="Choose a Country..." class="chosen-select form-control" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option value="United States">United States</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Afghanistan">Afghanistan</option>
-            <option value="Colombia">Colombia</option>
-        </select>
-
-        <select data-placeholder="Choose a Country..." class="chosen-select" multiple style="width:350px;" tabindex="4">
-            <option value=""></option>
-            <option value="United States">United States</option>
-            <option value="United Kingdom">United Kingdom</option>
-            <option value="Argentina">Argentina</option>
-        </select>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-
-    <h2 id="forms-example" class="">Thông tin mô tả</h2>
-    <h2 id="forms-example" class="">Thông tin nâng cao</h2>
-    <h2 id="forms-example" class="">Thông tin liên hệ</h2>
-</div>*@
-
 <script src="~/Assets/chosen/chosen.jquery.js"></script>
 <script type="text/javascript">
     function setValueInput() {
@@ -406,7 +366,7 @@
             $("#txtAddress").val(district + province);
 
             $.ajax({
-                url: '@Url.Action("GetAddress", "Admin")',
+                url: '@Url.Action("GetAddress", "Project")',
                 type: "GET",
                 dataType: "JSON",
                 data: {
@@ -433,7 +393,7 @@
             var stateId = $(this).val();
 
             $.ajax({
-                url: '@Url.Action("GetDistrictByID", "Admin")',
+                url: '@Url.Action("GetDistrictByID", "Project")',
                 type: "GET",
                 dataType: "JSON",
                 data: { id: stateId },
@@ -463,41 +423,7 @@
     });
 
     // Lấy danh sách phường theo quận gán vào select
-    function GetListPhuongToSelectBox(data, element) {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GetDistrictByID", "Home")' + "?id=" + data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            //data:JSON.stringify($("#ddlDistrict").val()),
-            //async: false,
-            success: function (data) {
-                alert("thanh công" + data);
-                $('#' + element).find('option').remove();
-                $('#' + element).append($("<option></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
-                $.each(data, function () {
-                    $('#' + element).append($("<option></option>").attr("value", this.ID).text(this.Name));
-                });
-            },
-            error: function (a) {
-                console.log(a.responseText);
-                alert("lỗi");
-            }
-        });
-    }
-
-
-    var config = {
-        '.chosen-select': {},
-        '.chosen-select-deselect': { allow_single_deselect: true },
-        '.chosen-select-no-single': { disable_search_threshold: 10 },
-        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
-        '.chosen-select-width': { width: "95%" }
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
-
+    
 
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
