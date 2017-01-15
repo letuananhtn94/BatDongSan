@@ -1,0 +1,94 @@
+﻿@model IPagedList<BDS.Data.Dto.User>
+
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<table id="table-no-resize">
+    <thead>
+        <tr>
+            <th>
+                Tên tài khoản
+            </th>
+            <th>
+                Quyền
+            </th>
+            <th>
+                Họ và tên
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                SĐT
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+
+                <td>
+                    <div class="btn-group" style="margin: 0px !important">
+                        <a href="@Url.Action("Edit", new { id = item.ID })" class="btn btn-default" style="border: 1px solid">
+                            <i class="fa fa-pencil" aria-hidden="true"></i> Sửa
+                        </a>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="border: 1px solid">
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu btn-dropdown-menu" role="menu" style="min-width: 100px">
+                            <li>
+                                <a href="@Url.Action("Detail", new { id = item.ID })">
+                                    <i class="fa fa-eye" aria-hidden="true"></i> Chi tiết
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="confirmation" href="javascript:void(0)" class="delete_item" id="@string.Format("{0}?page={1}",item.ID, @Model.PageNumber)">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i> Xóa
+                                </a>
+                            </li>
+                        </ul>
+                    </div>                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pull-left" style="margin-top:20px">
+    @string.Format("Trang {0} trong {1}", Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber, @Model.PageCount)
+</div>
+<div class="pull-right">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @ViewBag.Role }))
+</div>
+
+
+
+

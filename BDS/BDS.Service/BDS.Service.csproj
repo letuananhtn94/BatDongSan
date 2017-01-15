@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParameterService.cs" />
+    <Compile Include="LikeService.cs" />
+    <Compile Include="TypeProjectService.cs" />
     <Compile Include="SaveService.cs" />
     <Compile Include="DetailProjectService.cs" />
     <Compile Include="MappingConfig.cs" />

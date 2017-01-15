@@ -17,7 +17,7 @@ namespace BDS.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Login", controller = "Login", id = UrlParameter.Optional }
+                new { action = "Index", controller = "Login", id = UrlParameter.Optional }
             );
         }
     }

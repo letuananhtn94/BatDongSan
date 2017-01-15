@@ -1,432 +1,61 @@
-﻿@using BDS.Data.Dto.Response;
-@using BDS.Data.Dto;
+﻿@model IEnumerable<BDS.Data.Dto.Project>
 
-@model Project
-@{ 
-    var data = (List<Criteria>)ViewBag.Criterias;
-}
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dự án";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Assets/chosen/bootstrap-chosen.css" rel="stylesheet" />
-<link href="~/Assets/client/css/timkiem.css" rel="stylesheet" />
 
-<style>
-    #pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 300px;
-}
-.controls {
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-</style>
+<div class="agile-grids">
+    <div class="agile-tables">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Danh sách dự án</h3>
+            </div>
+            <div class="title_right">
+                <div class="pull-right">
+                    @Html.ActionLink("Thêm dự án", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
 
+        <div class="pull-left">
+            <h5>
+                <span class="field-validation-error" id="error_message">
+                </span>
+            </h5>
+        </div>
+
+        <div id="list">
+            @{Html.RenderAction("ProjectList", "Project");}
+        </div>
+    </div>
+</div>
 @section scripts{
     <script>
-       
-        var editor = CKEDITOR.replace('txtDescription', {
-            customConfig: '/Assets/admin/plugins/ckeditor/ckeditor.js',
-        });
-        var editor1 = CKEDITOR.replace('txtContact', {
-            customConfig: '/Assets/admin/plugins/ckeditor/ckeditor.js',
+        // delete item
+        $('.delete_item').on('confirmed.bs.confirmation', function (event) {
+
+            var deleteUrl = '@Url.Action("Delete")' + "/" + $(this).attr('id');
+            $.post(deleteUrl, function (data) {
+                if (data.length != 0) {
+                    $('#list').html(data);
+                } else {
+                    $('#error_message').html('Không thể xóa dữ liệu đang được sử dụng. ');
+                }
+            });
+        })
+
+        $(document).ready(function () {
+            $('select').select2({
+                theme: "bootstrap"
+            });
+
+            $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
+
+            $('#table-no-resize').basictable({
+                noResize: true
+            });
         });
     </script>
 }
 
-@using (Html.BeginForm("Index", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="grid-form1">
-        <h2 id="forms-example" class="">Thông tin cơ bản</h2>
-
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2" for="sel1">Loại bất động sản</label>
-                <div class="col-md-4">
-                    <select class="form-control" id="loai-bds" name="TypeID">
-                        <option selected hidden>--Chọn loại--</option>
-                        <option value="1">Chung cư</option>
-                    </select>
-                </div>
-                @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    <input class="form-control" type="date" name="Deadline" min="2016-12-20">                                       
-                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-                    <input type="hidden" name="search.Criterias[95].ID" value="96" />
-                    <input type="hidden" name="search.Criterias[95].Selected" value="true" />
-                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-2">
-                    <select class="form-control" id="don-vi" name="UnitPrice">
-                        <option selected hidden>--Đơn vị--</option>
-                        <option value="triệu">Triệu</option>
-                        <option value="tỷ">Tỷ</option>
-                    </select>
-                </div>
-                @Html.LabelFor(model => model.Acreage, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-3">
-                    <input type="hidden" name="search.Criterias[96].ID" value="97" />
-                    <input type="hidden" name="search.Criterias[96].Selected" value="true" />
-                    @Html.TextBoxFor(model => model.Acreage, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Acreage, "", new { @class = "text-danger" })
-                </div>
-                <label class="control-label">m2</label>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Status, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2" for="sel1">Tỉnh/ thành phố</label>
-                <div class="col-md-4">
-                    <input type="hidden" name="search.Criterias[94].ID" value="95" />
-                    <input type="hidden" name="search.Criterias[94].Selected" value="true" />
-                    <input id="txtAddress" type="hidden" name="search.Criterias[94].Value" value="" />
-                    <input type="hidden" name="search.Criterias[94].EnumType" value="Address" />
-                    <select class="chosen-select form-control" id="ddlProvince">
-                        <option Selected hidden>--Chọn Tỉnh/Thành phố--</option>
-                        @foreach (var item in ViewBag.CbProvince as List<Province>)
-                        {
-                            <option value="@item.ID.ToString()">@item.Type @item.Name</option>
-                        }
-                    </select>
-
-                </div>
-                <label class="control-label col-md-2" for="sel1">Quận/ huyện</label>
-                <div class="col-md-4">
-                    <select class="form-control" id="ddlDistrict">
-                        <option Selected hidden>--Chọn Quận/Huyện--</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-7">
-                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn-primary btn" id="btnBanDo"> Tìm trên bản đồ</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                    <div id="googleMap" style="height:500px"></div>
-                    <input type="hidden" id="lat" name="Lat" readonly="yes"><br>
-                    <input type="hidden" id="lng" name="Long" readonly="yes">
-                    <!-- Add Google Maps -->
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq2vNKISjdL0GJcmj_0oVqKCBEmwoV_os&libraries=places">
-                    </script>
-                    <script>
-                        $(document).ready(function () {
-                            $("#btnBanDo").click(function () {
-                                //var input = document.getElementById('pac-input');
-                                var data = $('#Address').val();
-                                $('#pac-input').val(data);                               
-                                
-                            });
-                        });
-                        var map; //Will contain map object.
-                        var marker = false; ////Has the user plotted their location marker? 
-
-                        function initMap() {
-                            var uluru = { lat: 10.8559859, lng: 106.7325827 };
-                            var map = new google.maps.Map(document.getElementById('googleMap'), {
-                                zoom: 12,
-                                center: uluru,
-                                //scrollwheel: true,
-                                //draggable: true,
-                                //mapTypeId: google.maps.MapTypeId.ROADMAP
-                            });
-                            //var marker = new google.maps.Marker({
-                            //    position: uluru,
-                            //    map: map
-                            //});
-
-                            var input = document.getElementById('pac-input');
-                            var searchBox = new google.maps.places.SearchBox(input);
-                            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-                            map.addListener('bounds_changed', function () {
-                                searchBox.setBounds(map.getBounds());
-                            });
-
-                            var markers = [];
-                            // Listen for the event fired when the user selects a prediction and retrieve
-                            // more details for that place.
-                            searchBox.addListener('places_changed', function () {
-                                var places = searchBox.getPlaces();
-
-                                if (places.length == 0) {
-                                    return;
-                                }
-
-                                // Clear out the old markers.
-                                markers.forEach(function (marker) {
-                                    marker.setMap(null);
-                                });
-                                markers = [];
-
-                                // For each place, get the icon, name and location.
-                                var bounds = new google.maps.LatLngBounds();
-                                places.forEach(function (place) {
-                                    if (!place.geometry) {
-                                        console.log("Returned place contains no geometry");
-                                        return;
-                                    }
-                                    var icon = {
-                                        url: place.icon,
-                                        size: new google.maps.Size(71, 71),
-                                        origin: new google.maps.Point(0, 0),
-                                        anchor: new google.maps.Point(17, 34),
-                                        scaledSize: new google.maps.Size(25, 25)
-                                    };
-
-                                    // Create a marker for each place.
-                                    markers.push(new google.maps.Marker({
-                                        map: map,                                        
-                                        title: place.name,
-                                        draggable: true,
-                                        position: place.geometry.location
-                                    }));
-
-                                    document.getElementById('lat').value = place.geometry.location.lat(); //latitude
-                                    document.getElementById('lng').value = place.geometry.location.lng();
-                                   
-                                    if (place.geometry.viewport) {
-                                        // Only geocodes have viewport.
-                                        bounds.union(place.geometry.viewport);
-                                    } else {
-                                        bounds.extend(place.geometry.location);
-                                    }
-                                });
-                                map.fitBounds(bounds);
-                                                             
-                            });
-
-                            //google.maps.event.addListener(map, 'click', function (event) {
-                            //    //Get the location that the user clicked.
-                            //    var clickedLocation = event.latLng;
-                            //    //If the marker hasn't been added.
-                            //    if (marker === false) {
-                            //        //Create the marker.
-                            //        marker = new google.maps.Marker({
-                            //            position: place.geometry.location,
-                            //            map: map,
-                            //            draggable: true //make it draggable
-                            //        });
-                            //        //Listen for drag events!
-                            //        google.maps.event.addListener(marker, 'dragend', function (event) {
-                            //            markerLocation();
-                            //        });
-                            //    } else {
-                            //        //Marker has already been added, so just change its location.
-                            //        marker.setPosition(clickedLocation);
-                            //    }
-                            //    //Get the marker's location.
-                            //    markerLocation();
-                            //});
-                        }
-
-                        function markerLocation() {
-                            //Get location.
-                            var currentLocation = marker.getPosition();
-                            //Add lat and lng values to a field that we can save.
-                            document.getElementById('lat').value = currentLocation.lat(); //latitude
-                            document.getElementById('lng').value = currentLocation.lng(); //longitude
-                        }
-                        google.maps.event.addDomListener(window, 'load', initMap);
-                    </script>
-                                      
-                </div>
-            </div>
-
-            
-           @*Thông tin mô tả*@
-            <hr />       
-            <h2 id="forms-example" class="">Thông tin mô tả</h2>
-            <hr />
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" }, id = "txtDescription" })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2" for="sel1">Hình ảnh</label>
-                <div class="col-md-10">
-                    <input class="btn-primary btn" type="file" name="files" value="" multiple="multiple" />
-                    <div style="color:Red;font-size:14px">@ViewBag.Message</div>
-                </div>
-            </div>
-
-            <hr />
-            <h2 id="forms-example" class="">Thông tin nâng cao</h2>
-            <hr />
-         
-            <div>
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#vatlykientruc">Vật lý kiến trúc</a></li>
-                    <li><a data-toggle="tab" href="#vitri">Vị trí</a></li>
-                    <li><a data-toggle="tab" href="#moitruong">Môi trường</a></li>
-                    <li><a data-toggle="tab" href="#taichinh">Tài chính</a></li>
-                    <li><a data-toggle="tab" href="#marketing">Marketing</a></li>
-                    <li><a data-toggle="tab" href="#phaply">Pháp lý</a></li>
-                </ul>
-
-                <div class="tab-content" style="padding:10px">
-                    <div id="vatlykientruc" class="tab-pane fade in active">
-                        @Html.Partial("_VatLyPartial",  data.Where(v => v.GroupID == 1).ToList())
-                    </div>
-                    <div id="vitri" class="tab-pane fade">
-                        @Html.Partial("_ViTriPartial", data.Where(v => v.GroupID == 2).ToList())
-                    </div>
-                    <div id="moitruong" class="tab-pane fade">
-                        @Html.Partial("_MoiTruongPartial", data.Where(v => v.GroupID == 3).ToList())
-                    </div>
-                    <div id="taichinh" class="tab-pane fade">
-                        @Html.Partial("_TaiChinhPartial", data.Where(v => v.GroupID == 4).ToList())
-                    </div>
-                    <div id="marketing" class="tab-pane fade">
-                        @Html.Partial("_MarketingPartial", data.Where(v => v.GroupID == 5).ToList())
-                    </div>
-                    <div id="phaply" class="tab-pane fade">
-                        @Html.Partial("_PhapLyPartial", data.Where(v => v.GroupID == 6).ToList())
-                    </div>
-                </div>
-            </div>
-
-            <h2 id="forms-example" class="">Thông tin liên hệ</h2>
-            <hr />
-            <div class="form-group">
-                @Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" }, id = "txtContact" })
-                    @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <hr />
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Thêm dự án" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<script src="~/Assets/chosen/chosen.jquery.js"></script>
-<script type="text/javascript">
-    function setValueInput() {
-        $("#ddlDistrict").on("change", function () {
-            var province = $("#ddlProvince").val();
-            var district = $(this).val();
-
-            $("#txtAddress").val(district + province);
-
-            $.ajax({
-                url: '@Url.Action("GetAddress", "Project")',
-                type: "GET",
-                dataType: "JSON",
-                data: {
-                    provinceid: province,
-                    districtid: district
-                },
-                success: function (cities) {
-                    console.log(cities);                    
-                    $("#Address").val(cities);
-                },
-                error: function (a) {
-                    console.log(a.responseText);
-                    alert("lỗi");
-                }
-            });
-        });
-    }
-
-    function setEventToControl() {
-        $("#ddlProvince").on("change", function () {
-            setValueInput();
-            $("#Lat").val("");
-            $("#Long").val("");
-            var stateId = $(this).val();
-
-            $.ajax({
-                url: '@Url.Action("GetDistrictByID", "Project")',
-                type: "GET",
-                dataType: "JSON",
-                data: { id: stateId },
-                success: function (cities) {
-                    console.log(cities);
-                    //$("#_district").html();
-                    $("#ddlDistrict").find('option').remove();
-                    $("#ddlDistrict").append($("<option Selected hidden></option>").attr("value", "").text("--Chọn Quận/Huyện--"));
-                    $.each(cities, function (i, city) {
-                        //$("#ddlDistrict").append(
-                        //    $('<option></option>').val(city.ID).html(city.Name));
-
-                        $("#ddlDistrict").append($("<option></option>").attr("value", city.ID).text(city.Type + " " + city.Name));
-                    });
-                },
-                error: function (a) {
-                    console.log(a.responseText);
-                    alert("lỗi");
-                }
-            });
-        });
-    }
-
-    $(document).ready(function () {
-        setValueInput();
-        setEventToControl();// Gán event
-    });
-
-    // Lấy danh sách phường theo quận gán vào select
-    
-
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
-    });
-
-</script>

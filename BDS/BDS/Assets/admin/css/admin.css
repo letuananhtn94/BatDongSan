@@ -62,3 +62,16 @@ legend {
 ._tooltip + .tooltip.right > .tooltip-arrow {
     border-right: 5px solid black;
 }
+
+.title_left, .title_right{
+    width: 50%;   
+}
+
+.title_left{   
+    float: left;
+    margin: -15px 0px 10px;
+}
+
+.title_right{
+    float: right;
+}

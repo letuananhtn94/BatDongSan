@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BDS.Helper;
+using PagedList;
 
 namespace BDS.Areas.Admin.Controllers
 {
@@ -17,27 +18,55 @@ namespace BDS.Areas.Admin.Controllers
         private readonly IProvinceService _provinceService;
         private readonly IDistrictService _districtService;
         private readonly ICriteriaService _criteriaService;
+        private readonly ITypeProjectService _typeProjectService;
+
         List<Province> data = new List<Province>();
         List<District> district = new List<District>();
-        public ProjectController(IProjectService projectService, IProvinceService provinceService, IDistrictService district, ICriteriaService criteriaService)
+
+        public ProjectController(IProjectService projectService, 
+            IProvinceService provinceService, 
+            IDistrictService district, 
+            ICriteriaService criteriaService,
+            ITypeProjectService typeProjectService)
         {
             _projectService = projectService;
             _provinceService = provinceService;
             _districtService = district;
             _criteriaService = criteriaService;
+            _typeProjectService = typeProjectService;
         }
-        // GET: Admin/Admin
-        [HttpGet]        
+
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult ProjectList(int page = 1)
+        {
+            var model = _projectService.GetList();
+            model = model.ToPagedList(page, _pageSize);
+
+            return PartialView(model);
+        }
+
+        // GET: Admin/Admin
+        [HttpGet]        
+        public ActionResult Create()
+        {
             ViewBag.Criterias = _criteriaService.GetAll();
+
+            var typeProject = _typeProjectService.GetAll();
+            ViewBag.TypeProject = typeProject;
+
             data = _provinceService.GetAll();
             ViewBag.CbProvince = data;
+
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Index(Project project, SearchProject search, HttpPostedFileBase[] files)
+        public ActionResult Create(Project project, SearchProject search, HttpPostedFileBase[] files)
         {
             try
             {                         
@@ -79,17 +108,7 @@ namespace BDS.Areas.Admin.Controllers
             }
             return Index();
         }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        public ActionResult List()
-        {
-            var result = _projectService.GetAll();
-            return View(result);
-        }
+       
 
         public ActionResult GetDistrictByID(string id)
         {

@@ -222,28 +222,41 @@
     });
 
     $("#btnBinhLuan").on("click", function () {
-        var txtComment = $("#txtComment").val();
-        var projectid = @Model.ID;
-        var userid = $("#UserID").val();
-        //var file = $('input[type=file]');
-        var files = document.getElementById("fileComment").files;
-        var formData = new FormData();
+        var url = window.location.pathname + "?projectId=" + @Model.ID;
+        var sess = @Html.Raw(Json.Encode(session));
+        if (sess != null) {
+            var txtComment = $("#txtComment").val();
+            var projectid = @Model.ID;
+            var userid = $("#UserID").val();
 
-        if(files != null)
-        {
-            for (i = 0; i < files.length; i++) {
-                formData.append(files[i].name, files[i]);
-                console.log(files[i]);
+            var files = document.getElementById("fileComment").files;
+            var formData = new FormData();
+
+            if(files != null)
+            {
+                for (i = 0; i < files.length; i++) {
+                    formData.append(files[i].name, files[i]);
+                    console.log(files[i]);
+                }
             }
+
+            formData.append('ProjectID', projectid);
+            formData.append('Content', txtComment);
+            formData.append('UserID', userid);
+
+            InsertComment(formData, null);
+        }
+        else
+        {
+            redirect(url);
         }
 
-        formData.append('ProjectID', projectid);
-        formData.append('Content', txtComment);
-        formData.append('UserID', userid);
-
-        InsertComment(formData, null);
-
     });
+
+    function redirect(retrunUrl) {
+        var url = '@Url.Action("Login", "User", new { returnUrl = "url" })';
+        window.location.href = url.replace('url', retrunUrl);
+    }
 
     function InsertComment(formData, control) {
         $.ajax({
@@ -254,7 +267,7 @@
             contentType: false,
             success: function (data) {
                 console.log(data);
-                $(".list-comment").html(data);        
+                $(".list-comment").html(data);
                 location.reload();
             },
 

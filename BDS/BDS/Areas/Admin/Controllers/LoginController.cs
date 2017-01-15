@@ -35,7 +35,7 @@ namespace BDS.Areas.Admin.Controllers
                     userSession.UserID = user.ID;
                                        
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("List", "Project");
+                    return RedirectToAction("Index", "Project");
                 }
                 else if (result == 0)
                 {

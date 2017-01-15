@@ -12,6 +12,15 @@ namespace BDS.Areas.Admin.Controllers
 {
     public class BaseController : Controller
     {
+
+        protected int _pageSize;
+
+        // GET: Admin/Base
+        public BaseController()
+        {
+            _pageSize = 15;
+        }
+
         //initilizing culture on controller initialization
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {

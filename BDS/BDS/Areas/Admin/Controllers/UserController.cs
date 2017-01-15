@@ -1,6 +1,7 @@
 ﻿using BDS.Common;
 using BDS.Data.Dto;
 using BDS.Service;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +14,53 @@ namespace BDS.Areas.Admin.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IUserService _userService;
-        
-        public UserController(IProjectService projectService, IUserService userService)
+        private readonly IRoleService _roleService;
+
+        public UserController(IProjectService projectService, IUserService userService, IRoleService roleService)
         {
             _projectService = projectService;
             _userService = userService;
+            _roleService = roleService;
         }
         // GET: Admin/User
         public ActionResult Index()
-        {
-            var result = _userService.GetAll();
-            return View(result);
+        {            
+            return View();
         }
 
         public ActionResult Logout()
         {
             Session[CommonConstants.USER_SESSION] = null;
             return Redirect("/");
+        }
+
+        [HttpGet]
+        public PartialViewResult UserList(int page = 1)
+        {
+            var model = _userService.GetAll();
+            model = model.ToPagedList(page, _pageSize);
+
+            foreach (var item in model)
+            {
+                int[] idRoles = item.RoleID.Split(',').Select(o => int.Parse(o)).ToArray();
+                item.RoleID = GetRoleName(idRoles);
+            }
+            
+            return PartialView(model);
+        }
+
+        string GetRoleName(int[] idRoles)
+        {
+            string[] name = new string[idRoles.Count()];
+            var i = 0;
+            foreach (var item in idRoles)
+            {
+                var role = _roleService.Get(item);
+                name[i] = role.Name;
+                i++;
+            }
+
+            return string.Join(",", name);
         }
 
         // GET: Admin/User/Details/5

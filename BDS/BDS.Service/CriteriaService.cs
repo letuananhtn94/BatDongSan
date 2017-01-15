@@ -13,6 +13,7 @@ namespace BDS.Service
     public interface ICriteriaService
     {
         List<Criteria> GetByID(long groupId, string code, string codeFull);
+        IEnumerable<Criteria> GetList();
         List<Criteria> GetAll();
         List<Criteria> FilterList(List<Criteria> criteria);
         bool CheckPrerequisite(List<Criteria> criteria);
@@ -114,5 +115,20 @@ namespace BDS.Service
                 return true;
             return false;          
         }
+
+        public IEnumerable<Criteria> GetList()
+        {
+            try
+            {
+                var result = _repository.GetAll();
+
+                return result.Select(v => MappingConfig.Mapper.Map<Entity.Criteria, Criteria>(v)).ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Criteria>();
+            }
+        }
+        
     }
 }

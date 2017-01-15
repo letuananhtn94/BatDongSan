@@ -108,6 +108,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -205,6 +213,11 @@
     </Compile>
     <Compile Include="Helper\ImageUpload.cs" />
     <Compile Include="Helper\SelectedHelper.cs" />
+    <Compile Include="LocalResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -680,6 +693,7 @@
     <Content Include="Assets\select2\vi.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -703,7 +717,7 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Create.cshtml" />
     <Content Include="Assets\admin\fonts\fontawesome-webfont.eot" />
     <Content Include="Assets\admin\fonts\fontawesome-webfont.ttf" />
     <Content Include="Assets\admin\fonts\fontawesome-webfont.woff" />
@@ -711,7 +725,7 @@
     <Content Include="Assets\admin\fonts\FontAwesome.otf" />
     <Content Include="Assets\admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\admin\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Areas\Admin\Views\Project\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
     <Content Include="Assets\admin\plugins\ckeditor\CHANGES.md" />
     <Content Include="Assets\admin\plugins\ckeditor\LICENSE.md" />
     <Content Include="Assets\admin\plugins\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -773,6 +787,9 @@
     <Content Include="Assets\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Assets\font-awesome\scss\_stacked.scss" />
     <Content Include="Assets\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\User\UserList.cshtml" />
+    <Content Include="Areas\Admin\Views\Criteria\CriteriaList.cshtml" />
+    <Content Include="Areas\Admin\Views\Project\ProjectList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -820,6 +837,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Images\Comment\" />
     <Folder Include="Images\Project\" />
     <Folder Include="Models\" />
@@ -851,6 +870,12 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LocalResources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

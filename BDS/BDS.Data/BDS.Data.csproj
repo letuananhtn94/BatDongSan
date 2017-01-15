@@ -65,7 +65,7 @@
     <Compile Include="Dto\Request\SearchProject.cs" />
     <Compile Include="Dto\Response\SearchResult.cs" />
     <Compile Include="Dto\Response\ServiceResult.cs" />
-    <Compile Include="Enum\Price.cs" />
+    <Compile Include="Enum\EnumType.cs" />
     <Compile Include="Enum\ResultCode.cs" />
     <Compile Include="Extensions\LinqExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

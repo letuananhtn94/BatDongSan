@@ -19,6 +19,8 @@ namespace BDS.Service
 
         List<Project> GetAll();
 
+        IEnumerable<Project> GetList();
+
         Project GetById(long projectId);
 
         ServiceResult<Project> Add(Project project);
@@ -218,6 +220,20 @@ namespace BDS.Service
             if (dem == listPre.Count)
                 return true;
             return false;
+        }
+
+        public IEnumerable<Project> GetList()
+        {
+            try
+            {
+                var result = _projectRepository.GetAll();
+                return result.Select(v => MappingConfig.Mapper.Map<Entity.Project, Project>(v)).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                return new List<Project>();
+            }
         }
     }
 }

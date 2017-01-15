@@ -1,5 +1,6 @@
 ﻿using BDS.Data.Dto;
 using BDS.Service;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,17 @@ namespace BDS.Areas.Admin.Controllers
         }
         // GET: Admin/Criteria
         public ActionResult Index()
+        {            
+            return View();
+        }
+
+        [HttpGet]
+        public PartialViewResult CriteriaList(int page = 1)
         {
-            var result = _criteriaService.GetAll();
-            return View(result);
+            var model = _criteriaService.GetList();
+            model = model.ToPagedList(page, _pageSize);
+           
+            return PartialView(model);
         }
 
         // GET: Admin/Criteria/Details/5

@@ -25,6 +25,9 @@ namespace BDS.Repository.Repository
             builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerRequest();
             builder.RegisterType<SaveRepository>().As<ISaveRepository>().InstancePerRequest();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerRequest();
+            builder.RegisterType<TypeProjectRepository>().As<ITypeProjectRepository>().InstancePerRequest();
+            builder.RegisterType<LikeRepositoty>().As<ILikeRepository>().InstancePerRequest();
+            builder.RegisterType<ParameterRepositoty>().As<IParameterRepository>().InstancePerRequest();
         }
 
     }

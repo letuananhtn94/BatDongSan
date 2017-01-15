@@ -11,8 +11,8 @@ using System.Collections.Generic;
 namespace BDS.Service
 {
     public interface IUserService
-    {       
-        List<User> GetAll();
+    {
+        IEnumerable<User> GetAll();
         long InsertForFacebook(User entity);
         int Login(string userName, string passWord, bool isLoginAdmin = false);
         string Insert(User entity);
@@ -70,7 +70,7 @@ namespace BDS.Service
             }
         }
 
-        public List<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
             try
             {

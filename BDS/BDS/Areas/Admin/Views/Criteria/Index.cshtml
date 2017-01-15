@@ -7,65 +7,55 @@
 
 <div class="agile-grids">
     <div class="agile-tables">
-        <h3>Danh sách tiêu chí</h3>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Danh sách tiêu chí</h3>
+            </div>
+            <div class="title_right">
+                <div class="pull-right">
+                    @Html.ActionLink("Thêm tiêu chí", "Create", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
 
-        <table id="table-no-resize">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Code)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Score)
-                    </th>
-                    
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Code)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Score)
-                        </td>                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) 
-                            @*|
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="pull-left">
+            <h5>
+                <span class="field-validation-error" id="error_message">
+                </span>
+            </h5>
+        </div>
+
+        <div id="list">
+            @{Html.RenderAction("CriteriaList", "Criteria");}
+        </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        // delete item
+        $('.delete_item').on('confirmed.bs.confirmation', function (event) {
 
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
+            var deleteUrl = '@Url.Action("Delete")' + "/" + $(this).attr('id');
+            $.post(deleteUrl, function (data) {
+                if (data.length != 0) {
+                    $('#list').html(data);
+                } else {
+                    $('#error_message').html('Không thể xóa dữ liệu đang được sử dụng. ');
+                }
+            });
+        })
 
-        $('#table-no-resize').basictable({
-            noResize: true
+        $(document).ready(function () {
+            $('select').select2({
+                theme: "bootstrap"
+            });
+
+            $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
+
+            $('#table-no-resize').basictable({
+                noResize: true
+            });
         });
-    });
-</script>
+    </script>
+}
 

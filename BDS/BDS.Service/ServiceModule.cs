@@ -24,6 +24,9 @@ namespace BDS.Service
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerRequest();
             builder.RegisterType<SaveService>().As<ISaveService>().InstancePerRequest();
             builder.RegisterType<RoleService>().As<IRoleService>().InstancePerRequest();
+            builder.RegisterType<TypeProjectService>().As<ITypeProjectService>().InstancePerRequest();
+            builder.RegisterType<LikeService>().As<ILikeService>().InstancePerRequest();
+            builder.RegisterType<ParameterService>().As<IParameterService>().InstancePerRequest();
         }
 
     }
