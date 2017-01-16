@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using StaticResource;
+using AutoMapper;
 
 namespace BDS.Areas.Admin.Controllers
 {
@@ -72,44 +74,108 @@ namespace BDS.Areas.Admin.Controllers
         // GET: Admin/User/Create
         public ActionResult Create()
         {
-            return View();
+            var role = _roleService.GetAll();
+            ViewBag.Role = new SelectList(_roleService.GetAll(), "ID", "Name");
+
+            ViewBag.IsInsert = true;
+            return View("Insert", new UserModel());
         }
 
         // POST: Admin/User/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UserModel model)
         {
-            try
+            ViewBag.Role = new SelectList(_roleService.GetAll(), "ID", "Name");
+            ViewBag.IsInsert = true;
+            model.RoleID = string.Join(",", model.SelectedValues);
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var user = new User();
+                user.UserName = model.UserName;
+                user.Name = model.FullName;
+                user.Password = Encryptor.MD5Hash(model.Pass);
+                user.Phone = model.Phone;
+                user.Email = model.Email;
+                user.Address = model.Address;
+                user.CreatedDate = DateTime.Now;
+                user.RoleID = model.RoleID;
+                user.Active = true;
+               
+                string errorInsert = _userService.Insert(user);
+
+                if (errorInsert != null)
+                {
+                    ModelState.AddModelError(string.Empty, errorInsert);
+                    return View("Insert", model);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                ModelState.AddModelError(string.Empty, Resource.CannotInsertData);
+                return View("Insert", model);
             }
         }
 
         // GET: Admin/User/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            UserEditModel model = new UserEditModel();
+            ViewBag.Role = new SelectList(_roleService.GetAll(), "ID", "Name");
+
+            ViewBag.IsInsert = false;
+            var user = _userService.Get(id);
+
+            model.UserName = user.UserName;
+            model.Pass = user.Password;
+            model.RoleID = user.RoleID;
+            model.FullName = user.Name;
+            model.Email = user.Email;
+            model.Phone = user.Phone;
+            model.Address = user.Address;
+
+            ViewBag.AccountRole = model.RoleID.Split(',').Select(o => int.Parse(o)).ToArray();
+
+            return View("Update", model);
         }
 
         // POST: Admin/User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(UserEditModel model)
         {
-            try
+            ViewBag.Role = new SelectList(_roleService.GetAll(), "ID", "Name");
+            ViewBag.IsInsert = false;
+            model.RoleID = string.Join(",", model.SelectedValues);
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var user = new User();
+                user.ID = model.ID;
+                user.UserName = model.UserName;
+                user.Name = model.FullName;
+                user.Password = model.Pass;
+                user.Phone = model.Phone;
+                user.Email = model.Email;
+                user.Address = model.Address;
+                user.CreatedDate = DateTime.Now;
+                user.RoleID = model.RoleID;
+                user.Active = true;
+
+                string error = _userService.Update(user);
+
+                if (error != null)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                    return View("Update", model);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                ModelState.AddModelError(string.Empty, Resource.CannotInsertData);
+                ViewBag.AccountRole = model.RoleID.Split(',').Select(o => int.Parse(o)).ToArray();
+                return View("Update", model);
             }
         }
 

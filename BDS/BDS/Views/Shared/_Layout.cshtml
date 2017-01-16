@@ -77,7 +77,8 @@
             $('select').select2({
                 theme: "bootstrap"
             });
-
+            
+            $('[data-toggle="tooltip"]').tooltip({ html: true, animation: true });
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 500) {

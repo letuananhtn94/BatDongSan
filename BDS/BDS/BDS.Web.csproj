@@ -55,6 +55,10 @@
       <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="BotDetect, Version=4.1.0.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
       <HintPath>..\packages\Captcha.4.1.0\lib\net45\BotDetect.dll</HintPath>
       <Private>True</Private>
@@ -213,11 +217,6 @@
     </Compile>
     <Compile Include="Helper\ImageUpload.cs" />
     <Compile Include="Helper\SelectedHelper.cs" />
-    <Compile Include="LocalResources\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -790,6 +789,10 @@
     <Content Include="Areas\Admin\Views\User\UserList.cshtml" />
     <Content Include="Areas\Admin\Views\Criteria\CriteriaList.cshtml" />
     <Content Include="Areas\Admin\Views\Project\ProjectList.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Insert.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserModel.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\UserEditModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -838,7 +841,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
-    <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Images\Comment\" />
     <Folder Include="Images\Project\" />
     <Folder Include="Models\" />
@@ -866,16 +868,14 @@
       <Project>{00F233C8-66C0-44D5-9316-F447380E156F}</Project>
       <Name>BDS.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StaticResource\StaticResource.csproj">
+      <Project>{a48a6190-f8e0-4a6e-b7e7-7f3dab563baf}</Project>
+      <Name>StaticResource</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LocalResources\Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

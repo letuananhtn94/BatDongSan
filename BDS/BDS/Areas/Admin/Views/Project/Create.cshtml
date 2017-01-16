@@ -47,10 +47,12 @@
     </script>
 }
 
-@using (Html.BeginForm("Index", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Project", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="grid-form1">
+        <div style="color:Red;font-size:14px">@ViewBag.Message</div>
+
         <h2 id="forms-example" class="">Thông tin cơ bản</h2>
 
         <div class="form-horizontal">
@@ -98,6 +100,7 @@
                         <option value="triệu">Triệu</option>
                         <option value="tỷ">Tỷ</option>
                     </select>
+                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
                 </div>
                 @Html.LabelFor(model => model.Acreage, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-3">
@@ -303,7 +306,7 @@
                 <label class="control-label col-md-2" for="sel1">Hình ảnh</label>
                 <div class="col-md-10">
                     <input class="btn-primary btn" type="file" name="files" value="" multiple="multiple" />
-                    <div style="color:Red;font-size:14px">@ViewBag.Message</div>
+                    @*<div style="color:Red;font-size:14px">@ViewBag.Message</div>*@
                 </div>
             </div>
 

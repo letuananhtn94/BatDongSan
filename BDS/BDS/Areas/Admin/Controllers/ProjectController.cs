@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using BDS.Helper;
 using PagedList;
+using StaticResource;
 
 namespace BDS.Areas.Admin.Controllers
 {
@@ -68,45 +69,54 @@ namespace BDS.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Project project, SearchProject search, HttpPostedFileBase[] files)
         {
-            try
-            {                         
-                project.Image = new List<Image>();
-                project.DetailProject = new List<DetailProject>();
-                var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
-
-                foreach (var item in listCriteria.ToList())
-                {
-                    DetailProject dp = new DetailProject();
-                    dp.CriteriaID = (int)item.ID;
-                    dp.Value = !string.IsNullOrEmpty(item.Value) ? int.Parse(item.Value) : 0;
-
-                    project.DetailProject.Add(dp);
-                }
-
-                if (files != null)
-                {
-                    /*Lopp for multiple files*/
-                    foreach (HttpPostedFileBase file in files)
-                    {
-                        Image img = new Image();
-                        img = ImageUpload.UploadFile(file, img);
-                        project.Image.Add(img);
-                    }
-                }
-
-                project.CreatedDate = DateTime.Now;
-                project.Active = true;                        
-                
-            
-                ServiceResult<Project> result = _projectService.Add(project);
-
-                
-            }
-            catch(Exception ex)
+            if (ModelState.IsValid)
             {
-                
+                try
+                {
+                    project.Image = new List<Image>();
+                    project.DetailProject = new List<DetailProject>();
+                    var listCriteria = _criteriaService.FilterList(search.Criterias.ToList());
+
+                    foreach (var item in listCriteria.ToList())
+                    {
+                        DetailProject dp = new DetailProject();
+                        dp.CriteriaID = (int)item.ID;
+                        dp.Value = !string.IsNullOrEmpty(item.Value) ? int.Parse(item.Value) : 0;
+
+                        project.DetailProject.Add(dp);
+                    }
+
+                    if (files != null)
+                    {
+                        /*Lopp for multiple files*/
+                        foreach (HttpPostedFileBase file in files)
+                        {
+                            Image img = new Image();
+                            img = ImageUpload.UploadFile(file, img);
+                            project.Image.Add(img);
+                        }
+                    }
+
+                    project.CreatedDate = DateTime.Now;
+                    project.Active = true;
+
+                    ServiceResult<Project> result = _projectService.Add(project);
+
+                    ViewBag.Message = "Thêm dự án thành công!";
+
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Thêm dự án không thành công!";
+                }
+                return Create();
             }
-            return Index();
+            else
+            {
+                ModelState.AddModelError(string.Empty, Resource.CannotInsertData);
+                return Create();
+            }                       
         }
        
 

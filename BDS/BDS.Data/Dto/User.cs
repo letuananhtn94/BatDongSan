@@ -4,13 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StaticResource;
 
 namespace BDS.Data.Dto
 {
     public class User : BaseData
     {
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
         [Display(Name = "Tài khoản")]
         public string UserName { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
         public string Password { get; set; }
         [Display(Name = "Quyền")]
         public string RoleID { get; set; }
@@ -31,6 +34,57 @@ namespace BDS.Data.Dto
         public virtual IList<Like> Like { get; set; }
         public virtual Role Role { get; set; }
         public virtual IList<Save> Save { get; set; }
+    }
+
+    public class UserModel
+    {
+        public long ID { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        [Display(Name = "Tài khoản")]
+        public string UserName { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        public string Pass { get; set; }
+
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        [Compare("Pass", ErrorMessageResourceName = "PasswordNotMatch", ErrorMessageResourceType = typeof(Resource))]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resource))]
+        public string ConfirmPass { get; set; }
+
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        [Display(Name = "Role", ResourceType = typeof(Resource))]
+        public int[] SelectedValues { get; set; }
+        [Display(Name = "Quyền")]
+        public string RoleID { get; set; }
+        [Display(Name = "Tên")]
+        public string FullName { get; set; }
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
+        public string Email { get; set; }
+        [Display(Name = "SĐT")]
+        public string Phone { get; set; }
+    }
+
+    public class UserEditModel
+    {
+        public long ID { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        [Display(Name = "Tài khoản")]
+        public string UserName { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        public string Pass { get; set; }
+        
+        [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(Resource))]
+        [Display(Name = "Role", ResourceType = typeof(Resource))]
+        public int[] SelectedValues { get; set; }
+        [Display(Name = "Quyền")]
+        public string RoleID { get; set; }
+        [Display(Name = "Tên")]
+        public string FullName { get; set; }
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
+        public string Email { get; set; }
+        [Display(Name = "SĐT")]
+        public string Phone { get; set; }
     }
 
     public class LoginModel

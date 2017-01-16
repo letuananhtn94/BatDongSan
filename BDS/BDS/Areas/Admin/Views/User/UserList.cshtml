@@ -1,4 +1,6 @@
-﻿@model IPagedList<BDS.Data.Dto.User>
+﻿@using StaticResource;
+
+@model IPagedList<BDS.Data.Dto.User>
 
 @using PagedList.Mvc;
 @using PagedList;
@@ -7,23 +9,23 @@
 <table id="table-no-resize">
     <thead>
         <tr>
-            <th>
-                Tên tài khoản
+            <th>          
+                @Resource.UserName                                                  
             </th>
             <th>
-                Quyền
+                @Resource.Role                
             </th>
             <th>
-                Họ và tên
+                @Resource.FullName
             </th>
             <th>
-                Địa chỉ
+                @Resource.Address                
             </th>
             <th>
-                Email
+                @Resource.Email               
             </th>
             <th>
-                SĐT
+                @Resource.Phone
             </th>
 
             <th></th>
@@ -65,7 +67,7 @@
 
                         <ul class="dropdown-menu btn-dropdown-menu" role="menu" style="min-width: 100px">
                             <li>
-                                <a href="@Url.Action("Detail", new { id = item.ID })">
+                                <a href="javascript:void(0)">
                                     <i class="fa fa-eye" aria-hidden="true"></i> Chi tiết
                                 </a>
                             </li>

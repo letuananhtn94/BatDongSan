@@ -1,0 +1,135 @@
+﻿@using StaticResource;
+@model BDS.Data.Dto.UserModel
+@{
+    ViewBag.Title = Resource.Account;
+
+    string actionName = "";
+    string title = "";
+    int[] idRoles = new int[] { };
+    if (ViewBag.IsInsert)
+    {
+        actionName = "Create";
+        title = @Resource.Create;
+
+        ViewBag.AccountRole = idRoles;
+    }
+
+    var role = @ViewBag.Role as SelectList;
+    if (!string.IsNullOrEmpty(Model.RoleID))
+        Model.RoleID = role.Select(o => int.Parse(o.Value)).First().ToString();
+}
+
+<div class="agile-grids">
+    <div class="agile-tables">
+        <div class="page-title">
+            <div >
+                <h3>
+                    @Resource.Account
+                    <small>@title</small>
+                </h3>
+            </div>
+        </div>
+
+
+        <div class="main-content">
+            @using (Html.BeginForm(@actionName, "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.ID)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Pass, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.Pass, new { @class = "form-control", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.Pass)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmPass, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.ConfirmPass, new { @class = "form-control", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPass)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SelectedValues, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.DropDownListFor(model => model.SelectedValues, role, new { @class = "form-control", multiple = "multiple" })
+                            @Html.ValidationMessageFor(model => model.SelectedValues)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FullName, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FullName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Phone)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2 col-sm-3 col-xs-12" })
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-sm-offset-3 col-md-10 col-sm-9 col-xs-12">
+                            <input type="submit" value="@Resource.Save" class="btn btn-primary" />
+                            <a href="@Url.Action("Index")" class="btn btn-default">@Resource.BackToList</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            var roles = [@(string.Join(", ", (int[])ViewBag.AccountRole))];
+            $("#SelectedValues").val(roles);
+
+            $('select').select2({
+                theme: "bootstrap"
+            });
+        });
+    </script>
+}
